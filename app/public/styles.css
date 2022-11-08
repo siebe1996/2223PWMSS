@@ -230,6 +230,12 @@ main {
     height: 2.1rem;
     margin-bottom: 1rem;
 }
+.panel .form input.error {
+    border-color: #FF0000;
+    background: #FF000032;
+    color: red;
+    font-weight: 600;
+}
 
 .btn.newRideToggle {
     position: absolute;
