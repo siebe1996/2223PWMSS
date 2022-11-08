@@ -7,5 +7,4 @@ $twig = new \Twig\Environment($loader, [
         'auto_reload' => true ]
 );
 $registerPanel = $twig->load('/pages/register.twig');
-$headerFooter = $twig->load('/partials/common.twig');
 echo $registerPanel->render(['pathToRoot'=>'../']);
