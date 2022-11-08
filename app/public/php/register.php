@@ -33,17 +33,13 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'register')) {
         $formErrors['password'] = 'Voer een password in';
     }
 
-    if(!in_array($priority, $priorities)){
-        $formErrors[] = 'Ongeldige prioriteit geselecteerd';
-    }
-
     //  if no errors: insert values into database
 
     if (sizeof($formErrors) === 0){
-        $stmt = $conn->prepare('INSERT INTO tasks (name, priority, added_on) VALUES (?, ?, ?)');
+        /*$stmt = $conn->prepare('INSERT INTO tasks (name, priority, added_on) VALUES (?, ?, ?)');
         $result = $stmt->executeStatement([$what, $priority, (new DateTime()) -> format('y-m-d h:i:s')]);
         $what = '';
-        $priority = 'low';
+        $priority = 'low';*/
     }
 }
 
