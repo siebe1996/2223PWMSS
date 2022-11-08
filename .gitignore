@@ -4,3 +4,4 @@
 docker/mysql-data
 app/storage/db.log
 app/vendor
+storage\cache
