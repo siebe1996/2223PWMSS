@@ -15,6 +15,7 @@ $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
 $lastName = isset($_POST['lastName']) ? $_POST['lastName'] : '';
 $email = isset($_POST['email']) ? $_POST['email'] : '';
 $password = isset($_POST['password']) ? $_POST['password'] : '';
+$formErrors = [];
 
 if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'register')) {
     if (!preg_match("/^[a-zA-Z-' ]*$/",$firstName)){
@@ -47,5 +48,10 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'register')) {
 
 
 
-$registerPanel = $twig->load('/pages/register.twig');
-echo $registerPanel->render(['pathToRoot'=>'../']);
+$tpl = $twig->load('/pages/register.twig');
+echo $tpl->render([
+    'firstName' => $firstName,
+    'lastName' => $lastName,
+    'email' => $email,
+    'errors' => $formErrors,
+]);
