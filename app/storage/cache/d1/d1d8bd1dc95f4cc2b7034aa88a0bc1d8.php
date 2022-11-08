@@ -84,7 +84,7 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 
         <ul>
             <li>
-                <a href=\"login/\">
+                <a href=\"php/\">
                     <svg width=\"27\" height=\"27\" viewBox=\"0 0 27 27\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">
                         <g clip-path=\"url(#clip0_7_44)\">
                             <path
