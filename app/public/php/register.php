@@ -37,10 +37,16 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'register')) {
     //  if no errors: insert values into database
 
     if (sizeof($formErrors) === 0){
-        /*$stmt = $conn->prepare('INSERT INTO tasks (name, priority, added_on) VALUES (?, ?, ?)');
-        $result = $stmt->executeStatement([$what, $priority, (new DateTime()) -> format('y-m-d h:i:s')]);
-        $what = '';
-        $priority = 'low';*/
+        // @toDO check errors connection
+        $stmt = $conn->prepare('INSERT INTO anonymous_users (email, first_name, last_name) VALUES (?, ?, ?)');
+        $result = $stmt->executeStatement([$email, $firstName, $lastName]);
+        $stmt2 = $conn->prepare('SELECT id FROM anonymous_users WHERE email = ?');
+        $result2 = $stmt2->executeQuery([$email]);
+        $userId = $result2->fetchOne();
+        $stmt3 = $conn->prepare('INSERT INTO users (id, password) VALUES (?,?)');
+        $result3 = $stmt3->executeStatement([$userId, password_hash($password, PASSWORD_DEFAULT)]);
+
+        //toDo redirect to conformation page;
     }
 }
 
