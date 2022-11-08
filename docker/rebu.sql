@@ -8,22 +8,22 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema rebu
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `mydb` ;
+DROP SCHEMA IF EXISTS `rebu` ;
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema rebu
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8mb4 DEFAULT  COLLATE  utf8mb4_unicode_ci;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `rebu` DEFAULT CHARACTER SET utf8mb4 DEFAULT  COLLATE  utf8mb4_unicode_ci;
+USE `rebu` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`anonymous_users`
+-- Table `rebu`.`anonymous_users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`anonymous_users` ;
+DROP TABLE IF EXISTS `rebu`.`anonymous_users` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`anonymous_users` (
+CREATE TABLE IF NOT EXISTS `rebu`.`anonymous_users` (
                                                         `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
                                                         `email` VARCHAR(255) NOT NULL,
     `first_name` VARCHAR(45) NOT NULL,
@@ -31,103 +31,103 @@ CREATE TABLE IF NOT EXISTS `mydb`.`anonymous_users` (
     PRIMARY KEY (`id`))
     ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `id_UNIQUE` ON `mydb`.`anonymous_users` (`id` ASC) VISIBLE;
+CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`anonymous_users` (`id` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `email_UNIQUE` ON `mydb`.`anonymous_users` (`email` ASC) VISIBLE;
+CREATE UNIQUE INDEX `email_UNIQUE` ON `rebu`.`anonymous_users` (`email` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`users`
+-- Table `rebu`.`users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`users` ;
+DROP TABLE IF EXISTS `rebu`.`users` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`users` (
+CREATE TABLE IF NOT EXISTS `rebu`.`users` (
                                               `id` INT UNSIGNED NOT NULL,
                                               `password` VARCHAR(255) NOT NULL,
     `verified` TINYINT NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`),
     CONSTRAINT `userid`
     FOREIGN KEY (`id`)
-    REFERENCES `mydb`.`anonymous_users` (`id`)
+    REFERENCES `rebu`.`anonymous_users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `id_UNIQUE` ON `mydb`.`users` (`id` ASC) VISIBLE;
+CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`users` (`id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`admin_roles`
+-- Table `rebu`.`admin_roles`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`admin_roles` ;
+DROP TABLE IF EXISTS `rebu`.`admin_roles` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`admin_roles` (
+CREATE TABLE IF NOT EXISTS `rebu`.`admin_roles` (
                                                     `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
                                                     `title` ENUM('admin', 'tester') NULL,
     PRIMARY KEY (`id`))
     ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `id_UNIQUE` ON `mydb`.`admin_roles` (`id` ASC) VISIBLE;
+CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`admin_roles` (`id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`users_has_users`
+-- Table `rebu`.`users_has_users`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`users_has_users` ;
+DROP TABLE IF EXISTS `rebu`.`users_has_users` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`users_has_users` (
+CREATE TABLE IF NOT EXISTS `rebu`.`users_has_users` (
                                                         `users_id` INT UNSIGNED NOT NULL,
                                                         `users_id1` INT UNSIGNED NOT NULL,
                                                         PRIMARY KEY (`users_id`, `users_id1`),
     CONSTRAINT `fk_users_has_users_users`
     FOREIGN KEY (`users_id`)
-    REFERENCES `mydb`.`users` (`id`)
+    REFERENCES `rebu`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_users_has_users_users1`
     FOREIGN KEY (`users_id1`)
-    REFERENCES `mydb`.`users` (`id`)
+    REFERENCES `rebu`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_users_has_users_users1_idx` ON `mydb`.`users_has_users` (`users_id1` ASC) VISIBLE;
+CREATE INDEX `fk_users_has_users_users1_idx` ON `rebu`.`users_has_users` (`users_id1` ASC) VISIBLE;
 
-CREATE INDEX `fk_users_has_users_users_idx` ON `mydb`.`users_has_users` (`users_id` ASC) VISIBLE;
+CREATE INDEX `fk_users_has_users_users_idx` ON `rebu`.`users_has_users` (`users_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`users_has_admin_roles`
+-- Table `rebu`.`users_has_admin_roles`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`users_has_admin_roles` ;
+DROP TABLE IF EXISTS `rebu`.`users_has_admin_roles` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`users_has_admin_roles` (
+CREATE TABLE IF NOT EXISTS `rebu`.`users_has_admin_roles` (
                                                               `users_id` INT UNSIGNED NOT NULL,
                                                               `roles_id` INT UNSIGNED NOT NULL,
                                                               PRIMARY KEY (`users_id`, `roles_id`),
     CONSTRAINT `fk_users_has_roles_users1`
     FOREIGN KEY (`users_id`)
-    REFERENCES `mydb`.`users` (`id`)
+    REFERENCES `rebu`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `fk_users_has_roles_roles1`
     FOREIGN KEY (`roles_id`)
-    REFERENCES `mydb`.`admin_roles` (`id`)
+    REFERENCES `rebu`.`admin_roles` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE INDEX `fk_users_has_roles_roles1_idx` ON `mydb`.`users_has_admin_roles` (`roles_id` ASC) VISIBLE;
+CREATE INDEX `fk_users_has_roles_roles1_idx` ON `rebu`.`users_has_admin_roles` (`roles_id` ASC) VISIBLE;
 
-CREATE INDEX `fk_users_has_roles_users1_idx` ON `mydb`.`users_has_admin_roles` (`users_id` ASC) VISIBLE;
+CREATE INDEX `fk_users_has_roles_users1_idx` ON `rebu`.`users_has_admin_roles` (`users_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`drivers`
+-- Table `rebu`.`drivers`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`drivers` ;
+DROP TABLE IF EXISTS `rebu`.`drivers` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`drivers` (
+CREATE TABLE IF NOT EXISTS `rebu`.`drivers` (
                                                 `id` INT UNSIGNED NOT NULL,
                                                 `btw_nr` VARCHAR(10) NOT NULL,
     `number_plate` VARCHAR(7) NOT NULL,
@@ -141,24 +141,24 @@ CREATE TABLE IF NOT EXISTS `mydb`.`drivers` (
     PRIMARY KEY (`id`),
     CONSTRAINT `driver`
     FOREIGN KEY (`id`)
-    REFERENCES `mydb`.`users` (`id`)
+    REFERENCES `rebu`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `idd_UNIQUE` ON `mydb`.`drivers` (`id` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idd_UNIQUE` ON `rebu`.`drivers` (`id` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `btw_nr_UNIQUE` ON `mydb`.`drivers` (`btw_nr` ASC) VISIBLE;
+CREATE UNIQUE INDEX `btw_nr_UNIQUE` ON `rebu`.`drivers` (`btw_nr` ASC) VISIBLE;
 
-CREATE UNIQUE INDEX `nummerplaat_UNIQUE` ON `mydb`.`drivers` (`number_plate` ASC) VISIBLE;
+CREATE UNIQUE INDEX `nummerplaat_UNIQUE` ON `rebu`.`drivers` (`number_plate` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`trips`
+-- Table `rebu`.`trips`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`trips` ;
+DROP TABLE IF EXISTS `rebu`.`trips` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`trips` (
+CREATE TABLE IF NOT EXISTS `rebu`.`trips` (
                                               `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
                                               `start_house_nr` VARCHAR(5) NOT NULL,
     `start_street` VARCHAR(255) NOT NULL,
@@ -175,29 +175,29 @@ CREATE TABLE IF NOT EXISTS `mydb`.`trips` (
     PRIMARY KEY (`id`),
     CONSTRAINT `costumer`
     FOREIGN KEY (`costumer_id`)
-    REFERENCES `mydb`.`anonymous_users` (`id`)
+    REFERENCES `rebu`.`anonymous_users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     CONSTRAINT `driverreview`
     FOREIGN KEY (`driver_id`)
-    REFERENCES `mydb`.`drivers` (`id`)
+    REFERENCES `rebu`.`drivers` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `idt_UNIQUE` ON `mydb`.`trips` (`id` ASC) VISIBLE;
+CREATE UNIQUE INDEX `idt_UNIQUE` ON `rebu`.`trips` (`id` ASC) VISIBLE;
 
-CREATE INDEX `costumer_idx` ON `mydb`.`trips` (`costumer_id` ASC) VISIBLE;
+CREATE INDEX `costumer_idx` ON `rebu`.`trips` (`costumer_id` ASC) VISIBLE;
 
-CREATE INDEX `driver_idx` ON `mydb`.`trips` (`driver_id` ASC) VISIBLE;
+CREATE INDEX `driver_idx` ON `rebu`.`trips` (`driver_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`reviews`
+-- Table `rebu`.`reviews`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `mydb`.`reviews` ;
+DROP TABLE IF EXISTS `rebu`.`reviews` ;
 
-CREATE TABLE IF NOT EXISTS `mydb`.`reviews` (
+CREATE TABLE IF NOT EXISTS `rebu`.`reviews` (
                                                 `id` INT UNSIGNED NOT NULL,
                                                 `rating` DECIMAL(2,1) NOT NULL,
     `review` TEXT NOT NULL,
@@ -205,14 +205,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`reviews` (
     PRIMARY KEY (`id`),
     CONSTRAINT `trip`
     FOREIGN KEY (`trip_id`)
-    REFERENCES `mydb`.`trips` (`id`)
+    REFERENCES `rebu`.`trips` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
-CREATE UNIQUE INDEX `id_UNIQUE` ON `mydb`.`reviews` (`id` ASC) VISIBLE;
+CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`reviews` (`id` ASC) VISIBLE;
 
-CREATE INDEX `trip_idx` ON `mydb`.`reviews` (`trip_id` ASC) VISIBLE;
+CREATE INDEX `trip_idx` ON `rebu`.`reviews` (`trip_id` ASC) VISIBLE;
+
+-- CREATE VIEW `users_view` AS select anonymous_users.id, email, first_name, last_name, users.password from anonymous_users inner join users on users.id = anonymous_users.id;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
