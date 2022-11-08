@@ -7,4 +7,4 @@ $twig = new \Twig\Environment($loader, [
         'auto_reload' => true ]
 );
 $loginPanel = $twig->load('/pages/login.twig');
-echo $loginPanel->render(['pathToRoot'=>'../']);
+echo $loginPanel->render(['pathToRoot'=>'index.php']);
