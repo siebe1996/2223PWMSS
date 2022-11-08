@@ -58,7 +58,7 @@ class __TwigTemplate_004c30c4b21eed7a75819bc9f14161eb extends Template
         </div>
         <button class=\"btn\" type=\"submit\">Log In</button>
     </form>
-    <a href=\"/login/register.php\">Register here</a> if you don't have an account yet
+    <a href=\"/php/register.php\">Register here</a> if you don't have an account yet
 </div>
 ";
     }
