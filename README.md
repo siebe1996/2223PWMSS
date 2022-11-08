@@ -3,22 +3,22 @@
 ## URL Paths
 
 ```
-GET		/login
+GET	/
+
+GET	/login
 POST	/login
 
-GET		/register
+GET	/register
 POST	/register
 
-GET		/
-
-GET		/tirps
-GET	  /trips/{{ID}}
+GET	/tirps
+GET	/trips/{{ID}}
 POST	/trips/new
 
-GET		/users
+GET	/users
 
-GET		/reviews
-GET	  /reviews/{{ID}}
+GET	/reviews
+GET	/reviews/{{ID}}
 POST	/reviews/new
 ```
 
