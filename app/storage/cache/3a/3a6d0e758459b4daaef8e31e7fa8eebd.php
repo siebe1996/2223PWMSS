@@ -47,7 +47,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
     {
         $macros = $this->macros;
         // line 3
-        echo "    <div class=\"panel\">
+        echo "    <div class=\"panel registerDriver\">
         <h2>Driver Register</h2>
         <form action=\".php\" method=\"post\" novalidate>
             <div class=\"form\">

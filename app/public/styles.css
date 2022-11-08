@@ -17,7 +17,7 @@ html {
     color: #1b1b1b;
     background-color: #fafafa;
 
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 h1 {
@@ -169,7 +169,6 @@ main {
     justify-content: center;
     align-items: center;
     height: calc(100vh - 4rem);
-    overflow: hidden;
 }
 
 .panel {
@@ -178,6 +177,13 @@ main {
     align-items: center;
     flex-direction: column;
     width: 100%;
+}
+
+.panel.registerDriver {
+    margin-top: 9rem;
+}
+.panel.registerDriver .btn {
+    margin: 1rem auto 2rem;
 }
 
 .panel.bottom {
@@ -218,7 +224,7 @@ main {
 }
 
 
-.panel .form input {
+.panel .form input, .panel .form select {
     font-family: 'Nunito', sans-serif;
     padding: 7px 5px;
     border-block: none;
@@ -229,6 +235,7 @@ main {
     border-radius: 5px;
     height: 2.1rem;
     margin-bottom: 1rem;
+    background-color: #FFF;
 }
 .panel .form input.error {
     border-color: #FF0000;
