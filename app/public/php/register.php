@@ -23,7 +23,7 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'register')) {
     }
 
     if (!preg_match("/^[a-zA-Z-' ]*$/",$lastName)){
-        $formErrors['lastName'] = 'Voer een geldige achtenaam in';
+        $formErrors['lastName'] = 'Voer een geldige achternaam in';
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)){
