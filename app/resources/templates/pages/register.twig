@@ -1,0 +1,19 @@
+{% extends "/partials/common.twig" %}
+{% block main %}
+    <div class="panel">
+        <h2>Register</h2>
+        <form action=".php" method="post">
+            <div class="form">
+                <label for="firstName">First Name</label>
+                <input type="text" name="firstName" id="firstName">
+                <label for="lastName">Last Name</label>
+                <input type="text" name="lastName" id="lastName">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email">
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <button class="btn" type="submit">Register</button>
+        </form>
+    </div>
+{% endblock %}

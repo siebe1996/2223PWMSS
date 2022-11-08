@@ -12,8 +12,8 @@ use Twig\Sandbox\SecurityNotAllowedFunctionError;
 use Twig\Source;
 use Twig\Template;
 
-/* /pages/login.twig */
-class __TwigTemplate_004c30c4b21eed7a75819bc9f14161eb extends Template
+/* /pages/register.twig */
+class __TwigTemplate_6857fe84803a59e2bbd19ee0e4e8dc41 extends Template
 {
     private $source;
     private $macros = [];
@@ -38,7 +38,7 @@ class __TwigTemplate_004c30c4b21eed7a75819bc9f14161eb extends Template
     protected function doDisplay(array $context, array $blocks = [])
     {
         $macros = $this->macros;
-        $this->parent = $this->loadTemplate("/partials/common.twig", "/pages/login.twig", 1);
+        $this->parent = $this->loadTemplate("/partials/common.twig", "/pages/register.twig", 1);
         $this->parent->display($context, array_merge($this->blocks, $blocks));
     }
 
@@ -47,25 +47,28 @@ class __TwigTemplate_004c30c4b21eed7a75819bc9f14161eb extends Template
     {
         $macros = $this->macros;
         // line 3
-        echo "<div class=\"panel\">
-    <h2>Log in</h2>
-    <form action=\".php\" method=\"post\">
-        <div class=\"form\">
-            <label for=\"username\">Username</label>
-            <input type=\"text\" name=\"username\" id=\"username\">
-            <label for=\"password\">Password</label>
-            <input type=\"password\" name=\"password\" id=\"password\">
-        </div>
-        <button class=\"btn\" type=\"submit\">Log In</button>
-    </form>
-    <a href=\"/login/register.php\">Register here</a> if you don't have an account yet
-</div>
+        echo "    <div class=\"panel\">
+        <h2>Register</h2>
+        <form action=\".php\" method=\"post\">
+            <div class=\"form\">
+                <label for=\"firstName\">First Name</label>
+                <input type=\"text\" name=\"firstName\" id=\"firstName\">
+                <label for=\"lastName\">Last Name</label>
+                <input type=\"text\" name=\"lastName\" id=\"lastName\">
+                <label for=\"email\">Email</label>
+                <input type=\"email\" name=\"email\" id=\"email\">
+                <label for=\"password\">Password</label>
+                <input type=\"password\" name=\"password\" id=\"password\">
+            </div>
+            <button class=\"btn\" type=\"submit\">Register</button>
+        </form>
+    </div>
 ";
     }
 
     public function getTemplateName()
     {
-        return "/pages/login.twig";
+        return "/pages/register.twig";
     }
 
     public function isTraitable()
@@ -80,6 +83,6 @@ class __TwigTemplate_004c30c4b21eed7a75819bc9f14161eb extends Template
 
     public function getSourceContext()
     {
-        return new Source("", "/pages/login.twig", "/var/www/resources/templates/pages/login.twig");
+        return new Source("", "/pages/register.twig", "/var/www/resources/templates/pages/register.twig");
     }
 }
