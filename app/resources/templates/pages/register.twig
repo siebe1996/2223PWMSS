@@ -2,21 +2,29 @@
 {% block main %}
     <div class="panel">
         <h2>Register</h2>
-        <form action=".php" method="post" novalidate>
+        <form action="php/register.php" method="post" novalidate>
             <div class="form">
                 <label for="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName" value="{{firstName}}" require>
-                <p class="errorMsg">Hey dit is een error</p>
+                <input type="text" name="firstName" id="firstName" value="{{firstName}}" required>
+                {% if errors.firstName %}
+                <p class="errorMsg">{{errors.firstName}}</p>
+                {% endif %}
                 <label for="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName" value="{{lastName}}" require>
-                <p class="errorMsg">Hey dit is een error</p>
+                <input type="text" name="lastName" id="lastName" value="{{lastName}}" required>
+                {% if errors.lastName %}
+                <p class="errorMsg">{{errors.lastName}}</p>
+                {% endif %}
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="{{email}}" require>
-                <p class="errorMsg">Hey dit is een error</p>
+                <input type="email" name="email" id="email" value="{{email}}" required>
+                {% if errors.email %}
+                <p class="errorMsg">{{errors.email}}</p>
+                {% endif %}
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" value="{{password}}" require>
-                <p class="errorMsg">Hey dit is een error</p>
-                <input type="hidden" name="moduelAction" value="register">
+                <input type="password" name="password" id="password" required>
+                {% if errors.password %}
+                <p class="errorMsg">{{errors.password}}</p>
+                {% endif %}
+                <input type="hidden" name="moduleAction" value="register">
             </div>
             <button class="btn" type="submit">Register</button>
         </form>
