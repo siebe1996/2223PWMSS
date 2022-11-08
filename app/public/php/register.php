@@ -54,7 +54,7 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'register')) {
 
 
 
-$tpl = $twig->load('/pages/register.twig');
+$tpl = $twig->load('pages/register.twig');
 echo $tpl->render([
     'firstName' => $firstName,
     'lastName' => $lastName,

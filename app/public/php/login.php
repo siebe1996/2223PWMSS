@@ -52,7 +52,7 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'login')) {
 
 }
 
-$tpl = $twig->load('/pages/register.twig');
+$tpl = $twig->load('pages/login.twig');
 echo $tpl->render([
     'errors' => $formErrors,
 ]);
