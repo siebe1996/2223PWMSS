@@ -81,6 +81,6 @@ if u want support contact one of the developers ;)
 
 ## License
 
-licensed by [odisee](https://odisee.be)
+licensed by [Odisee](https://odisee.be)
 
 ---
