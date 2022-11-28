@@ -3,7 +3,7 @@
     <div class="panel login">
         <h2>Log in</h2>
         {% if error %}
-            <p>{{ error }}</p>
+            <p class="errorMsg">{{ error }}</p>
         {% endif %}
         <form action="./login.php" method="post">
             <input type="hidden" name="moduleAction" value="login">
