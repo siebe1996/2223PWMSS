@@ -2,16 +2,21 @@
 {% block main %}
 <div class="panel">
     <h2>Log in</h2>
-    <form action="php/login.php" method="post">
+    <form action="./login.php" method="post">
         <div class="form">
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username">
+            <label for="email">E-mail</label>
+            <input type="text" name="email" id="email">
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
+            {% if errors %}
+                {% for error in errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% endif %}
         </div>
-        <input type="hidden" name="moduelAction" value="login">
+        <input type="hidden" name="moduleAction" value="login">
         <button class="btn" type="submit">Log In</button>
     </form>
-    <a href="php/register.php">Register here</a> if you don't have an account yet
+    <a href="./register.php">Register here</a> if you don't have an account yet
 </div>
 {% endblock %}
