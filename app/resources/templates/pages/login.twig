@@ -2,10 +2,15 @@
 {% block main %}
     <div class="panel login">
         <h2>Log in</h2>
+        {% if errors %}
+            {% for error in errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        {% endif %}
         <form action="php/login.php" method="post">
             <input type="hidden" name="moduelAction" value="login">
             <div class="form" id="loginForm">
-                <label for="username">Username</label>
+                <label for="email">Username</label>
                 <span>
                     <svg width="22" height="22" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"
                          class="username">
@@ -13,7 +18,7 @@
                               fill="currentColor"/>
                     </svg>
 
-                <input type="text" name="username" id="username"></span>
+                <input type="text" name="email" id="email"></span>
                 <label for="password">Password</label>
                 <span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22px" height="22px" preserveAspectRatio="xMidYMid meet"
@@ -25,8 +30,7 @@
                 </span>
                 <button class="btn" type="submit">Log In</button>
             </div>
-
         </form>
-        <a href="php/register.php">Register here</a> if you don't have an account yet
+        <a href="./register.php">Register here</a> if you don't have an account yet
     </div>
 {% endblock %}

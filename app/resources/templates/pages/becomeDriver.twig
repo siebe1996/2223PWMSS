@@ -23,23 +23,17 @@
                         <input type="file" name="profilePic" id="profilePic">
                     </span>
                 </section>
-                <section class="secondFormSection">
+                <section class="secondFormSection hidden">
                     <label for="carBrand">Car Brand</label>
-                    <span>
                     <input type="text" name="carBrand" id="carBrand">
-                    </span>
                     <label for="carModel">Car Model</label>
-                    <span>
                     <input type="text" name="carModel" id="carModel">
-                    </span>
                     <label for="carPassengers">Passengers</label>
-                    <span>
-                        <input type="number" name="carPassenger" id="carPassengers">
-                    </span>
+                    <input type="number" name="carPassenger" id="carPassengers">
+                    <button class="btn secondFormSection" type="submit">Register</button>
                 </section>
-                <button class="btn firstFormSection">Next</button>
-                <button class="btn secondFormSection" type="submit">Register</button>
             </div>
         </form>
+        <button class="btn formToggle">Next</button>
     </div>
 {% endblock %}

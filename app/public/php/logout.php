@@ -1,17 +1,24 @@
 <?php
-// Composer's autoloader & DB init
-require_once ('../../vendor/autoload.php');
-require_once ('../../config/database.php');
-require_once ('../../src/Services/DatabaseConnector.php');
 
-$loader = new \Twig\Loader\FilesystemLoader(__DIR__ . '/../../resources/templates');
-$twig = new \Twig\Environment($loader, [
-        'cache' => __DIR__ . '/../../storage/cache',
-        'auto_reload' => true ]
-);
-if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'logout')) {
-    header('location: login.php');
+// Initialize the session.
+session_start();
+
+// Unset all of the session variables.
+$_SESSION = [];
+
+// If it's desired to kill the session, also delete the session cookie.
+// Note: This will destroy the session, and not just the session data!
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
 }
 
-$tpl = $twig->load('pages/logout.twig');
-echo $tpl->render();
+// Finally, destroy the session.
+session_destroy();
+
+// redirect to index
+header('location: login.php');
+exit();

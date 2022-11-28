@@ -16,7 +16,7 @@ session_start();
 
 // already logged in!
 if (isset($_SESSION['user'])) {
-    header('location: logout.php');
+    header('location: index.php');
     exit();
 }
 
@@ -31,7 +31,7 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'login')) {
 
     $conn = \Services\DatabaseConnector::getConnection();
     //@toDO handle error
-    $user = $conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon WHERE email = ? JOIN users AS u ON anonymous_users.id = users.id', [$email]);
+    $user = $conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
 
     if ($user !== false) {
 

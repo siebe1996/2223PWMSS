@@ -10,4 +10,4 @@ $twig = new \Twig\Environment($loader, [
 );
 
 $becomeDriverPanel = $twig->load('/pages/becomeDriver.twig');
-echo $becomeDriverPanel->render(['pathToRoot'=>'../']);
+echo $becomeDriverPanel->render(['pathToRoot'=>'../','driverRegister'=>true]);

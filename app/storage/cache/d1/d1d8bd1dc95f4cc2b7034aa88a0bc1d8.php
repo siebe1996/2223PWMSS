@@ -43,8 +43,14 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
           content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">
     <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
     <link rel=\"stylesheet\" href=\"../styles.css\">
-    <script src=\"../navbar.js\" defer></script>
-    <title>Document</title>
+    <script src=\"../js/navbar.js\" defer></script>
+    ";
+        // line 10
+        if (($context["driverRegister"] ?? null)) {
+            echo "<script src=\"../js/dualFormSection.js\" defer></script>";
+        }
+        // line 11
+        echo "    <title>Rebu</title>
 </head>
 <body>
 <header>
@@ -93,15 +99,17 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
                     </svg>
                     Become a driver</a></li>
             <li><a href=\"#\">Trip history</a></li>
-            <li><a href=\"#\">Reviews</a></li>
+            <li>
+                <a href=\"./logout.php\">Log out</a>
+            </li>
         </ul>
     </nav>
 </header>
 <main>
     ";
-        // line 64
+        // line 67
         $this->displayBlock('main', $context, $blocks);
-        // line 66
+        // line 69
         echo "</main>
 <footer>
     Siebe, Bert en Lukas
@@ -111,11 +119,11 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 ";
     }
 
-    // line 64
+    // line 67
     public function block_main($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 65
+        // line 68
         echo "    ";
     }
 
@@ -124,9 +132,14 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
         return "/partials/common.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  119 => 65,  115 => 64,  105 => 66,  103 => 64,  38 => 1,);
+        return array (  127 => 68,  123 => 67,  113 => 69,  111 => 67,  53 => 11,  49 => 10,  38 => 1,);
     }
 
     public function getSourceContext()

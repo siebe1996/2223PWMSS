@@ -203,24 +203,29 @@ footer {
     width: 100%;
 }
 
-.firstFormSection {
-    width: 100%;
-}
-
+.firstFormSection,
 .secondFormSection {
     width: 100%;
+}
+.firstFormSection.hidden,
+.secondFormSection.hidden {
     display: none;
 }
 
-
+.btn.formToggle {
+    width: 70%;
+}
+.btn.formToggle.back {
+    margin-top: 0;
+    background: 0;
+    color: var(--primary);
+    border: var(--primary) solid 2px;
+}
 #registerDriver .btn {
-    margin: 1rem auto 2rem;
+    margin: 2rem auto 1rem;
     width: 100%;
 }
 
-section .btn {
-
-}
 
 .panel.bottom {
     bottom: -45%;
@@ -311,6 +316,9 @@ section .btn {
     left: 0.6rem;
     transform: translateY(-1.2rem) scale(1.2);
     color: var(--primary);
+}
+.form:focus-within span svg {
+    display: none;
 }
 
 #registerDriver span {
