@@ -73,14 +73,14 @@ if u want support contact one of the developers ;)
 
 ## Authors
 
-[Downes Lukas](https://gitlab.com/lukas.downes)
-[Bert Van den Broeck](https://gitlab.com/bert.vandenbroeck)
+[Downes Lukas](https://gitlab.com/lukas.downes), 
+[Bert Van den Broeck](https://gitlab.com/bert.vandenbroeck), 
 [Van de Voorde Siebe](https://gitlab.com/siebe.vandevoorde)
 
 ---
 
 ## License
 
-licened by [odisee](https://odisee.be)
+licensed by [odisee](https://odisee.be)
 
 ---
