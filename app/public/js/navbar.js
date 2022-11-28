@@ -4,7 +4,6 @@
     const main = document.querySelector("main");
     const body = document.querySelector('body');
     const nav = document.querySelector('nav');
-    console.log(newRideToggle)
 
     const toggleNavbar = ()=> {
         if(body.classList.contains('overlayOpen')) {

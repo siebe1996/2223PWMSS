@@ -34,7 +34,6 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'login')) {
     $user = $conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
 
     if ($user !== false) {
-
         if (password_verify($password, $user['password'])) {
 
             // Store the user row in the session
@@ -55,5 +54,6 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'login')) {
 $tpl = $twig->load('pages/login.twig');
 echo $tpl->render([
     'error' => $formErrors,
+    'disappearingSVG' => true
 ]);
 

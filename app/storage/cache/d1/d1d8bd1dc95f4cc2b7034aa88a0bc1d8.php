@@ -42,14 +42,23 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
     <meta name=\"viewport\"
           content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">
     <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">
+    <link rel=\"preconnect\" href=\"https://fonts.googleapis.com\">
+    <link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin>
+    <link href=\"https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;800&display=swap\" rel=\"stylesheet\">
+    <link href=\"https://fonts.googleapis.com/css2?family=Asap:wght@300;400;500;600&display=swap\" rel=\"stylesheet\">
     <link rel=\"stylesheet\" href=\"../styles.css\">
     <script src=\"../js/navbar.js\" defer></script>
     ";
-        // line 10
+        // line 14
         if (($context["driverRegister"] ?? null)) {
             echo "<script src=\"../js/dualFormSection.js\" defer></script>";
         }
-        // line 11
+        // line 15
+        echo "    ";
+        if (($context["disappearingSVG"] ?? null)) {
+            echo "<script src=\"../js/disappearingSVG.js\" defer></script>";
+        }
+        // line 16
         echo "    <title>Rebu</title>
 </head>
 <body>
@@ -107,9 +116,9 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 </header>
 <main>
     ";
-        // line 67
+        // line 72
         $this->displayBlock('main', $context, $blocks);
-        // line 69
+        // line 74
         echo "</main>
 <footer>
     Siebe, Bert en Lukas
@@ -119,11 +128,11 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 ";
     }
 
-    // line 67
+    // line 72
     public function block_main($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 68
+        // line 73
         echo "    ";
     }
 
@@ -139,7 +148,7 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 
     public function getDebugInfo()
     {
-        return array (  127 => 68,  123 => 67,  113 => 69,  111 => 67,  53 => 11,  49 => 10,  38 => 1,);
+        return array (  136 => 73,  132 => 72,  122 => 74,  120 => 72,  62 => 16,  57 => 15,  53 => 14,  38 => 1,);
     }
 
     public function getSourceContext()

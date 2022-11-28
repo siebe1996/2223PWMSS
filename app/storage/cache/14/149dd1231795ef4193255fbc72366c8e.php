@@ -55,62 +55,98 @@ class __TwigTemplate_6857fe84803a59e2bbd19ee0e4e8dc41 extends Template
                 <input type=\"text\" name=\"firstName\" id=\"firstName\" value=\"";
         // line 8
         echo twig_escape_filter($this->env, ($context["firstName"] ?? null), "html", null, true);
-        echo "\" required>
-                ";
+        echo "\" required
+                        ";
         // line 9
         if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 9)) {
             // line 10
+            echo "                            class=\"error\"
+                        ";
+        }
+        // line 11
+        echo ">
+                ";
+        // line 12
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 12)) {
+            // line 13
             echo "                <p class=\"errorMsg\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 10), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 13), "html", null, true);
             echo "</p>
                 ";
         }
-        // line 12
+        // line 15
         echo "                <label for=\"lastName\">Last Name</label>
                 <input type=\"text\" name=\"lastName\" id=\"lastName\" value=\"";
-        // line 13
+        // line 16
         echo twig_escape_filter($this->env, ($context["lastName"] ?? null), "html", null, true);
-        echo "\" required>
+        echo "\" required
+                        ";
+        // line 17
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "lastName", [], "any", false, false, false, 17)) {
+            // line 18
+            echo "                            class=\"error\"
+                        ";
+        }
+        // line 19
+        echo ">
                 ";
-        // line 14
-        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "lastName", [], "any", false, false, false, 14)) {
-            // line 15
+        // line 20
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "lastName", [], "any", false, false, false, 20)) {
+            // line 21
             echo "                <p class=\"errorMsg\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "lastName", [], "any", false, false, false, 15), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "lastName", [], "any", false, false, false, 21), "html", null, true);
             echo "</p>
                 ";
         }
-        // line 17
+        // line 23
         echo "                <label for=\"email\">Email</label>
                 <input type=\"email\" name=\"email\" id=\"email\" value=\"";
-        // line 18
-        echo twig_escape_filter($this->env, ($context["email"] ?? null), "html", null, true);
-        echo "\" required>
-                ";
-        // line 19
-        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "email", [], "any", false, false, false, 19)) {
-            // line 20
-            echo "                <p class=\"errorMsg\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "email", [], "any", false, false, false, 20), "html", null, true);
-            echo "</p>
-                ";
-        }
-        // line 22
-        echo "                <label for=\"password\">Password</label>
-                <input type=\"password\" name=\"password\" id=\"password\" required>
-                ";
         // line 24
-        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 24)) {
-            // line 25
-            echo "                <p class=\"errorMsg\">";
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 25), "html", null, true);
-            echo "</p>
-                ";
+        echo twig_escape_filter($this->env, ($context["email"] ?? null), "html", null, true);
+        echo "\" required
+                        ";
+        // line 25
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "email", [], "any", false, false, false, 25)) {
+            // line 26
+            echo "                            class=\"error\"
+                        ";
         }
         // line 27
+        echo ">
+                ";
+        // line 28
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "email", [], "any", false, false, false, 28)) {
+            // line 29
+            echo "                <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "email", [], "any", false, false, false, 29), "html", null, true);
+            echo "</p>
+                ";
+        }
+        // line 31
+        echo "                <label for=\"password\">Password</label>
+                <input type=\"password\" name=\"password\" id=\"password\" required
+                        ";
+        // line 33
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 33)) {
+            // line 34
+            echo "                    class=\"error\"
+                        ";
+        }
+        // line 35
+        echo ">
+                ";
+        // line 36
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 36)) {
+            // line 37
+            echo "                <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 37), "html", null, true);
+            echo "</p>
+                ";
+        }
+        // line 39
         echo "                <input type=\"hidden\" name=\"moduleAction\" value=\"register\">
+                <button class=\"btn\" type=\"submit\">Register</button>
             </div>
-            <button class=\"btn\" type=\"submit\">Register</button>
         </form>
     </div>
 ";
@@ -128,7 +164,7 @@ class __TwigTemplate_6857fe84803a59e2bbd19ee0e4e8dc41 extends Template
 
     public function getDebugInfo()
     {
-        return array (  111 => 27,  105 => 25,  103 => 24,  99 => 22,  93 => 20,  91 => 19,  87 => 18,  84 => 17,  78 => 15,  76 => 14,  72 => 13,  69 => 12,  63 => 10,  61 => 9,  57 => 8,  50 => 3,  46 => 2,  35 => 1,);
+        return array (  147 => 39,  141 => 37,  139 => 36,  136 => 35,  132 => 34,  130 => 33,  126 => 31,  120 => 29,  118 => 28,  115 => 27,  111 => 26,  109 => 25,  105 => 24,  102 => 23,  96 => 21,  94 => 20,  91 => 19,  87 => 18,  85 => 17,  81 => 16,  78 => 15,  72 => 13,  70 => 12,  67 => 11,  63 => 10,  61 => 9,  57 => 8,  50 => 3,  46 => 2,  35 => 1,);
     }
 
     public function getSourceContext()

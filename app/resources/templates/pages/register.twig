@@ -5,28 +5,40 @@
         <form action="./register.php" method="post" novalidate>
             <div class="form">
                 <label for="firstName">First Name</label>
-                <input type="text" name="firstName" id="firstName" value="{{firstName}}" required>
+                <input type="text" name="firstName" id="firstName" value="{{firstName}}" required
+                        {% if errors.firstName %}
+                            class="error"
+                        {% endif %}>
                 {% if errors.firstName %}
                 <p class="errorMsg">{{errors.firstName}}</p>
                 {% endif %}
                 <label for="lastName">Last Name</label>
-                <input type="text" name="lastName" id="lastName" value="{{lastName}}" required>
+                <input type="text" name="lastName" id="lastName" value="{{lastName}}" required
+                        {% if errors.lastName %}
+                            class="error"
+                        {% endif %}>
                 {% if errors.lastName %}
                 <p class="errorMsg">{{errors.lastName}}</p>
                 {% endif %}
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" value="{{email}}" required>
+                <input type="email" name="email" id="email" value="{{email}}" required
+                        {% if errors.email %}
+                            class="error"
+                        {% endif %}>
                 {% if errors.email %}
                 <p class="errorMsg">{{errors.email}}</p>
                 {% endif %}
                 <label for="password">Password</label>
-                <input type="password" name="password" id="password" required>
+                <input type="password" name="password" id="password" required
+                        {% if errors.password %}
+                    class="error"
+                        {% endif %}>
                 {% if errors.password %}
                 <p class="errorMsg">{{errors.password}}</p>
                 {% endif %}
                 <input type="hidden" name="moduleAction" value="register">
+                <button class="btn" type="submit">Register</button>
             </div>
-            <button class="btn" type="submit">Register</button>
         </form>
     </div>
 {% endblock %}

@@ -5,6 +5,14 @@
 
 
     const toggleFormSection = ()=> {
+        first.classList.toggle('transforming');
+        second.classList.toggle('transforming');
+        toggle.classList.toggle('transforming');
+        setTimeout(()=> {
+            first.classList.toggle('transforming');
+            second.classList.toggle('transforming');
+            toggle.classList.toggle('transforming');
+        }, 200);
         first.classList.toggle('hidden');
         second.classList.toggle('hidden');
         if (toggle.innerHTML === 'Next') {
@@ -15,7 +23,6 @@
         }
         toggle.classList.toggle('back');
     }
-    console.log(toggle)
 
     toggle.addEventListener('click', () => {
         toggleFormSection();
