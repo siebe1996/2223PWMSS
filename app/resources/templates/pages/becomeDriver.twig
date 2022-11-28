@@ -3,28 +3,43 @@
     <div class="panel registerDriver">
         <h2>Driver Register</h2>
         <form action=".php" method="post" novalidate>
-            <div class="form">
-                <label for="numberPlate">Number Plate</label>
-                <input type="text" name="numberPlate" id="numberPlate">
-                <label for="birthDate">Birth Date</label>
-                <input type="date" name="birthDate" id="birthDate">
-                <label for="carBrand">Car Brand</label>
-                <input type="text" name="carBrand" id="carBrand">
-                <label for="carModel">Car Model</label>
-                <input type="text" name="carModel" id="carModel">
-                <label for="carPassengers">Passengers</label>
-                <input type="number" name="carPassenger" id="carPassengers">
-                <label for="gender">Gender</label>
-                <select name="gender" id="gender">
-                    <option value="">...</option>
-                    <option value="M">M</option>
-                    <option value="F">F</option>
-                    <option value="X">X</option>
-                </select>
-                <label for="profilePic">Profile Picture</label>
-                <input type="file" name="profilePic" id="profilePic">
+            <div class="form" id="registerDriver">
+                <section class="firstFormSection">
+                    <label for="numberPlate">Number Plate</label>
+                    <input type="text" name="numberPlate" id="numberPlate">
+                    <label for="birthDate">Birth Date</label>
+                    <input type="date" name="birthDate" id="birthDate">
+                    <label for="gender">Gender</label>
+                    <select name="gender" id="gender">
+                        <option value="">...</option>
+                        <option value="M">M</option>
+                        <option value="F">F</option>
+                        <option value="X">X</option>
+                    </select>
+                    <label for="profilePic">
+                        Profile Picture
+                    </label>
+                    <span>
+                        <input type="file" name="profilePic" id="profilePic">
+                    </span>
+                </section>
+                <section class="secondFormSection">
+                    <label for="carBrand">Car Brand</label>
+                    <span>
+                    <input type="text" name="carBrand" id="carBrand">
+                    </span>
+                    <label for="carModel">Car Model</label>
+                    <span>
+                    <input type="text" name="carModel" id="carModel">
+                    </span>
+                    <label for="carPassengers">Passengers</label>
+                    <span>
+                        <input type="number" name="carPassenger" id="carPassengers">
+                    </span>
+                </section>
+                <button class="btn firstFormSection">Next</button>
+                <button class="btn secondFormSection" type="submit">Register</button>
             </div>
-            <button class="btn" type="submit">Register</button>
         </form>
     </div>
 {% endblock %}

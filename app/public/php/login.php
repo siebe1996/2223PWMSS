@@ -16,7 +16,7 @@ session_start();
 
 // already logged in!
 if (isset($_SESSION['user'])) {
-    header('location: index.php');
+    header('location: logout.php');
     exit();
 }
 

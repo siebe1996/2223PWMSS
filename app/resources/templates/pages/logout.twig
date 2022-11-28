@@ -1,0 +1,12 @@
+{% extends "/partials/common.twig" %}
+{% block main %}
+    <div class="panel login">
+        <h2>Do you realy want to?</h2>
+        <form action="php/login.php" method="post">
+            <input type="hidden" name="moduelAction" value="logout">
+            <div class="form" id="loginForm">
+                <button class="btn" type="submit">Log Out</button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

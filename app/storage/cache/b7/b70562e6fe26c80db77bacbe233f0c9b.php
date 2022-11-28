@@ -50,15 +50,15 @@ class __TwigTemplate_b9e90890dacf996526f310d70f96d056 extends Template
         echo "<div class=\"map\"></div>
 <div class=\"panel bottom\">
     <form action=\"\" method=\"POST\" enctype=\"application/x-www-form-urlencoded\">
-        <div class=\"form\">
+        <div class=\"form\" id=\"homeForm\">
             <label for=\"startLocation\">From:</label>
             <input type=\"text\" id=\"startLocation\" name=\"startLocation\">
             <label for=\"endLocation\">To:</label>
             <input type=\"text\" name=\"endLocation\" id=\"endLocation\">
             <label for=\"time\">When:</label>
             <input type=\"time\" name=\"time\" id=\"time\">
+            <button class=\"btn\" type=\"submit\">Request Ride</button>
         </div>
-        <button class=\"btn\" type=\"submit\">Request Ride</button>
     </form>
 </div>
 <a class=\"btn newRideToggle\">
