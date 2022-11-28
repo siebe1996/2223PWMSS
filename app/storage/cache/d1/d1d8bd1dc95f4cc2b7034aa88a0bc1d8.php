@@ -89,14 +89,19 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
             <li><a href=\"./becomeDriver.php\">Become a driver</a></li>
             <li><a href=\"#\">Trip history</a></li>
             <li><a href=\"#\">Reviews</a></li>
+            <li>
+                <form class=\"navbar-form navbar-right\" method=\"post\" action=\"logout.php\">
+                    <button type=\"submit\" class=\"btn btn-default\">Uitloggen</button>
+                </form>
+            </li>
         </ul>
     </nav>
 </header>
 <main>
     ";
-        // line 59
+        // line 64
         $this->displayBlock('main', $context, $blocks);
-        // line 61
+        // line 66
         echo "</main>
 <footer>
     Siebe, Bert en Lukas
@@ -106,11 +111,11 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 ";
     }
 
-    // line 59
+    // line 64
     public function block_main($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 60
+        // line 65
         echo "    ";
     }
 
@@ -121,7 +126,7 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 
     public function getDebugInfo()
     {
-        return array (  114 => 60,  110 => 59,  100 => 61,  98 => 59,  38 => 1,);
+        return array (  119 => 65,  115 => 64,  105 => 66,  103 => 64,  38 => 1,);
     }
 
     public function getSourceContext()
