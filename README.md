@@ -40,6 +40,25 @@ git branch -M main
 git push -uf origin main
 ```
 
+## start up composer
+
+```
+cd existing_repo
+docker compose up
+```
+open new terminal
+```
+cd existing_repo
+docker compose exec php-web bash
+composer install
+```
+
+## check if database is up and running
+
+- [go to phpMyAdmin](http://localhost:8001)
+- login with username: root, password: Azerty123
+
+
 ## Integrate with your tools
 
 - [ ] [Set up project integrations](https://gitlab.com/ikdoeict/siebe.vandevoorde/2223PWMSS/-/settings/integrations)
