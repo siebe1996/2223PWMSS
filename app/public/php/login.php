@@ -21,7 +21,7 @@ if (isset($_SESSION['user'])) {
 }
 
 // var to tell if we have a login error
-$formErrors = [];
+$formErrors = '';
 
 // extract sent in username & password
 $email = isset($_POST['email']) ? trim($_POST['email']) : '';
@@ -43,17 +43,17 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'login')) {
             exit();
         } // Invalid login
         else {
-            $formErrors[] = 'Invalid login credentials';
+            $formErrors = 'Invalid login credentials';
         }
     } // username & password are not valid
     else {
-        $formErrors[] = 'Invalid login credentials';
+        $formErrors = 'Invalid login credentials';
     }
 
 }
 
 $tpl = $twig->load('pages/login.twig');
 echo $tpl->render([
-    'errors' => $formErrors,
+    'error' => $formErrors,
 ]);
 

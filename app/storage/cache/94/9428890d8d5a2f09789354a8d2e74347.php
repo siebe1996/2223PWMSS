@@ -51,29 +51,18 @@ class __TwigTemplate_004c30c4b21eed7a75819bc9f14161eb extends Template
         <h2>Log in</h2>
         ";
         // line 5
-        if (($context["errors"] ?? null)) {
+        if (($context["error"] ?? null)) {
             // line 6
-            echo "            ";
-            $context['_parent'] = $context;
-            $context['_seq'] = twig_ensure_traversable(($context["errors"] ?? null));
-            foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-                // line 7
-                echo "                <p>";
-                echo twig_escape_filter($this->env, $context["error"], "html", null, true);
-                echo "</p>
-            ";
-            }
-            $_parent = $context['_parent'];
-            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
-            $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 9
-            echo "        ";
+            echo "            <p>";
+            echo twig_escape_filter($this->env, ($context["error"] ?? null), "html", null, true);
+            echo "</p>
+        ";
         }
-        // line 10
-        echo "        <form action=\"php/login.php\" method=\"post\">
-            <input type=\"hidden\" name=\"moduelAction\" value=\"login\">
+        // line 8
+        echo "        <form action=\"./login.php\" method=\"post\">
+            <input type=\"hidden\" name=\"moduleAction\" value=\"login\">
             <div class=\"form\" id=\"loginForm\">
-                <label for=\"email\">Username</label>
+                <label for=\"email\">E-mail</label>
                 <span>
                     <svg width=\"22\" height=\"22\" viewBox=\"0 0 16 16\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"
                          class=\"username\">
@@ -94,7 +83,7 @@ class __TwigTemplate_004c30c4b21eed7a75819bc9f14161eb extends Template
                 <button class=\"btn\" type=\"submit\">Log In</button>
             </div>
         </form>
-        <a href=\"./register.php\">Register here</a> if you don't have an account yet
+        <p><a href=\"./register.php\">Register here</a> if you don't have an account yet</p>
     </div>
 ";
     }
@@ -111,7 +100,7 @@ class __TwigTemplate_004c30c4b21eed7a75819bc9f14161eb extends Template
 
     public function getDebugInfo()
     {
-        return array (  73 => 10,  70 => 9,  61 => 7,  56 => 6,  54 => 5,  50 => 3,  46 => 2,  35 => 1,);
+        return array (  62 => 8,  56 => 6,  54 => 5,  50 => 3,  46 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
