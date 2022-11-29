@@ -59,6 +59,11 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
             echo "<script src=\"../js/disappearingSVG.js\" defer></script>";
         }
         // line 16
+        echo "    ";
+        if (($context["home"] ?? null)) {
+            echo "<script src=\"../js/newRideButton.js\" defer></script>";
+        }
+        // line 17
         echo "    <title>Rebu</title>
 </head>
 <body>
@@ -81,7 +86,7 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
             <svg width=\"20\" height=\"20\" viewBox=\"0 0 27 27\" fill=\"none\"
                  xmlns=\"http://www.w3.org/2000/svg\">
                 <g clip-path=\"url(#clip0_8_70)\">
-                    <path d=\"M1.6875 25.3125L25.3125 1.6875M25.3125 25.3125L1.6875 1.6875\" stroke=\"white\"
+                    <path d=\"M1.6875 25.3125L25.3125 1.6875M25.3125 25.3125L1.6875 1.6875\" stroke=\"currentColor\"
                           stroke-width=\"1.6875\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>
                 </g>
             </svg>
@@ -107,7 +112,7 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
                               d=\"M6 19v.525q0 .625-.425 1.05Q5.15 21 4.5 21q-.625 0-1.062-.438Q3 20.125 3 19.5V12l2.1-6q.15-.45.538-.725Q6.025 5 6.5 5h11q.475 0 .863.275q.387.275.537.725l2.1 6v7.525q0 .625-.425 1.05Q20.15 21 19.5 21q-.625 0-1.062-.438Q18 20.125 18 19.5V19Zm-.2-9h12.4l-1.05-3H6.85ZM5 12v5Zm2.5 4q.625 0 1.062-.438Q9 15.125 9 14.5t-.438-1.062Q8.125 13 7.5 13t-1.062.438Q6 13.875 6 14.5t.438 1.062Q6.875 16 7.5 16Zm9 0q.625 0 1.062-.438Q18 15.125 18 14.5t-.438-1.062Q17.125 13 16.5 13t-1.062.438Q15 13.875 15 14.5t.438 1.062Q15.875 16 16.5 16ZM5 17h14v-5H5Z\"/>
                     </svg>
                     Become a driver</a></li>
-            <li><a href=\"#\">Trip history</a></li>
+            <li><a href=\"#\">About</a></li>
             <li>
                 <a href=\"./logout.php\">Log out</a>
             </li>
@@ -116,9 +121,9 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 </header>
 <main>
     ";
-        // line 72
+        // line 73
         $this->displayBlock('main', $context, $blocks);
-        // line 74
+        // line 75
         echo "</main>
 <footer>
     Siebe, Bert en Lukas
@@ -128,11 +133,11 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 ";
     }
 
-    // line 72
+    // line 73
     public function block_main($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 73
+        // line 74
         echo "    ";
     }
 
@@ -148,7 +153,7 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 
     public function getDebugInfo()
     {
-        return array (  136 => 73,  132 => 72,  122 => 74,  120 => 72,  62 => 16,  57 => 15,  53 => 14,  38 => 1,);
+        return array (  141 => 74,  137 => 73,  127 => 75,  125 => 73,  67 => 17,  62 => 16,  57 => 15,  53 => 14,  38 => 1,);
     }
 
     public function getSourceContext()
