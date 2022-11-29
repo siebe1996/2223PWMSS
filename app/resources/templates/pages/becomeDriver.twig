@@ -6,9 +6,15 @@
             <div class="form" id="registerDriver">
                 <section class="firstFormSection">
                     <label for="numberPlate">Number Plate</label>
-                    <input type="text" name="numberPlate" id="numberPlate">
+                    <input type="text" name="numberPlate" id="numberPlate" value="{{ errors.numberPlate }}">
+                    {% if errors.numberPlate %}
+                        <p class="errorMsg">{{errors.numberPlate}}</p>
+                    {% endif %}
                     <label for="birthDate">Birth Date</label>
                     <input type="date" name="birthDate" id="birthDate">
+                    {% if errors.birthDate %}
+                        <p class="errorMsg">{{errors.birthDate}}</p>
+                    {% endif %}
                     <label for="gender">Gender</label>
                     <select name="gender" id="gender">
                         {% if genders|length < 0 %}
@@ -22,12 +28,18 @@
                         <option value="F">F</option>
                         <option value="X">X</option>-->
                     </select>
+                    {% if errors.firstName %}
+                        <p class="errorMsg">{{errors.gender}}</p>
+                    {% endif %}
                     <label for="profilePic">
                         Profile Picture
                     </label>
                     <span>
                         <input type="file" name="profilePic" id="profilePic">
                     </span>
+                    {% if errors.firstName %}
+                        <p class="errorMsg">{{errors.profilePic}}</p>
+                    {% endif %}
                 </section>
                 <section class="secondFormSection hidden">
                     <label for="carBrand">Car Brand</label>
