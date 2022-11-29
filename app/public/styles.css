@@ -211,8 +211,7 @@ footer {
 }
 .firstFormSection.transforming,
 .secondFormSection.transforming {
-    transition: 200ms ease-in-out;
-    transform: scaleX(0.8);
+    transform: scaleX(0.9);
 }
 .firstFormSection.hidden,
 .secondFormSection.hidden {
