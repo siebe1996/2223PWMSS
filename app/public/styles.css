@@ -416,6 +416,9 @@ footer {
     .form#loginForm {
         width: min(420px, 70%);
     }
+    .btn.newRideToggle {
+        scale: 1.2;
+    }
 }
 @media (min-width: 900px) {
     h2 {

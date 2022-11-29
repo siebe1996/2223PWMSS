@@ -58,6 +58,11 @@
                         <p class="errorMsg">{{errors.carPassengers}}</p>
                     {% endif %}
                     <input type="hidden" name="moduleAction" value="becomeDriver">
+                    <label for="btwNumber">BTW-nummer</label>
+                    <input type="number" name="btwNumber" id="btwNumber" value="{{ btwNumber }}">
+                    {% if errors.btwNumber %}
+                        <p class="errorMsg">{{errors.btwNumber}}</p>
+                    {% endif %}
                     <button class="btn secondFormSection" type="submit">Register</button>
                 </section>
             </div>
