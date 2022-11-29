@@ -119,7 +119,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
                     </select>
                     ";
         // line 31
-        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 31)) {
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "gender", [], "any", false, false, false, 31)) {
             // line 32
             echo "                        <p class=\"errorMsg\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "gender", [], "any", false, false, false, 32), "html", null, true);
@@ -135,7 +135,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
                     </span>
                     ";
         // line 40
-        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 40)) {
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "profilePic", [], "any", false, false, false, 40)) {
             // line 41
             echo "                        <p class=\"errorMsg\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "profilePic", [], "any", false, false, false, 41), "html", null, true);
@@ -152,7 +152,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
         echo "\">
                     ";
         // line 47
-        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 47)) {
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "carBrand", [], "any", false, false, false, 47)) {
             // line 48
             echo "                        <p class=\"errorMsg\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "carBrand", [], "any", false, false, false, 48), "html", null, true);
@@ -167,7 +167,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
         echo "\">
                     ";
         // line 52
-        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 52)) {
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstModel", [], "any", false, false, false, 52)) {
             // line 53
             echo "                        <p class=\"errorMsg\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "carModel", [], "any", false, false, false, 53), "html", null, true);
@@ -182,7 +182,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
         echo "\">
                     ";
         // line 57
-        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 57)) {
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "carPassengers", [], "any", false, false, false, 57)) {
             // line 58
             echo "                        <p class=\"errorMsg\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "carPassengers", [], "any", false, false, false, 58), "html", null, true);
@@ -190,7 +190,8 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
                     ";
         }
         // line 60
-        echo "                    <button class=\"btn secondFormSection\" type=\"submit\">Register</button>
+        echo "                    <input type=\"hidden\" name=\"moduleAction\" value=\"becomeDriver\">
+                    <button class=\"btn secondFormSection\" type=\"submit\">Register</button>
                 </section>
             </div>
         </form>

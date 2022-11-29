@@ -28,14 +28,14 @@ $carPassengers = isset($_POST['carPassengers']) ? $_POST['carPassengers'] : '';
 $formErrors = [];
 $genders = ['M', 'F', 'X'];
 
-if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'register')) {
+if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'becomeDriver')) {
     if (!preg_match("/^[a-zA-Z-' ]+$/",$numberPlate)){
         $formErrors['numberPlate'] = 'Voer een geldige nummerplaat in';
     }
 
     $birthDate_arr  = explode('-', $birthDate);
-    if (!checkdate($birthDate_arr[0], $birthDate_arr[1], $birthDate_arr[2])) {
-        $formErrors['birthDate'] = 'Voer een geldige geboorte datum in';
+    if (!checkdate($birthDate_arr[1], $birthDate_arr[2], $birthDate_arr[0])) {
+        $formErrors['birthDate'] = 'Voer een geldige geboorte datum in ' . $birthDate_arr[1];
     }
 
     if(!in_array($gender, $genders)){
