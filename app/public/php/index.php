@@ -8,5 +8,18 @@ $twig = new \Twig\Environment($loader, [
         'auto_reload' => true
     ]
 );
+
+session_start();
+
+// already logged in!
+if (isset($_SESSION['user'])) {
+    $loggedIn = true;
+}
+else{
+    $loggedIn = false;
+}
+
 $homePanel = $twig->load('/pages/home.twig');
-echo $homePanel->render([]);
+echo $homePanel->render([
+    'loggedIn' => $loggedIn,
+]);
