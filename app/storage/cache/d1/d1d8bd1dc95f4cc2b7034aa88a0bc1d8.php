@@ -64,6 +64,11 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
             echo "<script src=\"../js/newRideButton.js\" defer></script>";
         }
         // line 17
+        echo "    ";
+        if (($context["home"] ?? null)) {
+            echo "<script src=\"../js/openLayers/main.js\" type=\"module\" defer></script>";
+        }
+        // line 18
         echo "    <title>Rebu</title>
 </head>
 <body>
@@ -121,9 +126,9 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 </header>
 <main>
     ";
-        // line 73
+        // line 74
         $this->displayBlock('main', $context, $blocks);
-        // line 75
+        // line 76
         echo "</main>
 <footer>
     Siebe, Bert en Lukas
@@ -133,11 +138,11 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 ";
     }
 
-    // line 73
+    // line 74
     public function block_main($context, array $blocks = [])
     {
         $macros = $this->macros;
-        // line 74
+        // line 75
         echo "    ";
     }
 
@@ -153,7 +158,7 @@ class __TwigTemplate_494b389c5a66f3c6bf178cfa6f1cfcff extends Template
 
     public function getDebugInfo()
     {
-        return array (  141 => 74,  137 => 73,  127 => 75,  125 => 73,  67 => 17,  62 => 16,  57 => 15,  53 => 14,  38 => 1,);
+        return array (  146 => 75,  142 => 74,  132 => 76,  130 => 74,  72 => 18,  67 => 17,  62 => 16,  57 => 15,  53 => 14,  38 => 1,);
     }
 
     public function getSourceContext()

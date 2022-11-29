@@ -149,9 +149,10 @@ footer {
     transition: 300ms ease-in-out;
 }
 
-.map {
-    height: 100vh;
-    background: url('img/map.png');
+#map {
+    position: relative;
+    top: 10vh;
+    height: 90vh;
     width: 100%;
 
 }

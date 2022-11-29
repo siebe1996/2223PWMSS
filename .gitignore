@@ -5,3 +5,4 @@ docker/mysql-data
 app/storage/db.log
 app/vendor
 storage\cache
+app/public/js/openLayers/node_modules

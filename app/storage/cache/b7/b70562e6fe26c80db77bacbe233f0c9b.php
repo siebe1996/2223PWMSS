@@ -47,7 +47,7 @@ class __TwigTemplate_b9e90890dacf996526f310d70f96d056 extends Template
     {
         $macros = $this->macros;
         // line 3
-        echo "<div class=\"map\"></div>
+        echo "<div id=\"map\"></div>
 <div class=\"panel bottom\">
     <form action=\"\" method=\"POST\" enctype=\"application/x-www-form-urlencoded\">
         <div class=\"form\" id=\"homeForm\">
