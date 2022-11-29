@@ -73,4 +73,5 @@ echo $tpl->render([
     'lastName' => $lastName,
     'email' => $email,
     'errors' => $formErrors,
+    'loggedIn' => false,
 ]);
