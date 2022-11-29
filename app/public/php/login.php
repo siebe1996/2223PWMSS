@@ -54,6 +54,7 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] == 'login')) {
 $tpl = $twig->load('pages/login.twig');
 echo $tpl->render([
     'error' => $formErrors,
-    'disappearingSVG' => true
+    'disappearingSVG' => true,
+    'loggedIn' => false,
 ]);
 
