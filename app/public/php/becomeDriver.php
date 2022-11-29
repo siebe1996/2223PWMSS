@@ -25,6 +25,7 @@ $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 $carBrand = isset($_POST['carBrand']) ? $_POST['carBrand'] : '';
 $carModel = isset($_POST['carModel']) ? $_POST['carModel'] : '';
 $carPassengers = isset($_POST['carPassengers']) ? $_POST['carPassengers'] : '';
+$btwNumber = isset($_POST['btwNumber']) ? $_POST['btwNumber'] : '';
 $formErrors = [];
 $genders = ['M', 'F', 'X'];
 
@@ -71,16 +72,19 @@ if (isset($_POST['moduleAction']) && ($_POST['moduleAction'] === 'becomeDriver')
         $formErrors['carPassengers'] = 'Voer een geldig aantal passagiers in tussen 1 en 10';
     }
 
+    if(trim($btwNumber) === '') {
+        $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
+    }
+
     //  if no errors: insert values into database
 
     if (sizeof($formErrors) === 0){
-        // @toDO check errors connection
-        $stmt = $conn->prepare('INSERT INTO drivers (id, number_plate, birth_date, car_seats, car_model, car_brand, gender, profile_pic) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-        $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, (int)$_SESSION['user']['id'] . '.jpg']);
+        $stmt = $conn->prepare('INSERT INTO drivers (id, number_plate, birth_date, car_seats, car_model, car_brand, gender, profile_pic, btw_nr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, (int)$_SESSION['user']['id'] . '.jpg', $btwNumber]);
         header('location: index.php');
         exit();
 
-        //toDo redirect to conformation page;
+        //toDo als je bestuurder bent kun je nie opnieuw inschrijven
     }
 }
 
@@ -96,5 +100,6 @@ echo $becomeDriverPanel->render([
     'carBrand' => $carBrand,
     'carModel' => $carModel,
     'carPassengers' => $carPassengers,
+    'btwNumber' => $btwNumber,
     'genders' => $genders,
     ]);

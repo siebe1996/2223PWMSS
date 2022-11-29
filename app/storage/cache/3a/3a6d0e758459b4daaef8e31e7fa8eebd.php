@@ -190,6 +190,21 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
                     ";
         }
         // line 60
+        echo "                    <label for=\"btwNumber\">BTW-nummer</label>
+                    <input type=\"number\" name=\"btwNumber\" id=\"btwNumber\" value=\"";
+        // line 61
+        echo twig_escape_filter($this->env, ($context["btwNumber"] ?? null), "html", null, true);
+        echo "\">
+                    ";
+        // line 62
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "btwNumber", [], "any", false, false, false, 62)) {
+            // line 63
+            echo "                        <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "btwNumber", [], "any", false, false, false, 63), "html", null, true);
+            echo "</p>
+                    ";
+        }
+        // line 65
         echo "                    <input type=\"hidden\" name=\"moduleAction\" value=\"becomeDriver\">
                     <button class=\"btn secondFormSection\" type=\"submit\">Register</button>
                 </section>
@@ -212,7 +227,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
 
     public function getDebugInfo()
     {
-        return array (  193 => 60,  187 => 58,  185 => 57,  181 => 56,  178 => 55,  172 => 53,  170 => 52,  166 => 51,  163 => 50,  157 => 48,  155 => 47,  151 => 46,  146 => 43,  140 => 41,  138 => 40,  130 => 34,  124 => 32,  122 => 31,  115 => 26,  100 => 24,  95 => 23,  91 => 21,  89 => 20,  85 => 18,  79 => 16,  77 => 15,  73 => 14,  70 => 13,  64 => 11,  62 => 10,  58 => 9,  50 => 3,  46 => 2,  35 => 1,);
+        return array (  208 => 65,  202 => 63,  200 => 62,  196 => 61,  193 => 60,  187 => 58,  185 => 57,  181 => 56,  178 => 55,  172 => 53,  170 => 52,  166 => 51,  163 => 50,  157 => 48,  155 => 47,  151 => 46,  146 => 43,  140 => 41,  138 => 40,  130 => 34,  124 => 32,  122 => 31,  115 => 26,  100 => 24,  95 => 23,  91 => 21,  89 => 20,  85 => 18,  79 => 16,  77 => 15,  73 => 14,  70 => 13,  64 => 11,  62 => 10,  58 => 9,  50 => 3,  46 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
