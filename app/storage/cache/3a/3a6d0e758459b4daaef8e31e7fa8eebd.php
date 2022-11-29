@@ -53,24 +53,50 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
             <div class=\"form\" id=\"registerDriver\">
                 <section class=\"firstFormSection\">
                     <label for=\"numberPlate\">Number Plate</label>
-                    <input type=\"text\" name=\"numberPlate\" id=\"numberPlate\">
-                    <label for=\"birthDate\">Birth Date</label>
-                    <input type=\"date\" name=\"birthDate\" id=\"birthDate\">
-                    <label for=\"gender\">Gender</label>
+                    <input type=\"text\" name=\"numberPlate\" id=\"numberPlate\" value=\"";
+        // line 9
+        echo twig_escape_filter($this->env, ($context["numberPlate"] ?? null), "html", null, true);
+        echo "\">
+                    ";
+        // line 10
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "numberPlate", [], "any", false, false, false, 10)) {
+            // line 11
+            echo "                        <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "numberPlate", [], "any", false, false, false, 11), "html", null, true);
+            echo "</p>
+                    ";
+        }
+        // line 13
+        echo "                    <label for=\"birthDate\">Birth Date</label>
+                    <input type=\"date\" name=\"birthDate\" id=\"birthDate\" value=\"";
+        // line 14
+        echo twig_escape_filter($this->env, ($context["birthDate"] ?? null), "html", null, true);
+        echo "\">
+                    ";
+        // line 15
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "birthDate", [], "any", false, false, false, 15)) {
+            // line 16
+            echo "                        <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "birthDate", [], "any", false, false, false, 16), "html", null, true);
+            echo "</p>
+                    ";
+        }
+        // line 18
+        echo "                    <label for=\"gender\">Gender</label>
                     <select name=\"gender\" id=\"gender\">
                         ";
-        // line 14
+        // line 20
         if ((twig_length_filter($this->env, ($context["genders"] ?? null)) < 0)) {
-            // line 15
+            // line 21
             echo "                            <option value=\"wrong\">something went wrong</option>
                         ";
         }
-        // line 17
+        // line 23
         echo "                        ";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["genders"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
-            // line 18
+            // line 24
             echo "                            <option value=\"";
             echo twig_escape_filter($this->env, $context["value"], "html", null, true);
             echo "\"  ";
@@ -85,27 +111,86 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 20
+        // line 26
         echo "                        <!--<option value=\"\">...</option>
                         <option value=\"M\">M</option>
                         <option value=\"F\">F</option>
                         <option value=\"X\">X</option>-->
                     </select>
-                    <label for=\"profilePic\">
+                    ";
+        // line 31
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 31)) {
+            // line 32
+            echo "                        <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "gender", [], "any", false, false, false, 32), "html", null, true);
+            echo "</p>
+                    ";
+        }
+        // line 34
+        echo "                    <label for=\"profilePic\">
                         Profile Picture
                     </label>
                     <span>
                         <input type=\"file\" name=\"profilePic\" id=\"profilePic\">
                     </span>
-                </section>
+                    ";
+        // line 40
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 40)) {
+            // line 41
+            echo "                        <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "profilePic", [], "any", false, false, false, 41), "html", null, true);
+            echo "</p>
+                    ";
+        }
+        // line 43
+        echo "                </section>
                 <section class=\"secondFormSection hidden\">
                     <label for=\"carBrand\">Car Brand</label>
-                    <input type=\"text\" name=\"carBrand\" id=\"carBrand\">
-                    <label for=\"carModel\">Car Model</label>
-                    <input type=\"text\" name=\"carModel\" id=\"carModel\">
-                    <label for=\"carPassengers\">Passengers</label>
-                    <input type=\"number\" name=\"carPassengers\" id=\"carPassengers\">
-                    <button class=\"btn secondFormSection\" type=\"submit\">Register</button>
+                    <input type=\"text\" name=\"carBrand\" id=\"carBrand\" value=\"";
+        // line 46
+        echo twig_escape_filter($this->env, ($context["carBrand"] ?? null), "html", null, true);
+        echo "\">
+                    ";
+        // line 47
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 47)) {
+            // line 48
+            echo "                        <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "carBrand", [], "any", false, false, false, 48), "html", null, true);
+            echo "</p>
+                    ";
+        }
+        // line 50
+        echo "                    <label for=\"carModel\">Car Model</label>
+                    <input type=\"text\" name=\"carModel\" id=\"carModel\" value=\"";
+        // line 51
+        echo twig_escape_filter($this->env, ($context["carModel"] ?? null), "html", null, true);
+        echo "\">
+                    ";
+        // line 52
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 52)) {
+            // line 53
+            echo "                        <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "carModel", [], "any", false, false, false, 53), "html", null, true);
+            echo "</p>
+                    ";
+        }
+        // line 55
+        echo "                    <label for=\"carPassengers\">Passengers</label>
+                    <input type=\"number\" name=\"carPassengers\" id=\"carPassengers\" value=\"";
+        // line 56
+        echo twig_escape_filter($this->env, ($context["carPassengers"] ?? null), "html", null, true);
+        echo "\">
+                    ";
+        // line 57
+        if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 57)) {
+            // line 58
+            echo "                        <p class=\"errorMsg\">";
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "carPassengers", [], "any", false, false, false, 58), "html", null, true);
+            echo "</p>
+                    ";
+        }
+        // line 60
+        echo "                    <button class=\"btn secondFormSection\" type=\"submit\">Register</button>
                 </section>
             </div>
         </form>
@@ -126,7 +211,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
 
     public function getDebugInfo()
     {
-        return array (  89 => 20,  74 => 18,  69 => 17,  65 => 15,  63 => 14,  50 => 3,  46 => 2,  35 => 1,);
+        return array (  193 => 60,  187 => 58,  185 => 57,  181 => 56,  178 => 55,  172 => 53,  170 => 52,  166 => 51,  163 => 50,  157 => 48,  155 => 47,  151 => 46,  146 => 43,  140 => 41,  138 => 40,  130 => 34,  124 => 32,  122 => 31,  115 => 26,  100 => 24,  95 => 23,  91 => 21,  89 => 20,  85 => 18,  79 => 16,  77 => 15,  73 => 14,  70 => 13,  64 => 11,  62 => 10,  58 => 9,  50 => 3,  46 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
