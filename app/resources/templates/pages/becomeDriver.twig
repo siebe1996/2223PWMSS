@@ -6,12 +6,12 @@
             <div class="form" id="registerDriver">
                 <section class="firstFormSection">
                     <label for="numberPlate">Number Plate</label>
-                    <input type="text" name="numberPlate" id="numberPlate" value="{{ errors.numberPlate }}">
+                    <input type="text" name="numberPlate" id="numberPlate" value="{{ numberPlate }}">
                     {% if errors.numberPlate %}
                         <p class="errorMsg">{{errors.numberPlate}}</p>
                     {% endif %}
                     <label for="birthDate">Birth Date</label>
-                    <input type="date" name="birthDate" id="birthDate">
+                    <input type="date" name="birthDate" id="birthDate" value="{{ birthDate }}">
                     {% if errors.birthDate %}
                         <p class="errorMsg">{{errors.birthDate}}</p>
                     {% endif %}
@@ -43,11 +43,20 @@
                 </section>
                 <section class="secondFormSection hidden">
                     <label for="carBrand">Car Brand</label>
-                    <input type="text" name="carBrand" id="carBrand">
+                    <input type="text" name="carBrand" id="carBrand" value="carBrand">
+                    {% if errors.firstName %}
+                        <p class="errorMsg">{{errors.carBrand}}</p>
+                    {% endif %}
                     <label for="carModel">Car Model</label>
-                    <input type="text" name="carModel" id="carModel">
+                    <input type="text" name="carModel" id="carModel" value="carModel">
+                    {% if errors.firstName %}
+                        <p class="errorMsg">{{errors.carModel}}</p>
+                    {% endif %}
                     <label for="carPassengers">Passengers</label>
-                    <input type="number" name="carPassengers" id="carPassengers">
+                    <input type="number" name="carPassengers" id="carPassengers" value="carPassengers">
+                    {% if errors.firstName %}
+                        <p class="errorMsg">{{errors.carPassengers}}</p>
+                    {% endif %}
                     <button class="btn secondFormSection" type="submit">Register</button>
                 </section>
             </div>
