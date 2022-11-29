@@ -2,7 +2,7 @@
 {% block main %}
     <div class="panel registerDriver">
         <h2>Driver Register</h2>
-        <form action=".php" method="post" novalidate>
+        <form action="./becomeDriver.php" method="post" novalidate>
             <div class="form" id="registerDriver">
                 <section class="firstFormSection">
                     <label for="numberPlate">Number Plate</label>
@@ -11,10 +11,16 @@
                     <input type="date" name="birthDate" id="birthDate">
                     <label for="gender">Gender</label>
                     <select name="gender" id="gender">
-                        <option value="">...</option>
+                        {% if genders|length < 0 %}
+                            <option value="wrong">something went wrong</option>
+                        {% endif %}
+                        {% for value in genders %}
+                            <option value="{{ value }}"  {% if value == gender %} selected="selected" {% endif %} >{{ value }}</option>
+                        {% endfor %}
+                        <!--<option value="">...</option>
                         <option value="M">M</option>
                         <option value="F">F</option>
-                        <option value="X">X</option>
+                        <option value="X">X</option>-->
                     </select>
                     <label for="profilePic">
                         Profile Picture
@@ -29,7 +35,7 @@
                     <label for="carModel">Car Model</label>
                     <input type="text" name="carModel" id="carModel">
                     <label for="carPassengers">Passengers</label>
-                    <input type="number" name="carPassenger" id="carPassengers">
+                    <input type="number" name="carPassengers" id="carPassengers">
                     <button class="btn secondFormSection" type="submit">Register</button>
                 </section>
             </div>

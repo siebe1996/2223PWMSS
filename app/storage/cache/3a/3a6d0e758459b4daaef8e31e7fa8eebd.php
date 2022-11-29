@@ -49,7 +49,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
         // line 3
         echo "    <div class=\"panel registerDriver\">
         <h2>Driver Register</h2>
-        <form action=\".php\" method=\"post\" novalidate>
+        <form action=\"./becomeDriver.php\" method=\"post\" novalidate>
             <div class=\"form\" id=\"registerDriver\">
                 <section class=\"firstFormSection\">
                     <label for=\"numberPlate\">Number Plate</label>
@@ -58,10 +58,38 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
                     <input type=\"date\" name=\"birthDate\" id=\"birthDate\">
                     <label for=\"gender\">Gender</label>
                     <select name=\"gender\" id=\"gender\">
-                        <option value=\"\">...</option>
+                        ";
+        // line 14
+        if ((twig_length_filter($this->env, ($context["genders"] ?? null)) < 0)) {
+            // line 15
+            echo "                            <option value=\"wrong\">something went wrong</option>
+                        ";
+        }
+        // line 17
+        echo "                        ";
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(($context["genders"] ?? null));
+        foreach ($context['_seq'] as $context["_key"] => $context["value"]) {
+            // line 18
+            echo "                            <option value=\"";
+            echo twig_escape_filter($this->env, $context["value"], "html", null, true);
+            echo "\"  ";
+            if (($context["value"] == ($context["gender"] ?? null))) {
+                echo " selected=\"selected\" ";
+            }
+            echo " >";
+            echo twig_escape_filter($this->env, $context["value"], "html", null, true);
+            echo "</option>
+                        ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['value'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 20
+        echo "                        <!--<option value=\"\">...</option>
                         <option value=\"M\">M</option>
                         <option value=\"F\">F</option>
-                        <option value=\"X\">X</option>
+                        <option value=\"X\">X</option>-->
                     </select>
                     <label for=\"profilePic\">
                         Profile Picture
@@ -76,7 +104,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
                     <label for=\"carModel\">Car Model</label>
                     <input type=\"text\" name=\"carModel\" id=\"carModel\">
                     <label for=\"carPassengers\">Passengers</label>
-                    <input type=\"number\" name=\"carPassenger\" id=\"carPassengers\">
+                    <input type=\"number\" name=\"carPassengers\" id=\"carPassengers\">
                     <button class=\"btn secondFormSection\" type=\"submit\">Register</button>
                 </section>
             </div>
@@ -98,7 +126,7 @@ class __TwigTemplate_2a1da99e21ddf7153632fec701834993 extends Template
 
     public function getDebugInfo()
     {
-        return array (  50 => 3,  46 => 2,  35 => 1,);
+        return array (  89 => 20,  74 => 18,  69 => 17,  65 => 15,  63 => 14,  50 => 3,  46 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
