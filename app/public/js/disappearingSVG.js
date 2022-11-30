@@ -4,7 +4,7 @@
     const usernameSVG = document.querySelector(".username");
     console.log("ok")
     const hasText = (input) => {
-        if (input.value) {
+        if (input.value !== "") {
             if (input.type === 'password') {
                 passwordSVG.classList.add('hasText');
             } else {
@@ -12,14 +12,13 @@
             }
         } else {
             if (input.type === 'password') {
-                passwordSVG.classList.toggle('hasText');
+                passwordSVG.classList.remove('hasText');
             } else {
-                usernameSVG.classList.toggle('hasText')
+                usernameSVG.classList.remove('hasText')
             }
         }
     }
     inputs.forEach(input => {
-        console.log(input);
         hasText(input);
         input.addEventListener('keydown', () => {
             hasText(input);

@@ -4,6 +4,7 @@
     const main = document.querySelector("main");
     const body = document.querySelector('body');
     const nav = document.querySelector('nav');
+    const newRideToggleBtn = document.querySelector('.btn.newRideToggle');
 
     const toggleNavbar = ()=> {
         if(body.classList.contains('overlayOpen')) {
@@ -16,7 +17,9 @@
         body.classList.toggle('overlayOpen');
         body.classList.remove('newRide');
 
-        document.querySelector('.btn.newRideToggle').classList.toggle('disabled-link');
+        if (newRideToggleBtn) {
+            newRideToggleBtn.classList.toggle('disabled-link');
+        }
     }
 
     main.addEventListener('click', () => {

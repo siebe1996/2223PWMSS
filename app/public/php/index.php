@@ -22,4 +22,5 @@ else{
 $homePanel = $twig->load('/pages/home.twig');
 echo $homePanel->render([
     'loggedIn' => $loggedIn,
+    'home' => true
 ]);

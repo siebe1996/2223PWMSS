@@ -36,15 +36,17 @@ header {
     z-index: 1;
 }
 
-.overlayOpen .navbarToggle {
+.overlayOpen .navbarToggle,
+.closeHomeOverlay {
     position: absolute;
     right: 7%;
     top: 2rem;
     transform: translate(0, -50%);
 }
 
-button.navbarToggle {
-    background: #FFF0;
+button.navbarToggle,
+button.closeHomeOverlay {
+    background: transparent;
     color: #fafafa;
     border: none;
     font-size: 1.2rem;
@@ -53,6 +55,10 @@ button.navbarToggle {
     align-items: center;
     gap: 0.5rem;
     height: 43px;
+}
+
+button.closeHomeOverlay {
+    color: var(--primary);
 }
 
 /*navigation*/
@@ -143,9 +149,10 @@ footer {
     transition: 300ms ease-in-out;
 }
 
-.map {
-    height: 100vh;
-    background: url('img/map.png');
+#map {
+    position: relative;
+    top: 10vh;
+    height: 90vh;
     width: 100%;
 
 }
@@ -211,8 +218,7 @@ footer {
 }
 .firstFormSection.transforming,
 .secondFormSection.transforming {
-    transition: 200ms ease-in-out;
-    transform: scaleX(0.8);
+    transform: scaleX(0.9);
 }
 .firstFormSection.hidden,
 .secondFormSection.hidden {
@@ -383,25 +389,62 @@ footer {
         width: 100%;
     }
 
-    header h1 {
-        margin-inline-start: 10vw;
-    }
-
     nav {
-        display: flex;
-        margin-inline-end: 10vw;
+        display: unset;
+        position: unset;
+        width: 55%;
+        padding: unset;
+        background: transparent;
     }
 
     nav h2 {
         display: none;
     }
+    nav svg {
+        display: none;
+    }
 
     nav ul {
         flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
     }
 
     button.navbarToggle {
         display: none;
     }
 
+    .form#loginForm {
+        width: min(420px, 70%);
+    }
+    .btn.newRideToggle {
+        scale: 1.2;
+    }
+}
+@media (min-width: 900px) {
+    h2 {
+        margin-bottom: 3rem;
+    }
+    .from#register {
+        width: min(700px,70%);
+    }
+    .newRide .panel.bottom {
+        transition: 300ms ease-in-out;
+        bottom: 50%;
+        left: 2rem;
+        width: min(30rem, 25%);
+        height: 40%;
+        transform: translate(0,50%);
+    }
+    #registerDriver {
+        flex-direction: row;
+        gap: 2rem;
+    }
+    .firstFormSection.hidden,
+    .secondFormSection.hidden {
+        display: block;
+    }
+    .btn.formToggle {
+        display: none;
+    }
 }

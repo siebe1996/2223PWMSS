@@ -2,34 +2,67 @@
 {% block main %}
     <div class="panel registerDriver">
         <h2>Driver Register</h2>
-        <form action=".php" method="post" novalidate>
+        <form action="./becomeDriver.php" method="post" novalidate>
             <div class="form" id="registerDriver">
                 <section class="firstFormSection">
                     <label for="numberPlate">Number Plate</label>
-                    <input type="text" name="numberPlate" id="numberPlate">
+                    <input type="text" name="numberPlate" id="numberPlate" value="{{ numberPlate }}">
+                    {% if errors.numberPlate %}
+                        <p class="errorMsg">{{errors.numberPlate}}</p>
+                    {% endif %}
                     <label for="birthDate">Birth Date</label>
-                    <input type="date" name="birthDate" id="birthDate">
+                    <input type="date" name="birthDate" id="birthDate" value="{{ birthDate }}">
+                    {% if errors.birthDate %}
+                        <p class="errorMsg">{{errors.birthDate}}</p>
+                    {% endif %}
                     <label for="gender">Gender</label>
                     <select name="gender" id="gender">
-                        <option value="">...</option>
+                        {% if genders|length < 0 %}
+                            <option value="wrong">something went wrong</option>
+                        {% endif %}
+                        {% for value in genders %}
+                            <option value="{{ value }}"  {% if value == gender %} selected="selected" {% endif %} >{{ value }}</option>
+                        {% endfor %}
+                        <!--<option value="">...</option>
                         <option value="M">M</option>
                         <option value="F">F</option>
-                        <option value="X">X</option>
+                        <option value="X">X</option>-->
                     </select>
+                    {% if errors.gender %}
+                        <p class="errorMsg">{{errors.gender}}</p>
+                    {% endif %}
                     <label for="profilePic">
                         Profile Picture
                     </label>
                     <span>
                         <input type="file" name="profilePic" id="profilePic">
                     </span>
+                    {% if errors.profilePic %}
+                        <p class="errorMsg">{{errors.profilePic}}</p>
+                    {% endif %}
                 </section>
                 <section class="secondFormSection hidden">
                     <label for="carBrand">Car Brand</label>
-                    <input type="text" name="carBrand" id="carBrand">
+                    <input type="text" name="carBrand" id="carBrand" value="{{ carBrand }}">
+                    {% if errors.carBrand %}
+                        <p class="errorMsg">{{errors.carBrand}}</p>
+                    {% endif %}
                     <label for="carModel">Car Model</label>
-                    <input type="text" name="carModel" id="carModel">
+                    <input type="text" name="carModel" id="carModel" value="{{ carModel }}">
+                    {% if errors.firstModel %}
+                        <p class="errorMsg">{{errors.carModel}}</p>
+                    {% endif %}
                     <label for="carPassengers">Passengers</label>
-                    <input type="number" name="carPassenger" id="carPassengers">
+                    <input type="number" name="carPassengers" id="carPassengers" value="{{ carPassengers }}">
+                    {% if errors.carPassengers %}
+                        <p class="errorMsg">{{errors.carPassengers}}</p>
+                    {% endif %}
+                    <label for="btwNumber">BTW-nummer</label>
+                    <input type="number" name="btwNumber" id="btwNumber" value="{{ btwNumber }}">
+                    {% if errors.btwNumber %}
+                        <p class="errorMsg">{{errors.btwNumber}}</p>
+                    {% endif %}
+                    <input type="hidden" name="moduleAction" value="becomeDriver">
                     <button class="btn secondFormSection" type="submit">Register</button>
                 </section>
             </div>

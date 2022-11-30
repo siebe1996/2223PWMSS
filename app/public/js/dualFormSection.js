@@ -16,7 +16,6 @@
         first.classList.toggle('hidden');
         second.classList.toggle('hidden');
         if (toggle.innerHTML === 'Next') {
-
             toggle.innerHTML = 'Back';
         } else {
             toggle.innerHTML = 'Next';

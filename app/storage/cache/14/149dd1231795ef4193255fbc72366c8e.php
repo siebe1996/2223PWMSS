@@ -50,7 +50,7 @@ class __TwigTemplate_6857fe84803a59e2bbd19ee0e4e8dc41 extends Template
         echo "    <div class=\"panel\">
         <h2>Register</h2>
         <form action=\"./register.php\" method=\"post\" novalidate>
-            <div class=\"form\">
+            <div class=\"form\" id=\"register\">
                 <label for=\"firstName\">First Name</label>
                 <input type=\"text\" name=\"firstName\" id=\"firstName\" value=\"";
         // line 8
@@ -69,7 +69,7 @@ class __TwigTemplate_6857fe84803a59e2bbd19ee0e4e8dc41 extends Template
         // line 12
         if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 12)) {
             // line 13
-            echo "                <p class=\"errorMsg\">";
+            echo "                    <p class=\"errorMsg\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "firstName", [], "any", false, false, false, 13), "html", null, true);
             echo "</p>
                 ";
@@ -93,7 +93,7 @@ class __TwigTemplate_6857fe84803a59e2bbd19ee0e4e8dc41 extends Template
         // line 20
         if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "lastName", [], "any", false, false, false, 20)) {
             // line 21
-            echo "                <p class=\"errorMsg\">";
+            echo "                    <p class=\"errorMsg\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "lastName", [], "any", false, false, false, 21), "html", null, true);
             echo "</p>
                 ";
@@ -117,7 +117,7 @@ class __TwigTemplate_6857fe84803a59e2bbd19ee0e4e8dc41 extends Template
         // line 28
         if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "email", [], "any", false, false, false, 28)) {
             // line 29
-            echo "                <p class=\"errorMsg\">";
+            echo "                    <p class=\"errorMsg\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "email", [], "any", false, false, false, 29), "html", null, true);
             echo "</p>
                 ";
@@ -138,7 +138,7 @@ class __TwigTemplate_6857fe84803a59e2bbd19ee0e4e8dc41 extends Template
         // line 36
         if (twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 36)) {
             // line 37
-            echo "                <p class=\"errorMsg\">";
+            echo "                    <p class=\"errorMsg\">";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "password", [], "any", false, false, false, 37), "html", null, true);
             echo "</p>
                 ";
