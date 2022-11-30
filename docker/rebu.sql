@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS `rebu`.`users` (
                                               `id` INT UNSIGNED NOT NULL,
                                               `password` VARCHAR(255) NOT NULL,
     `verified` TINYINT NOT NULL DEFAULT 0,
+    `verification_code` VARCHAR(16) NOT NULL,
     PRIMARY KEY (`id`),
     CONSTRAINT `userid`
     FOREIGN KEY (`id`)
