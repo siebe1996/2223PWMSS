@@ -1,8 +1,8 @@
-{% extends "/partials/common.twig" %}
+{% extends "partials/common.twig" %}
 {% block main %}
     <div class="panel registerDriver">
         <h2>Driver Register</h2>
-        <form action="./becomeDriver.php" method="post" novalidate>
+        <form action="{{ url('driver/create') }}" method="post" novalidate>
             <div class="form" id="registerDriver">
                 <section class="firstFormSection">
                     <label for="numberPlate">Number Plate</label>

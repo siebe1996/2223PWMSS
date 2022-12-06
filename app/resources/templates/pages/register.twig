@@ -1,8 +1,8 @@
-{% extends "/partials/common.twig" %}
+{% extends "partials/common.twig" %}
 {% block main %}
     <div class="panel">
         <h2>Register</h2>
-        <form action="./register.php" method="post" novalidate>
+        <form action="{{  url('register') }}" method="post" novalidate>
             <div class="form" id="register">
                 <label for="firstName">First Name</label>
                 <input type="text" name="firstName" id="firstName" value="{{firstName}}" required

@@ -4,5 +4,9 @@
         "twig/twig": "^3.4.3",
         "bramus/router": "^1.6.1",
         "phpmailer/phpmailer": "^6.6"
+    },
+    "autoload": {
+        "classmap": ["src/"],
+        "files": ["config/database.php"]
     }
 }

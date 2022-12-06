@@ -24,7 +24,7 @@ if (trim($verificationCode) !== '' && trim($userId) !== '') {
 	$stmt = $conn->prepare('SELECT verification_code,verified FROM users WHERE id = ?');
 	$result = $stmt->executeQuery([$userId]);
 	$user = $result->fetchAssociative();
-	print_r($dbVerificationCode);
+	$dbVerificationCode = $user['verification_code'];
 	if ($user['verified'] == 1) {
 		array_push($errorMsg, 'Je bent al geverifieerd');
 	} else if ($dbVerificationCode === $verificationCode) {

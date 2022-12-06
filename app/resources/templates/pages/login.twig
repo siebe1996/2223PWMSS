@@ -1,11 +1,11 @@
-{% extends "/partials/common.twig" %}
+{% extends "partials/common.twig" %}
 {% block main %}
     <div class="panel login">
         <h2>Log in</h2>
         {% if error %}
             <p class="errorMsg">{{ error }}</p>
         {% endif %}
-        <form action="./login.php" method="post">
+        <form action="{{  url('login') }}" method="post">
             <input type="hidden" name="moduleAction" value="login">
             <div class="form" id="loginForm">
                 <label for="email">E-mail</label>
@@ -42,6 +42,6 @@
                 <button class="btn" type="submit">Log In</button>
             </div>
         </form>
-        <p><a href="./register.php">Register here</a> if you don't have an account yet</p>
+        <p><a href="{{  url('register') }}">Register here</a> if you don't have an account yet</p>
     </div>
 {% endblock %}
