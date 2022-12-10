@@ -7,6 +7,7 @@ $router = new \Bramus\Router\Router();
 $router = new \Bramus\Router\Router();
 
 $router->get('/', 'DashboardController@show');
+$router->get('/user', 'UserController@showAccountInfo');
 $router->get('/login', 'UserController@showLogin');
 $router->post('/login', 'UserController@login');
 $router->get('/register', 'UserController@showRegister');

@@ -120,7 +120,6 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 4rem);
     transition: 300ms ease-in-out;
 }
 
@@ -130,7 +129,7 @@ main {
 }
 
 footer {
-    display: flex;
+    display: none;
     height: 4rem;
     background: var(--primary);
     justify-content: end;
@@ -145,16 +144,18 @@ footer {
 }
 
 .overlayOpen footer {
+    display: flex;
     bottom: 0;
     transition: 300ms ease-in-out;
 }
 
 #map {
     position: relative;
-    top: 10vh;
-    height: 90vh;
+    height: 100vh;
     width: 100%;
-
+}
+#map .ol-overlaycontainer-stopevent {
+    display: none;
 }
 
 /*buttons*/
@@ -208,6 +209,7 @@ footer {
     align-items: center;
     flex-direction: column;
     width: 100%;
+    margin-top: 6rem;
 }
 
 .firstFormSection,
@@ -380,6 +382,99 @@ footer {
     opacity: 0;
 }
 
+/*Account*/
+.panel.account {
+    margin-top: 0;
+}
+.userInfo {
+    background: var(--primary);
+    border-radius: 5px;
+    width: 80%;
+    color: white;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 1rem;
+    margin: 2rem auto;
+}
+.userInfo .text h2 {
+    margin: 0;
+}
+.userInfo .text p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: #F4F4F4;
+}
+.userInfo .profilePic {
+    border-radius: 50%;
+    background: white;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rideHistory {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    width: 100%;
+    padding-right: 10%;
+    margin-bottom: 7rem;
+}
+.ride {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #DDE9FB;
+    margin-block: 0.75rem;
+    width: 70%;
+    border-radius: 5px;
+    padding: 1rem;
+    box-shadow: 0 4px 5px #2e5da638;
+}
+.ride p {
+    margin-block: 0.5rem 0;
+    font-size: 0.8rem;
+}
+.ride h2 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+.ride .right {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    text-align: right;
+}
+.ride .right .date {
+    margin-top: 0.25rem;
+}
+.ride:before {
+    content: "•";
+    font-size: 5rem;
+    color: var(--primary);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: -15%;
+    top: -20%;
+    height: 140%;
+    width: 3px;
+    background: var(--primary);
+    box-shadow: 4px 0 5px #2e5da638;
+}
+.btn.logout {
+    width: 80%;
+    position: fixed;
+    bottom: 1.5rem;
+
+}
 
 @media (min-width: 750px) {
 

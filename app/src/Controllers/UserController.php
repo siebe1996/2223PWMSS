@@ -1,7 +1,7 @@
 <?php
 //namespace Controllers;
-use Services\DatabaseConnector;
 use PHPMailer\PHPMailer\PHPMailer;
+
 //require_once ('../../vendor/autoload.php');
 //require_once ('../../config/database.php');
 //require_once ('../../src/Services/DatabaseConnector.php');
@@ -34,7 +34,7 @@ class UserController
 
     public function showLogin()
     {
-        $formErrors = isset($_SESSION['flash']['errors']['login']) ? trim($_SESSION['flash']['errors']['login']) :  '';
+        $formErrors = isset($_SESSION['flash']['errors']['login']) ? trim($_SESSION['flash']['errors']['login']) : '';
         //$email = isset($_SESSION['flash']['login']['email']) ? trim($_SESSION['flash']['login']['email']) :  '';
         //$password = isset($_SESSION['flash']['login']['password']) ? trim($_SESSION['flash']['login']['password']) :  '';
         unset($_SESSION['flash']);
@@ -53,7 +53,7 @@ class UserController
 
         if ($user !== false) {
 
-            if($user['verified']) {
+            if ($user['verified']) {
                 if (password_verify($password, $user['password'])) {
 
                     // Store the user row in the session
@@ -66,8 +66,7 @@ class UserController
                     $_SESSION['flash'] = ['errors' => $formErrors];
                     header('Location : login');
                 }
-            }
-            else{
+            } else {
                 $formErrors['login'] = 'Please validate user';
                 $_SESSION['flash'] = ['errors' => $formErrors];
                 header('Location : login');
@@ -81,12 +80,13 @@ class UserController
         }
     }
 
-    public function showRegister(){
+    public function showRegister()
+    {
         $firstName = isset($_SESSION['flash']['register']['firstName']) ? trim($_SESSION['flash']['register']['firstName']) : '';
         $lastName = isset($_SESSION['flash']['register']['lastName']) ? trim($_SESSION['flash']['register']['lastName']) : '';
         $email = isset($_SESSION['flash']['register']['email']) ? trim($_SESSION['flash']['register']['email']) : '';
         $password = isset($_SESSION['flash']['register']['password']) ? trim($_SESSION['flash']['register']['password']) : '';
-        $formErrors = isset($_SESSION['flash']['errors']['register']) ? trim($_SESSION['flash']['errors']['register']) :  '';
+        $formErrors = isset($_SESSION['flash']['errors']['register']) ? trim($_SESSION['flash']['errors']['register']) : '';
         unset($_SESSION['flash']);
 
         echo $this->twig->render('pages/register.twig', [
@@ -95,10 +95,11 @@ class UserController
             'email' => $email,
             'errors' => $formErrors,
             'loggedIn' => false,
-            ]);
+        ]);
     }
 
-    public function Register(){
+    public function Register()
+    {
 
         $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
         $lastName = isset($_POST['lastName']) ? $_POST['lastName'] : '';
@@ -158,14 +159,14 @@ class UserController
 
 
             //toDo redirect to conformation page;
-        }
-        else {
+        } else {
             $_SESSION['flash']['errors'] = ['register' => $formErrors];
             header('Location : login');
         }
     }
 
-    public function logout(){
+    public function logout()
+    {
         // Unset all of the session variables.
         $_SESSION = [];
 
@@ -185,5 +186,40 @@ class UserController
         // redirect to index
         header('location: login');
         exit();
+    }
+
+    public function showAccountInfo()
+    {
+//        if (!isset($_SESSION['user'])) {
+//            header('location: /');
+//            exit();
+//        }
+
+        echo $this->twig->render('pages/account.twig', [
+            'User' => [
+                'name' => 'Lukas Downes',
+                'email' => 'lukasdownes@gmail.com',
+                'status' => 'Rider',
+                'rideAmount' => 27,
+                'rideHistory' => [
+                    [
+                        'day' => 'Zondag',
+                        'time' => 17,
+                        'from' => 'Anderlecht',
+                        'to' => 'Gent',
+                        'date' => '12/12/\'2022',
+                        'cost' => 7.63
+                    ],
+                    [
+                        'day' => 'Zondag',
+                        'time' => 10,
+                        'from' => 'Zaventem',
+                        'to' => 'Anderlecht',
+                        'date' => '12/12/\'2022',
+                        'cost' => 12.9
+                    ]
+                ]
+            ]
+        ]);
     }
 }
