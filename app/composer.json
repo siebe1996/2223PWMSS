@@ -11,7 +11,8 @@
 			"src/"
 		],
 		"files": [
-			"config/database.php"
+			"config/database.php",
+			"config/email.php"
 		]
 	}
 }
