@@ -1,13 +1,10 @@
 <?php
-//namespace Controllers;
+
 use Services\DatabaseConnector;
-//require_once ('../../vendor/autoload.php');
-//require_once ('../../config/database.php');
-//require_once ('../../src/Services/DatabaseConnector.php');
 
 class VerificationController
 {
-    protected \Doctrine\DBAL\Connection $db;
+    protected $conn;
     protected \Twig\Environment $twig;
 
     public function __construct()
@@ -31,29 +28,39 @@ class VerificationController
         $verificationCode = isset($_GET['verificationCode']) ? $_GET['verificationCode'] : '';
         $userId = isset($_GET['userId']) ? $_GET['userId'] : '';
 
-        $errorMsg = [];
+        $errorMsg = "";
+        $allOk = true;
 
         if (trim($verificationCode) !== '' && trim($userId) !== '') {
             $stmt = $this->conn->prepare('SELECT verification_code,verified FROM users WHERE id = ?');
             $result = $stmt->executeQuery([$userId]);
             $user = $result->fetchAssociative();
-            $dbVerificationCode = $user['verification_code'];
-            if ($user['verified'] == 1) {
-                array_push($errorMsg, 'Je bent al geverifieerd');
-            } else if ($dbVerificationCode === $verificationCode) {
-                $stmt = $this->conn->prepare('UPDATE users SET verified=1 WHERE id = ?');
-                $result = $stmt->executeStatement([$userId]);
-                echo 'email geverifieerd';
+
+            if (empty($user)) {
+                $allOk = false;
+            }
+
+            if ($allOk) {
+                $dbVerificationCode = $user['verification_code'];
+
+                if ($user['verified'] == 1) {
+                    $errorMsg = 'Je bent al geverifieerd';
+                } else if ($dbVerificationCode === $verificationCode) {
+                    $stmt = $this->conn->prepare('UPDATE users SET verified=1 WHERE id = ?');
+                    $result = $stmt->executeStatement([$userId]);
+                    $errorMsg = 'Je account is succesvol geverifieerd';
+                } else {
+                    $errorMsg = 'Er liep iets fout, ga naar [account > verifieer je email] en vraag een nieuwe email aan';
+                }
             } else {
-                array_push($errorMsg, 'Er liep iets fout, vraag bij [account > verifieer je email] een nieuwe email aan');
+                $errorMsg = 'Er liep iets fout, ga naar [account > verifieer je email] en vraag een nieuwe email aan';
             }
         } else {
             header('location: login');
             exit();
         }
         echo $this->twig->render('pages/verification.twig', [
-            'errorMsg' => $errorMsg
+            'errorMsg' => $errorMsg,
         ]);
     }
 }
-
