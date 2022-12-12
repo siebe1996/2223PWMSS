@@ -1,10 +1,11 @@
 <?php
 //namespace Controllers;
-use PHPMailer\PHPMailer\PHPMailer;
 
 //require_once ('../../vendor/autoload.php');
 //require_once ('../../config/database.php');
 //require_once ('../../src/Services/DatabaseConnector.php');
+
+use Services\MailService;
 
 class UserController
 {
@@ -39,9 +40,11 @@ class UserController
         //$password = isset($_SESSION['flash']['login']['password']) ? trim($_SESSION['flash']['login']['password']) :  '';
         unset($_SESSION['flash']);
 
-        echo $this->twig->render('pages/login.twig', ['error' => $formErrors,
+        echo $this->twig->render('pages/login.twig', [
+            'error' => $formErrors,
             'disappearingSVG' => true,
-            'loggedIn' => false,]);
+            'loggedIn' => false,
+        ]);
     }
 
     public function login()
@@ -70,7 +73,6 @@ class UserController
                 $formErrors['login'] = 'Please validate user';
                 $_SESSION['flash'] = ['errors' => $formErrors];
                 header('Location : login');
-
             }
         } // username & password are not valid
         else {
@@ -138,25 +140,12 @@ class UserController
             $user = $this->conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
             $_SESSION['user'] = $user;
 
-            $mail = new PHPMailer;
-            $mail->isSMTP();
-            $mail->SMTPDebug = 2;
-            $mail->Host = 'smtp.mailgun.org';
-            $mail->Port = 587;
-            $mail->SMTPAuth = true;
-            $mail->Username = 'postmaster@sandbox3341d6d8775c4d6d93839c2ec65b7741.mailgun.org';
-            $mail->Password = 'fd5f7e5f1208a625129e67b59d3c343f-f2340574-9cd32674';
-            $mail->setFrom('postmaster@sandbox3341d6d8775c4d6d93839c2ec65b7741.mailgun.org', 'Rebu');
-            $mail->addAddress($email, $firstName . ' ' . $lastName);
-            $mail->Subject = 'Verifieer je email';
-            $mail->Body = 'Klink op de link en <a href="http://localhost:8080/verification.php?verificationCode=' . $verificationCode . '&userId=' . $userId . '">verifieer je email</a>.';
-            if ($mail->send()) {
-                header('location: /');
-                exit();
-            } else {
-                echo 'mail versturen gefaald';
-            }
-
+            MailService::send($this->twig, 'info@rebu.be', $email, 'Verifieer je account', 'Je verificatiecode is: ' . $verificationCode, 'email/verificatiecode.twig', [
+                'verificationCode' => $verificationCode,
+                'first_name' => $firstName,
+                'last_name' => $lastName,
+                'userId' => $userId
+            ]);
 
             //toDo redirect to conformation page;
         } else {
@@ -174,9 +163,14 @@ class UserController
         // Note: This will destroy the session, and not just the session data!
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
-            setcookie(session_name(), '', time() - 42000,
-                $params["path"], $params["domain"],
-                $params["secure"], $params["httponly"]
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params["path"],
+                $params["domain"],
+                $params["secure"],
+                $params["httponly"]
             );
         }
 
@@ -190,10 +184,10 @@ class UserController
 
     public function showAccountInfo()
     {
-//        if (!isset($_SESSION['user'])) {
-//            header('location: /');
-//            exit();
-//        }
+        //        if (!isset($_SESSION['user'])) {
+        //            header('location: /');
+        //            exit();
+        //        }
 
         echo $this->twig->render('pages/account.twig', [
             'User' => [
