@@ -10,6 +10,7 @@ $router->get('/', 'DashboardController@show');
 $router->get('/user', 'UserController@showAccountInfo');
 $router->get('/login', 'UserController@showLogin');
 $router->post('/login', 'UserController@login');
+$router->post('/logout', 'UserController@logout');
 $router->get('/register', 'UserController@showRegister');
 $router->post('/register', 'UserController@register');
 $router->get('/driver/create', 'DriverController@show');

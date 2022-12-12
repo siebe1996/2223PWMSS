@@ -27,7 +27,7 @@ class UserController
         //start session
         session_start();
         //redirect to index if logged in
-        if (isset($_SESSION['user'])) {
+        if (isset($_SESSION['user']) && $_SERVER['REQUEST_URI'] != '/logout') {
             header('location: /');
             exit();
         }
@@ -136,7 +136,6 @@ class UserController
             $userId = $result2->fetchOne();
             $stmt3 = $this->conn->prepare('INSERT INTO users (id, password, verification_code) VALUES (?,?,?)');
             $result3 = $stmt3->executeStatement([$userId, password_hash($password, PASSWORD_DEFAULT), $verificationCode]);
-            $userId = $this->conn->lastInsertId();
             $user = $this->conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
             $_SESSION['user'] = $user;
 
@@ -146,6 +145,8 @@ class UserController
                 'last_name' => $lastName,
                 'userId' => $userId
             ]);
+
+            header('Location : /');
 
             //toDo redirect to conformation page;
         } else {
