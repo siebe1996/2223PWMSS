@@ -1,1 +1,10 @@
 {% extends 'partials/common.twig' %}
+{% block main %}
+  <div class="panel">
+    <h2>Verificatie</h2>
+    <p>{{ errorMsg }}</p>
+    <p>
+      <a href="{{ url('login') }}">Klik hier om je in te loggen</a>
+    </p>
+  </div>
+{% endblock %}
