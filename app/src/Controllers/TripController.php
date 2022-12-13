@@ -57,7 +57,7 @@ class TripController
 
         $date  = explode('-', $date);
         if (!checkdate($date[1], $date[2], $date[0])) {
-            $formErrors['date'] = 'Voer een geldige date datum in ';
+            $formErrors['date'] = 'Voer een geldige datum in ';
         }
 
         //  if no errors: insert values into database
