@@ -123,6 +123,8 @@ class DriverController
 
             //toDo als je bestuurder bent kun je nie opnieuw inschrijven
         } else {
+            $driver = ['numberPlate' => $numberPlate, 'birthDate' => $birthDate, 'gender' => $gender, 'carBrand' => $carBrand, 'carModel' => $carModel, 'carPassengers' => $carPassengers, 'btwNumber' => $btwNumber];
+            $_SESSION['flash']['driver'] = $driver;
             $_SESSION['flash']['errors'] = ['driver' => $formErrors];
             header('Location : driver/create');
         }
