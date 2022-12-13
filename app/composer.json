@@ -5,6 +5,7 @@
 		"bramus/router": "^1.6.1",
 		"symfony/mailer": "^6.2",
 		"symfony/twig-bridge": "^6.2",
+		"ibericode/vat": "^2.0",
 		"maxh/php-nominatim": "^2.3"
 	},
 	"autoload": {
