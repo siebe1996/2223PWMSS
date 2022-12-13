@@ -44,41 +44,50 @@ class UserController
     {
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+
+        $allOk = true;
+
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $formErrors = 'Please enter valid credentials';
-            $_SESSION['flash'] = ['errors' => $formErrors];
-            header('Location : login');
+            $allOk = false;
+        }
+        if ($password === '') {
+            $formErrors = 'Please enter valid credentials';
+            $allOk = false;
+        }
+
+        if (!$allOk) {
+            $_SESSION['flash']['errors'] = ['login' => $formErrors];
+            header('Location: login');
             exit();
         }
         $user = $this->conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
 
 
         if ($user !== false) {
-
             if ($user['verified']) {
                 if (password_verify($password, $user['password'])) {
-
                     // Store the user row in the session
                     $_SESSION['user'] = $user;
-                    header('Location: /');
+                    header('Location: ..');
                     exit();
                 } // Invalid login
                 else {
                     $formErrors = 'Please enter valid credentials';
-                    $_SESSION['flash'] = ['errors' => $formErrors];
-                    header('Location : login');
+                    $_SESSION['flash']['errors'] = ['login' => $formErrors];
+                    header('Location: login');
                     exit();
                 }
             } else {
-                $formErrors['login'] = 'Please validate user';
-                $_SESSION['flash'] = ['errors' => $formErrors];
-                header('Location : login');
+                $formErrors = 'Please validate user';
+                $_SESSION['flash']['errors'] = ['login' => $formErrors];
+                header('Location: login');
                 exit();
             }
         } // username & password are not valid
         else {
-            $formErrors['login'] = 'Please enter valid credentials';
-            $_SESSION['flash'] = ['errors' => $formErrors];
+            $formErrors = 'Please enter valid credentials';
+            $_SESSION['flash']['errors'] = ['login' => $formErrors];
             header('Location : login');
             exit();
         }
