@@ -17,11 +17,14 @@ class TripController
             return BASE_PATH . $path;
         });
         $this->twig->addFunction($function);
-        //start session
-        session_start();
     }
 
     public function add(){
+        if (isset($_SESSION['user'])) {
+            $loggedIn = true;
+        } else {
+            $loggedIn = false;
+        }
         $startHouseNumber = isset($_POST['startHouseNumber']) ? trim($_POST['startHouseNumber']) : '';
         $startStreet = isset($_POST['startStreet']) ? trim($_POST['startStreet']) : '';
         $startCity = isset($_POST['startCity']) ? trim($_POST['startCity']) : '';
@@ -59,6 +62,9 @@ class TripController
         if (!checkdate($date[1], $date[2], $date[0])) {
             $formErrors['date'] = 'Voer een geldige datum in ';
         }
+        if(!$loggedIn){
+
+        }
 
         //  if no errors: insert values into database
 
@@ -66,7 +72,7 @@ class TripController
             //toDo toevoegen databank
         }
         else{
-            $_SESSION['flash']['errors'] = ['driver' => $formErrors];
+            $_SESSION['flash']['errors'] = ['trip' => $formErrors];
             header('Location : /');
         }
     }
