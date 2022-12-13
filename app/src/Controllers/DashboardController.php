@@ -35,7 +35,8 @@ class DashboardController
 
         echo $this->twig->render('pages/home.twig', [
             'loggedIn' => $loggedIn,
-            'home' => true
+            'home' => true,
+            'errors' => $formErrors,
         ]);
     }
 }

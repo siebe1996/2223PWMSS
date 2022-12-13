@@ -63,7 +63,10 @@ class TripController
             $formErrors['date'] = 'Voer een geldige datum in ';
         }
         if(!$loggedIn){
-
+            //toDo als niet logged in extra velden controleren
+        }
+        else{
+            //toDo extra velden uit $_SESSION['user'] halen
         }
 
         //  if no errors: insert values into database
