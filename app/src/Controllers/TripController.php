@@ -75,6 +75,8 @@ class TripController
             //toDo toevoegen databank
         }
         else{
+            $trip = ['startHouseNumber' => $startHouseNumber, 'startStreet' => $startStreet, 'startCity' => $startCity, 'endHouseNumber' => $endHouseNumber, 'endStreet' => $endStreet, 'endCity' => $endCity, 'time' => $time, 'date' => $date];
+            $_SESSION['flash']['trip'] = $trip;
             $_SESSION['flash']['errors'] = ['trip' => $formErrors];
             header('Location : /');
         }
