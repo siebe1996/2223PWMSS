@@ -48,14 +48,13 @@ class VerificationController
                     $result = $stmt->executeStatement([$userId]);
                     $errorMsg = 'Je account is succesvol geverifieerd';
                 } else {
-                    $errorMsg = 'Er liep iets fout, ga naar [account > verifieer je email] en vraag een nieuwe email aan';
+                    $errorMsg = 'Er liep iets fout, ga naar [account > verifieer je account] en vraag een nieuwe email aan';
                 }
             } else {
-                $errorMsg = 'Er liep iets fout, ga naar [account > verifieer je email] en vraag een nieuwe email aan';
+                $errorMsg = 'Er liep iets fout, ga naar [account > verifieer je account] en vraag een nieuwe email aan';
             }
         } else {
-            header('location: login');
-            exit();
+            $errorMsg = 'Controlleer je email en veverifieer je account';
         }
         echo $this->twig->render('pages/verification.twig', [
             'errorMsg' => $errorMsg,
