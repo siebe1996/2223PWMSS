@@ -31,6 +31,7 @@ class DashboardController
         } else {
             $loggedIn = false;
         }
+        $formErrors = isset($_SESSION['flash']['errors']['trip']) ? trim($_SESSION['flash']['errors']['trip']) :  '';
 
         echo $this->twig->render('pages/home.twig', [
             'loggedIn' => $loggedIn,
