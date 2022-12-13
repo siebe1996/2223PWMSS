@@ -45,6 +45,14 @@ class DashboardController
             'loggedIn' => $loggedIn,
             'home' => true,
             'errors' => $formErrors,
+            'startHouseNumber' => $startHouseNumber,
+            'startStreet' => $startStreet,
+            'startCity' => $startCity,
+            'endHouseNumber' => $endHouseNumber,
+            'endStreet' => $endStreet,
+            'endCity' => $endCity,
+            'time' => $time,
+            'date' => $date
         ]);
     }
 }
