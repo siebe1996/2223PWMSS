@@ -30,6 +30,12 @@ docker compose exec php-web bash
 composer install
 ```
 
+### Install Node.js
+```
+cd app/public/js/openLayers/
+npm install
+```
+
 ### Check if database is up and running
 
 - [go to phpMyAdmin](http://localhost:8001)
