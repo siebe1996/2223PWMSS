@@ -44,6 +44,12 @@ class UserController
     {
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $formErrors = 'Please enter valid credentials';
+            $_SESSION['flash'] = ['errors' => $formErrors];
+            header('Location : login');
+            exit();
+        }
         $user = $this->conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
 
 
@@ -61,17 +67,20 @@ class UserController
                     $formErrors = 'Please enter valid credentials';
                     $_SESSION['flash'] = ['errors' => $formErrors];
                     header('Location : login');
+                    exit();
                 }
             } else {
                 $formErrors['login'] = 'Please validate user';
                 $_SESSION['flash'] = ['errors' => $formErrors];
                 header('Location : login');
+                exit();
             }
         } // username & password are not valid
         else {
             $formErrors['login'] = 'Please enter valid credentials';
             $_SESSION['flash'] = ['errors' => $formErrors];
             header('Location : login');
+            exit();
         }
     }
 
