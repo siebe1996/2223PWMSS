@@ -22,13 +22,6 @@ class DriverController
             return BASE_PATH . $path;
         });
         $this->twig->addFunction($function);
-        //start session
-        session_start();
-        //redirect to index if logged in
-        if (!isset($_SESSION['user'])) {
-            header('location: /');
-            exit();
-        }
     }
 
     public function show()
@@ -45,8 +38,8 @@ class DriverController
         unset($_SESSION['flash']);
 
         echo $this->twig->render('pages/becomeDriver.twig', [
-            'pathToRoot'=>'../',
-            'driverRegister'=>true,
+            'pathToRoot' => '../',
+            'driverRegister' => true,
             'loggedIn' => true,
             'errors' => $formErrors,
             'numberPlate' => $numberPlate,
@@ -72,7 +65,7 @@ class DriverController
         $genders = ['M', 'F', 'X'];
         $formErrors = [];
 
-        if (!preg_match("/^[a-zA-Z-' ]+$/",$numberPlate)){
+        if (!preg_match("/^[a-zA-Z-' ]+$/", $numberPlate)) {
             $formErrors['numberPlate'] = 'Voer een geldige nummerplaat in';
         }
 
@@ -81,7 +74,7 @@ class DriverController
             $formErrors['birthDate'] = 'Voer een geldige geboorte datum in ' . $birthDate_arr[1];
         }
 
-        if(!in_array($gender, $genders)){
+        if (!in_array($gender, $genders)) {
             $formErrors['gender'] = 'Voer een geldige gender in';
         }
 
@@ -97,41 +90,41 @@ class DriverController
             }
         }
 
-        if (trim($carBrand) === ''){
+        if (trim($carBrand) === '') {
             $formErrors['carBrand'] = 'Voer een geldig automerk in';
         }
 
-        if (trim($carModel) === ''){
+        if (trim($carModel) === '') {
             $formErrors['carModel'] = 'Voer een geldig automodel in';
         }
 
         $filter_options = array(
-            'options' => array( 'min_range' => 1,
-                'max_range' => 10 )
+            'options' => array(
+                'min_range' => 1,
+                'max_range' => 10
+            )
         );
 
-        if( !filter_var( $carPassengers, FILTER_VALIDATE_INT, $filter_options )) {
+        if (!filter_var($carPassengers, FILTER_VALIDATE_INT, $filter_options)) {
             $formErrors['carPassengers'] = 'Voer een geldig aantal passagiers in tussen 1 en 10';
         }
 
-        if(!\Services\VIESValidatorService::validate($btwNumber)) {
+        if (!\Services\VIESValidatorService::validate($btwNumber)) {
             $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
         }
 
         //  if no errors: insert values into database
 
-        if (sizeof($formErrors) === 0){
+        if (sizeof($formErrors) === 0) {
             $stmt = $this->conn->prepare('INSERT INTO drivers (id, number_plate, birth_date, car_seats, car_model, car_brand, gender, profile_pic, btw_nr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
             $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, (int)$_SESSION['user']['id'] . '.jpg', $btwNumber]);
             header('location: /');
             exit();
 
             //toDo als je bestuurder bent kun je nie opnieuw inschrijven
-        }
-        else{
+        } else {
             $_SESSION['flash']['errors'] = ['driver' => $formErrors];
             header('Location : driver/create');
         }
     }
 }
-

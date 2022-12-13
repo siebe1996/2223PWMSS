@@ -6,6 +6,35 @@ $router = new \Bramus\Router\Router();
 
 $router = new \Bramus\Router\Router();
 
+$router->before('GET|POST', '/.*', function () {
+    session_start();
+});
+
+$router->before('GET|POST', '/login', function () {
+    if (isset($_SESSION['user'])) {
+        header('location: /');
+        exit();
+    }
+});
+$router->before('GET|POST', '/register', function () {
+    if (isset($_SESSION['user'])) {
+        header('location: /');
+        exit();
+    }
+});
+$router->before('GET|POST', '/driver/.*', function () {
+    if (isset($_SESSION['user'])) {
+        header('location: /');
+        exit();
+    }
+});
+$router->before('GET|POST', '/user', function () {
+    if (isset($_SESSION['user'])) {
+        header('location: /');
+        exit();
+    }
+});
+
 $router->get('/', 'DashboardController@show');
 $router->get('/user', 'UserController@showAccountInfo');
 $router->get('/login', 'UserController@showLogin');

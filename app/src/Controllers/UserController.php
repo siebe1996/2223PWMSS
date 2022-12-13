@@ -24,13 +24,6 @@ class UserController
             return BASE_PATH . $path;
         });
         $this->twig->addFunction($function);
-        //start session
-        session_start();
-        //redirect to index if logged in
-        if (isset($_SESSION['user']) && $_SERVER['REQUEST_URI'] != '/logout') {
-            header('location: /');
-            exit();
-        }
     }
 
     public function showLogin()
