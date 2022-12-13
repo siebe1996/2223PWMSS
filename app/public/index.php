@@ -36,6 +36,7 @@ $router->before('GET|POST', '/user', function () {
 });
 
 $router->get('/', 'DashboardController@show');
+$router->post('/', 'TripController@add');
 $router->get('/user', 'UserController@showAccountInfo');
 $router->get('/login', 'UserController@showLogin');
 $router->post('/login', 'UserController@login');
