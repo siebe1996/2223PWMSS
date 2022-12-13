@@ -152,6 +152,8 @@ class UserController
 
             //toDo redirect to conformation page;
         } else {
+            $register = ['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'password' => $password];
+            $_SESSION['flash']['register'] = $register;
             $_SESSION['flash']['errors'] = ['register' => $formErrors];
             header('Location : login');
         }
