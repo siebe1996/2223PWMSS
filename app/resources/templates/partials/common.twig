@@ -67,6 +67,9 @@
           </li>
           {% if loggedIn %}
             <li>
+              <a href="{{ url('user') }}">Account</a>
+            </li>
+            <li>
               <a href="{{ url('logout') }}">Log out</a>
             </li>
           {% endif %}

@@ -22,16 +22,13 @@ class DashboardController
             return BASE_PATH . $path;
         });
         $this->twig->addFunction($function);
-        //start session
-        session_start();
     }
 
     public function show()
     {
         if (isset($_SESSION['user'])) {
             $loggedIn = true;
-        }
-        else{
+        } else {
             $loggedIn = false;
         }
 
@@ -41,4 +38,3 @@ class DashboardController
         ]);
     }
 }
-
