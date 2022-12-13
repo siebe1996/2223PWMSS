@@ -63,7 +63,7 @@ class TripController
         //  if no errors: insert values into database
 
         if (sizeof($formErrors) === 0){
-
+            //toDo toevoegen databank
         }
         else{
             $_SESSION['flash']['errors'] = ['driver' => $formErrors];
