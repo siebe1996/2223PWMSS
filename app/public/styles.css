@@ -398,6 +398,7 @@ footer {
     gap: 1.5rem;
     padding: 1rem;
     margin: 2rem auto;
+    box-shadow: 0 4px 16px #b9b9b9;
 }
 .userInfo .text h2 {
     margin: 0;
