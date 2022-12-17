@@ -22,15 +22,9 @@ $router->before('GET|POST', '/register', function () {
         exit();
     }
 });
-$router->before('GET|POST', '/driver/.*', function () {
-    if (isset($_SESSION['user'])) {
-        header('location: /');
-        exit();
-    }
-});
-$router->before('GET|POST', '/user', function () {
-    if (isset($_SESSION['user'])) {
-        header('location: /');
+$router->before('GET|POST', '/driver/create', function () {
+    if (!isset($_SESSION['user'])) {
+        header('location: ../login');
         exit();
     }
 });
