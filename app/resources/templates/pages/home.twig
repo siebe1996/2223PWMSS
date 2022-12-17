@@ -4,15 +4,47 @@
 <div class="panel bottom">
     <form action="" method="POST" enctype="application/x-www-form-urlencoded">
         <div class="form" id="homeForm">
-            <label for="startLocation">From:</label>
-            <input type="text" id="startLocation" name="startLocation">
-            <label for="endLocation">To:</label>
-            <input type="text" name="endLocation" id="endLocation">
-            <label for="dateTime">When:</label>
-            <input type="datetime-local" name="dateTime" id="dateTime">
-            <button class="btn" type="submit">Request Ride</button>
+            <section class="firstFormSection">
+                <h2>FROM</h2>
+                <label for="startAdress">Street:</label>
+                <input type="text" id="startAdress" name="startAdress">
+                <label for="startNumber">Number:</label>
+                <input type="text" name="startNumber" id="startNumber">
+                <label for="startCity">City:</label>
+                <input type="text" name="startCity" id="startCity">
+                <label for="dateTime">When:</label>
+                <input type="datetime-local" name="dateTime" id="dateTime">
+            </section>
+            <section class="secondFormSection hidden">
+                <h2>TO</h2>
+                <label for="startAdress">Street:</label>
+                <input type="text" id="startAdress" name="startAdress">
+                <label for="startNumber">Number:</label>
+                <input type="text" name="startNumber" id="startNumber">
+                <label for="startCity">City:</label>
+                <input type="text" name="startCity" id="startCity">
+            </section>
+            {% if (not loggedIn) %}
+                <section class="thirdFormSection hidden">
+                    <h2>INFO</h2>
+                    <label for="firstName">First Name:</label>
+                    <input type="text" name="firstName" id="firstName">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" name="lastName" id="lastName">
+                    <label for="email">Email:</label>
+                    <input type="email" name="email" id="email">
+                    <button class="btn" type="submit">Request Ride</button>
+                </section>
+            {% endif %}
+            {% if loggedIn %}
+                <button class="btn" type="submit">Request Ride</button>            {% else %}
+            {% endif %}
         </div>
     </form>
+    {% if not loggedIn %}
+        <button class="btn formToggle next">Next</button>
+        <button class="btn formToggle back hidden">Back</button>
+    {% endif %}
     <button class="closeHomeOverlay">
         <svg width="20" height="20" viewBox="0 0 27 27" fill="none"
              xmlns="http://www.w3.org/2000/svg">

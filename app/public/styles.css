@@ -213,17 +213,20 @@ footer {
 }
 
 .firstFormSection,
-.secondFormSection {
+.secondFormSection,
+.thirdFormSection {
     width: 100%;
     transition: 200ms ease-in-out;
     transform: scaleX(1);
 }
 .firstFormSection.transforming,
-.secondFormSection.transforming {
+.secondFormSection.transforming,
+.thirdFormSection.transforming {
     transform: scaleX(0.9);
 }
 .firstFormSection.hidden,
-.secondFormSection.hidden {
+.secondFormSection.hidden,
+.thirdFormSection.hidden {
     /*width: 0;*/
     /*overflow: hidden;*/
     /*height: 0;*/
@@ -234,6 +237,9 @@ footer {
     width: 70%;
     transform: scaleX(1);
     transition: 200ms ease-in-out;
+}
+.btn.formToggle.hidden {
+    display: none;
 }
 .btn.formToggle.transforming {
     transform: scaleX(0.75);
@@ -252,14 +258,14 @@ footer {
 
 
 .panel.bottom {
-    bottom: -45%;
+    bottom: -60%;
     transition: 300ms ease-in-out;
     display: flex;
     position: absolute;
-    height: 45%;
     background: #fafafa;
     box-shadow: 0 -4px 15px #1b1b1b5e;
     border-radius: 10px;
+    padding: 2rem 1rem;
 }
 
 .newRide .panel.bottom {
@@ -288,7 +294,12 @@ footer {
     font-weight: 500;
     margin: 0.5rem 2px 4px;
 }
-
+#homeForm h2 {
+    margin-top: 0;
+}
+#homeForm input {
+    margin: 0rem auto 1rem;
+}
 
 #registerDriver label {
     width: 80%;
@@ -529,7 +540,6 @@ footer {
         bottom: 50%;
         left: 2rem;
         width: min(30rem, 25%);
-        height: 40%;
         transform: translate(0,50%);
     }
     #registerDriver {
@@ -537,10 +547,19 @@ footer {
         gap: 2rem;
     }
     .firstFormSection.hidden,
-    .secondFormSection.hidden {
+    .secondFormSection.hidden,
+    .thirdFormSection.hidden {
         display: block;
+    }
+    .newRide .firstFormSection.hidden,
+    .newRide .secondFormSection.hidden,
+    .newRide .thirdFormSection.hidden{
+        display: none;
     }
     .btn.formToggle {
         display: none;
+    }
+    .newRide .btn.formToggle {
+        display: block;
     }
 }
