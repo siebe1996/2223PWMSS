@@ -31,6 +31,7 @@ $router->before('GET|POST', '/driver/create', function () {
 
 $router->get('/', 'DashboardController@show');
 $router->post('/', 'TripController@add');
+$router->get('/about', 'DashboardController@showAbout');
 $router->get('/user', 'UserController@showAccountInfo');
 $router->get('/login', 'UserController@showLogin');
 $router->post('/login', 'UserController@login');

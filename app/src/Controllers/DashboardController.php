@@ -53,4 +53,11 @@ class DashboardController
             'datetime' => $datetime,
         ]);
     }
+
+    public function showAbout()
+    {
+        echo $this->twig->render('pages/about.twig', [
+            'loggedIn' => isset($_SESSION['user'])
+        ]);
+    }
 }
