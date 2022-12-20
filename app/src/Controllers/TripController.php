@@ -25,18 +25,17 @@ class TripController
         } else {
             $loggedIn = false;
         }
-        $startHouseNumber = isset($_POST['startHouseNumber']) ? trim($_POST['startHouseNumber']) : '';
+        $startHouseNumber = isset($_POST['startNumber']) ? trim($_POST['startNumber']) : '';
         $startStreet = isset($_POST['startStreet']) ? trim($_POST['startStreet']) : '';
         $startCity = isset($_POST['startCity']) ? trim($_POST['startCity']) : '';
-        $endHouseNumber = isset($_POST['endHouseNumber']) ? trim($_POST['endHouseNumber']) : '';
+        $endHouseNumber = isset($_POST['endNumber']) ? trim($_POST['endNumber']) : '';
         $endStreet = isset($_POST['endStreet']) ? trim($_POST['endStreet']) : '';
         $endCity = isset($_POST['endCity']) ? trim($_POST['endCity']) : '';
-        $time = isset($_POST['time']) ? trim($_POST['time']) : '';
-        $date = isset($_POST['date']) ? trim($_POST['date']) : '';
+        $datetime = isset($_POST['datetime']) ? trim($_POST['datetime']) : '';
         $formErrors = [];
 
         if (trim($startHouseNumber) === ''){
-            $formErrors['startHouseNumber'] = 'Voer een geldig huisnummer in';
+            $formErrors['startNumber'] = 'Voer een geldig huisnummer in';
         }
         if (trim($startStreet) === ''){
             $formErrors['startStreet'] = 'Voer een geldige straat in';
@@ -45,7 +44,7 @@ class TripController
             $formErrors['startStreet'] = 'Voer een geldige straat in';
         }
         if (trim($endHouseNumber) === ''){
-            $formErrors['endHouseNumber'] = 'Voer een geldig huisnummer in';
+            $formErrors['endNumber'] = 'Voer een geldig huisnummer in';
         }
         if (trim($endStreet) === ''){
             $formErrors['endStreet'] = 'Voer een geldige straat in';
@@ -54,14 +53,25 @@ class TripController
             $formErrors['endStreet'] = 'Voer een geldige straat in';
         }
 
-        if (trim($time) === ''){
-            $formErrors['time'] = 'Voer een geldige tijd in';
+        $dateTimeArr = explode('T', $datetime);
+        $dateArr = explode('-', $dateTimeArr[0]);
+        if (!checkdate($dateArr[1], $dateArr[2], $dateArr[0])) {
+            $formErrors['datetime'] = 'Voer een geldige datum in ';
         }
+        if (!trim($dateTimeArr[1]) === ''){
+            $formErrors['datetime'] = 'Voer een geldige tijd in';
+        }
+        /*function validateDate($date) {
+            $format = 'Y-m-d H:i';
+            $dateTime = DateTime::createFromFormat($format, $date);
 
-        $date  = explode('-', $date);
-        if (!checkdate($date[1], $date[2], $date[0])) {
-            $formErrors['date'] = 'Voer een geldige datum in ';
-        }
+            if ($dateTime instanceof DateTime && $dateTime->format('Y-m-d H:i') == $date) {
+                return $dateTime->getTimestamp();
+            }
+
+            return false;
+        }*/
+
         if(!$loggedIn){
             //toDo als niet logged in extra velden controleren
         }
@@ -75,7 +85,7 @@ class TripController
             //toDo toevoegen databank
         }
         else{
-            $trip = ['startHouseNumber' => $startHouseNumber, 'startStreet' => $startStreet, 'startCity' => $startCity, 'endHouseNumber' => $endHouseNumber, 'endStreet' => $endStreet, 'endCity' => $endCity, 'time' => $time, 'date' => $date];
+            $trip = ['startNumber' => $startHouseNumber, 'startStreet' => $startStreet, 'startCity' => $startCity, 'endNumber' => $endHouseNumber, 'endStreet' => $endStreet, 'endCity' => $endCity, 'datetime' => $datetime];
             $_SESSION['flash']['trip'] = $trip;
             $_SESSION['flash']['errors'] = ['trip' => $formErrors];
             header('Location : /');

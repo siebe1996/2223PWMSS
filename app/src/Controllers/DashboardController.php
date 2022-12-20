@@ -32,27 +32,32 @@ class DashboardController
             $loggedIn = false;
         }
         $formErrors = isset($_SESSION['flash']['errors']['trip']) ? trim($_SESSION['flash']['errors']['trip']) :  '';
-        $startHouseNumber = isset($_SESSION['startHouseNumber']) ? trim($_SESSION['startHouseNumber']) : '';
+        $startHouseNumber = isset($_SESSION['startNumber']) ? trim($_SESSION['startNumber']) : '';
         $startStreet = isset($_SESSION['startStreet']) ? trim($_SESSION['startStreet']) : '';
         $startCity = isset($_SESSION['startCity']) ? trim($_SESSION['startCity']) : '';
-        $endHouseNumber = isset($_SESSION['endHouseNumber']) ? trim($_SESSION['endHouseNumber']) : '';
+        $endHouseNumber = isset($_SESSION['endNumber']) ? trim($_SESSION['endNumber']) : '';
         $endStreet = isset($_SESSION['endStreet']) ? trim($_SESSION['endStreet']) : '';
         $endCity = isset($_SESSION['endCity']) ? trim($_SESSION['endCity']) : '';
-        $time = isset($_SESSION['time']) ? trim($_SESSION['time']) : '';
-        $date = isset($_SESSION['date']) ? trim($_SESSION['date']) : '';
+        $datetime = isset($_SESSION['datetime']) ? trim($_SESSION['datetime']) : '';
 
         echo $this->twig->render('pages/home.twig', [
             'loggedIn' => $loggedIn,
             'home' => true,
             'errors' => $formErrors,
-            'startHouseNumber' => $startHouseNumber,
+            'startNumber' => $startHouseNumber,
             'startStreet' => $startStreet,
             'startCity' => $startCity,
-            'endHouseNumber' => $endHouseNumber,
+            'endNumber' => $endHouseNumber,
             'endStreet' => $endStreet,
             'endCity' => $endCity,
-            'time' => $time,
-            'date' => $date
+            'datetime' => $datetime,
+        ]);
+    }
+
+    public function showAbout()
+    {
+        echo $this->twig->render('pages/about.twig', [
+            'loggedIn' => isset($_SESSION['user'])
         ]);
     }
 }
