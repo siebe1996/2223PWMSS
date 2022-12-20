@@ -611,4 +611,7 @@ footer {
     .newRide .btn.formToggle {
         display: block;
     }
+    .newRide .btn.formToggle.hidden {
+        display: none;
+    }
 }

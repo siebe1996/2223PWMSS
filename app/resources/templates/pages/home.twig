@@ -6,38 +6,68 @@
         <div class="form" id="homeForm">
             <section class="firstFormSection">
                 <h2>FROM</h2>
-                <label for="startAdress">Street:</label>
-                <input type="text" id="startAdress" name="startAdress">
+                <label for="startStreet">Street:</label>
+                <input type="text" id="startStreet" name="startStreet">
+                {% if errors.startStreet %}
+                    <p class="errorMsg">{{errors.startStreet}}</p>
+                {% endif %}
                 <label for="startNumber">Number:</label>
                 <input type="text" name="startNumber" id="startNumber">
+                {% if errors.startNumber %}
+                    <p class="errorMsg">{{errors.startNumber}}</p>
+                {% endif %}
                 <label for="startCity">City:</label>
                 <input type="text" name="startCity" id="startCity">
+                {% if errors.startCity %}
+                    <p class="errorMsg">{{errors.startCity}}</p>
+                {% endif %}
                 <label for="dateTime">When:</label>
                 <input type="datetime-local" name="dateTime" id="dateTime">
+                {% if errors.dateTime %}
+                    <p class="errorMsg">{{errors.dateTime}}</p>
+                {% endif %}
             </section>
             <section class="secondFormSection hidden">
                 <h2>TO</h2>
-                <label for="startAdress">Street:</label>
-                <input type="text" id="startAdress" name="startAdress">
-                <label for="startNumber">Number:</label>
-                <input type="text" name="startNumber" id="startNumber">
-                <label for="startCity">City:</label>
-                <input type="text" name="startCity" id="startCity">
+                <label for="endStreet">Street:</label>
+                <input type="text" id="endStreet" name="endStreet">
+                {% if errors.endStreet %}
+                    <p class="errorMsg">{{errors.endStreet}}</p>
+                {% endif %}
+                <label for="endNumber">Number:</label>
+                <input type="text" name="endNumber" id="endNumber">
+                {% if errors.endStreet %}
+                    <p class="errorMsg">{{errors.endStreet}}</p>
+                {% endif %}
+                <label for="endCity">City:</label>
+                <input type="text" name="endCity" id="endCity">
+                {% if errors.endCity %}
+                    <p class="errorMsg">{{errors.endCity}}</p>
+                {% endif %}
             </section>
             {% if (not loggedIn) %}
                 <section class="thirdFormSection hidden">
                     <h2>INFO</h2>
                     <label for="firstName">First Name:</label>
                     <input type="text" name="firstName" id="firstName">
+                    {% if errors.firstName %}
+                        <p class="errorMsg">{{errors.firstName}}</p>
+                    {% endif %}
                     <label for="lastName">Last Name:</label>
                     <input type="text" name="lastName" id="lastName">
+                    {% if errors.lastName %}
+                        <p class="errorMsg">{{errors.lastName}}</p>
+                    {% endif %}
                     <label for="email">Email:</label>
                     <input type="email" name="email" id="email">
+                    {% if errors.email %}
+                        <p class="errorMsg">{{errors.email}}</p>
+                    {% endif %}
                     <button class="btn" type="submit">Request Ride</button>
                 </section>
             {% endif %}
             {% if loggedIn %}
-                <button class="btn" type="submit">Request Ride</button>            {% else %}
+                <button class="btn" type="submit">Request Ride</button>
             {% endif %}
         </div>
     </form>
