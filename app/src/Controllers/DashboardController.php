@@ -55,4 +55,11 @@ class DashboardController
             'date' => $date
         ]);
     }
+
+    public function showAbout()
+    {
+        echo $this->twig->render('pages/about.twig', [
+            'loggedIn' => isset($_SESSION['user'])
+        ]);
+    }
 }
