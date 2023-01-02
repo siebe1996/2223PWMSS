@@ -19,76 +19,124 @@ class TripController
         $this->twig->addFunction($function);
     }
 
-    public function add(){
-        if (isset($_SESSION['user'])) {
-            $loggedIn = true;
-        } else {
-            $loggedIn = false;
-        }
-        $startHouseNumber = isset($_POST['startNumber']) ? trim($_POST['startNumber']) : '';
-        $startStreet = isset($_POST['startStreet']) ? trim($_POST['startStreet']) : '';
-        $startCity = isset($_POST['startCity']) ? trim($_POST['startCity']) : '';
-        $endHouseNumber = isset($_POST['endNumber']) ? trim($_POST['endNumber']) : '';
-        $endStreet = isset($_POST['endStreet']) ? trim($_POST['endStreet']) : '';
-        $endCity = isset($_POST['endCity']) ? trim($_POST['endCity']) : '';
-        $datetime = isset($_POST['datetime']) ? trim($_POST['datetime']) : '';
-        $formErrors = [];
+    public function showAccountInfo()
+    {
+        //        if (!isset($_SESSION['user'])) {
+        //            header('location: /');
+        //            exit();
+        //        }
 
-        if (trim($startHouseNumber) === ''){
-            $formErrors['startNumber'] = 'Voer een geldig huisnummer in';
-        }
-        if (trim($startStreet) === ''){
-            $formErrors['startStreet'] = 'Voer een geldige straat in';
-        }
-        if (trim($startCity) === ''){
-            $formErrors['startStreet'] = 'Voer een geldige straat in';
-        }
-        if (trim($endHouseNumber) === ''){
-            $formErrors['endNumber'] = 'Voer een geldig huisnummer in';
-        }
-        if (trim($endStreet) === ''){
-            $formErrors['endStreet'] = 'Voer een geldige straat in';
-        }
-        if (trim($endCity) === ''){
-            $formErrors['endStreet'] = 'Voer een geldige straat in';
-        }
+        echo $this->twig->render('pages/account.twig', [
+            'User' => [
+                'name' => 'Lukas Downes',
+                'email' => 'lukasdownes@gmail.com',
+                'status' => 'Rider',
+                'rideAmount' => 27,
+                'rideHistory' => [
+                    [
+                        'day' => 'Zondag',
+                        'time' => 17,
+                        'from' => 'Anderlecht',
+                        'to' => 'Gent',
+                        'date' => '12/12/\'2022',
+                        'cost' => 7.63
+                    ],
+                    [
+                        'day' => 'Zondag',
+                        'time' => 10,
+                        'from' => 'Zaventem',
+                        'to' => 'Anderlecht',
+                        'date' => '12/12/\'2022',
+                        'cost' => 12.9
+                    ]
+                ]
+            ]
+        ]);
+    }
 
-        $dateTimeArr = explode('T', $datetime);
-        $dateArr = explode('-', $dateTimeArr[0]);
-        if (!checkdate($dateArr[1], $dateArr[2], $dateArr[0])) {
-            $formErrors['datetime'] = 'Voer een geldige datum in ';
-        }
-        if (!trim($dateTimeArr[1]) === ''){
-            $formErrors['datetime'] = 'Voer een geldige tijd in';
-        }
-        /*function validateDate($date) {
-            $format = 'Y-m-d H:i';
-            $dateTime = DateTime::createFromFormat($format, $date);
+    public function showDriverInfo($id)
+    {
+        //        if (!isset($_SESSION['user'])) {
+        //            header('location: /');
+        //            exit();
+        //        }
 
-            if ($dateTime instanceof DateTime && $dateTime->format('Y-m-d H:i') == $date) {
-                return $dateTime->getTimestamp();
-            }
+        echo $this->twig->render('pages/account.twig', [
+            'User' => [
+                'name' => 'Lukas Downes',
+                'email' => 'lukasdownes@gmail.com',
+                'status' => 'Driver',
+                'rideAmount' => 2,
+                'rideHistory' => [
+                    [
+                        'day' => 'Zondag',
+                        'time' => 17,
+                        'from' => 'Anderlecht',
+                        'to' => 'Gent',
+                        'date' => '12/12/\'22',
+                        'cost' => 7.63
+                    ],
+                    [
+                        'day' => 'Zondag',
+                        'time' => 10,
+                        'from' => 'Zaventem',
+                        'to' => 'Anderlecht',
+                        'date' => '12/12/\'22',
+                        'cost' => 12.9
+                    ]
+                ]
+            ],
+            'DriverInfo' => true
+        ]);
+    }
 
-            return false;
-        }*/
-
-        if(!$loggedIn){
-            //toDo als niet logged in extra velden controleren
-        }
-        else{
-            //toDo extra velden uit $_SESSION['user'] halen
-        }
-
-        //  if no errors: insert values into database
-
-        if (sizeof($formErrors) === 0){
-            //toDo toevoegen databank
-        }
-        else{
-            $trip = ['startNumber' => $startHouseNumber, 'startStreet' => $startStreet, 'startCity' => $startCity, 'endNumber' => $endHouseNumber, 'endStreet' => $endStreet, 'endCity' => $endCity, 'datetime' => $datetime];
-            $_SESSION['flash']['trip'] = $trip;
-            $_SESSION['flash']['errors'] = ['trip' => $formErrors];
-            header('Location : /');
-        }
+    public function showAvailableRides()
+    {
+        echo $this->twig->render('pages/availableRides.twig', [
+            'available' => [
+                [
+                    'day' => 'Zondag',
+                    'time' => 17,
+                    'from' => 'Anderlecht',
+                    'to' => 'Gent',
+                    'date' => '12/12/\'22',
+                    'cost' => 7.63,
+                    'fullAddressFrom' => 'Henri Vieuxtempsstraat 16, 1070 Anderlecht',
+                    'fullAddressTo' => 'Elfjulistraat 46, 9000 Gent'
+                ],
+                [
+                    'day' => 'Zondag',
+                    'time' => 10,
+                    'from' => 'Zaventem',
+                    'to' => 'Anderlecht',
+                    'date' => '12/12/\'22',
+                    'cost' => 12.9,
+                    'fullAddressFrom' => 'Brussels Airport Zaventem',
+                    'fullAddressTo' => 'Henri Vieuxtempsstraat 16, 1070 Anderlecht'
+                ]
+            ],
+            'decided' => [
+                [
+                    'day' => 'Zondag',
+                    'time' => 17,
+                    'from' => 'Anderlecht',
+                    'to' => 'Gent',
+                    'date' => '12/12/\'22',
+                    'cost' => 7.63,
+                    'fullAddressFrom' => 'Henri Vieuxtempsstraat 16, 1070 Anderlecht',
+                    'fullAddressTo' => 'Elfjulistraat 46, 9000 Gent'
+                ],
+                [
+                    'day' => 'Zondag',
+                    'time' => 10,
+                    'from' => 'Zaventem',
+                    'to' => 'Anderlecht',
+                    'date' => '12/12/\'22',
+                    'cost' => 12.9,
+                    'fullAddressFrom' => 'Brussels Airport Zaventem',
+                    'fullAddressTo' => 'Henri Vieuxtempsstraat 16, 1070 Anderlecht'
+                ]
+            ]
+        ]);
     }
 }

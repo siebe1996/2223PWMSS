@@ -456,7 +456,17 @@ footer {
     padding-right: 10%;
     margin-bottom: 7rem;
 }
-
+.chooseRides.panel {
+    margin-top: unset;
+}
+.availableRides {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 7rem;
+}
 .ride {
     display: flex;
     flex-direction: column;
@@ -468,12 +478,30 @@ footer {
     padding: 1rem;
     box-shadow: 0 4px 5px #2e5da638;
 }
+.ride.available {
+    flex-direction: row;
+    align-items: center;
+    padding-left: 0.5rem;
+    gap: 0.5rem;
+}
+.ride.available.hidden div.extraInfo {
+    display: none;
+}
 
-.ride p {
+.ride.available.accepted {
+    background: rgba(48, 166, 46, 0.39);
+}
+.ride.available.declined {
+    background: rgba(208, 13, 13, 0.39);
+}
+
+.available p,
+.ride p,
+.ride a {
     margin-block: 0.5rem 0;
     font-size: 0.8rem;
 }
-
+.available.ride h3,
 .ride h2 {
     margin: 0;
     font-size: 1.1rem;
@@ -490,7 +518,7 @@ footer {
     margin-top: 0.25rem;
 }
 
-.ride:before {
+.ride:not(.available):before {
     content: "•";
     font-size: 5rem;
     color: var(--primary);
@@ -506,14 +534,63 @@ footer {
     box-shadow: 4px 0 5px #2e5da638;
 }
 
+.expandToggle {
+    order: -1;
+    cursor: pointer;
+    transform: rotate(-180deg);
+    transition: 200ms ease-in-out;
+}
+.hidden .expandToggle {
+    transform: rotate(0deg);
+}
+#chooseRides {
+    position: absolute;
+    right: 1rem;
+    gap: 5px;
+    flex-direction: row;
+    justify-content: unset;
+    width: unset;
+}
+.okButton,
+.nokButton{
+    opacity: 0;
+    border: none;
+    padding: 0;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 33px;
+    height: 33px;
+    border-radius: 5px;
+    box-shadow: 0 4px 5px #2e5da638;
+}
+.hidden .okButton,
+.hidden .nokButton {
+    opacity: 1;
+}
+.accepted .okButton {
+    display: none;
+}
+
+.okButton {
+    background: #30A62E;
+
+}
+.nokButton {
+    background: #D00D0D;
+
+}
+
 .btn.logout {
     width: 80%;
     position: fixed;
     bottom: 1.5rem;
+    background: #c8191c;
 }
 .btn.cancel {
     width: min(100%,12rem);
-    background: #d9191c;
+    background: #c8191c;
 }
 
 @media (min-width: 750px) {

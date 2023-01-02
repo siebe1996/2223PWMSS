@@ -30,13 +30,10 @@ $router->before('GET|POST', '/driver/create', function () {
 });
 
 $router->get('/', 'DashboardController@show');
+$router->post('/', 'DashboardController@add');
 $router->post('/', 'TripController@add');
-
-$router->get('/requestPending','DashboardController@showRequestPending');
-$router->get('/rideAccepted','DashboardController@showCancelRide');
-
 $router->get('/about', 'DashboardController@showAbout');
-$router->get('/user', 'UserController@showAccountInfo');
+$router->get('/user', 'TripController@showAccountInfo');
 $router->get('/login', 'UserController@showLogin');
 $router->post('/login', 'UserController@login');
 $router->get('/logout', 'UserController@logout');
@@ -45,5 +42,10 @@ $router->post('/register', 'UserController@Register');
 $router->get('/driver/create', 'DriverController@show');
 $router->post('/driver/create', 'DriverController@add');
 $router->get('/verification', 'VerificationController@show');
+
+$router->get('/requestPending','DashboardController@showRequestPending');
+$router->get('/rideAccepted','DashboardController@showCancelRide');
+$router->get('/driver/(\d+)', 'TripController@showDriverInfo');
+$router->get('/ride/', 'TripController@showAvailableRides');
 
 $router->run();

@@ -161,14 +161,14 @@ DROP TABLE IF EXISTS `rebu`.`trips` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`trips` (
                                               `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                                              `start_house_nr` VARCHAR(5) NOT NULL,
+                                              `start_nr` VARCHAR(5) NOT NULL,
     `start_street` VARCHAR(255) NOT NULL,
     `start_city` VARCHAR(45) NOT NULL,
-    `stop_housenr` VARCHAR(255) NOT NULL,
+    `stop_nr` VARCHAR(255) NOT NULL,
     `stop_street` VARCHAR(45) NOT NULL,
     `stop_city` VARCHAR(45) NOT NULL,
-    `start_time` TIMESTAMP NOT NULL,
-    `stop_time` TIMESTAMP NULL,
+    `start_time` DATETIME NOT NULL,
+    `stop_time` DATETIME NULL,
     `costumer_id` INT UNSIGNED NOT NULL,
     `driver_id` INT UNSIGNED NULL,
     `price` DECIMAL(5,2) UNSIGNED NOT NULL,
