@@ -21,12 +21,13 @@ class TripController
 
     public function showAccountInfo()
     {
-        //        if (!isset($_SESSION['user'])) {
-        //            header('location: /');
-        //            exit();
-        //        }
+        if (!isset($_SESSION['user'])) {
+            header('location: /');
+            exit();
+        }
 
         echo $this->twig->render('pages/account.twig', [
+            'loggedIn' =>true,
             'User' => [
                 'name' => 'Lukas Downes',
                 'email' => 'lukasdownes@gmail.com',
@@ -92,7 +93,13 @@ class TripController
 
     public function showAvailableRides()
     {
+
+        $loggedIn = false;
+        if (isset($_SESSION['user'])) {
+            $loggedIn = true;
+        }
         echo $this->twig->render('pages/availableRides.twig', [
+            'loggedIn' => $loggedIn,
             'available' => [
                 [
                     'day' => 'Zondag',

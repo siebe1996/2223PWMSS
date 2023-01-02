@@ -26,18 +26,19 @@
                     <h2>{{ ride.day }} {{ ride.time }}u</h2>
                     <div class="right">
                         <p class="date">{{ ride.date }}</p>
-                        {% if DriverInfo %}
+                        {% if not DriverInfo %}
                             <p class="cost">€{{ ride.cost }}</p>
                         {% endif %}
                     </div>
                     <p class="trip">{{ ride.from }}->{{ ride.to }}</p>
-                    {% if DriverInfo %}
+                    {% if not DriverInfo %}
                         <a class="driverPageLink" href="{{ url('driver/') }}">Visit Drivers page</a>
                     {% endif %}
                 </section>
             {% endfor %}
-
         </section>
-        <button class="btn logout">Log Out</button>
+        {% if not DriverInfo %}
+            <button class="btn logout">Log Out</button>
+        {% endif %}
     </div>
 {% endblock %}
