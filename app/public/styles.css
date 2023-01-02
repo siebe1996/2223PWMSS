@@ -510,11 +510,13 @@ footer {
     width: 80%;
     position: fixed;
     bottom: 1.5rem;
-
+}
+.btn.cancel {
+    width: min(100%,12rem);
+    background: #d9191c;
 }
 
 @media (min-width: 750px) {
-
     header {
         display: flex;
         justify-content: space-between;

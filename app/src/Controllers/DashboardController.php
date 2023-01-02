@@ -1,6 +1,5 @@
 <?php
 //namespace Controllers;
-use Services\DatabaseConnector;
 //require_once ('../../vendor/autoload.php');
 //require_once ('../../config/database.php');
 //require_once ('../../src/Services/DatabaseConnector.php');
@@ -31,7 +30,7 @@ class DashboardController
         } else {
             $loggedIn = false;
         }
-        $formErrors = isset($_SESSION['flash']['errors']['trip']) ? trim($_SESSION['flash']['errors']['trip']) :  '';
+        $formErrors = isset($_SESSION['flash']['errors']['trip']) ? trim($_SESSION['flash']['errors']['trip']) : '';
         $startHouseNumber = isset($_SESSION['startNumber']) ? trim($_SESSION['startNumber']) : '';
         $startStreet = isset($_SESSION['startStreet']) ? trim($_SESSION['startStreet']) : '';
         $startCity = isset($_SESSION['startCity']) ? trim($_SESSION['startCity']) : '';
@@ -51,6 +50,20 @@ class DashboardController
             'endStreet' => $endStreet,
             'endCity' => $endCity,
             'datetime' => $datetime,
+        ]);
+    }
+
+    public function showCancelRide()
+    {
+        echo $this->twig->render('pages/cancelRide.twig', [
+            'home' => true,
+            'rideAccepted' => true
+        ]);
+    }
+    public function showRequestPending()
+    {
+        echo $this->twig->render('pages/cancelRide.twig', [
+            'home' => true
         ]);
     }
 
