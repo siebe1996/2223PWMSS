@@ -314,7 +314,8 @@ footer {
 }
 
 .form input,
-.form select {
+.form select,
+#rideFilter select {
     display: flex;
     justify-content: center;
     width: 100%;
@@ -327,6 +328,11 @@ footer {
     background-color: #FFF;
     height: 2.1rem;
     cursor: pointer;
+}
+
+#rideFilter {
+    width: 80%;
+    margin: 1rem 0;
 }
 
 #registerDriver input,
@@ -450,9 +456,8 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: end;
+    align-items: center;
     width: 100%;
-    padding-right: 10%;
     margin-bottom: 7rem;
 }
 .chooseRides.panel {
@@ -471,7 +476,7 @@ footer {
     flex-direction: column;
     position: relative;
     background: #DDE9FB;
-    margin-block: 0.75rem;
+    margin: 0.75rem -10% 0.75rem 0;
     width: 70%;
     border-radius: 5px;
     padding: 1rem;
@@ -525,7 +530,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    left: -15%;
+    left: -10%;
     top: -20%;
     height: 140%;
     width: 3px;
@@ -643,11 +648,23 @@ footer {
     .newRide .thirdFormSection.hidden {
         display: none;
     }
+
+
 }
 
 @media (min-width: 900px) {
     h2 {
         margin-bottom: 3rem;
+    }
+    .panel.account {
+        margin-top: 4rem;
+        flex-direction: row;
+        align-items: start;
+    }
+    .userInfo {
+        width: 50%;
+        margin: 2rem;
+        padding: 4rem 2rem;
     }
 
     .from#register {

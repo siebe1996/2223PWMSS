@@ -21,6 +21,25 @@
 
         </section>
         <section class="rideHistory">
+            <form id="rideFilter" action="">
+                <select name="month" id="month">
+                    {% for month in months %}
+                        <option value="month">month</option>
+                    {% endfor %}
+                    <option value="">Jan</option>
+                    <option value="">Feb</option>
+                    <option value="">Mar</option>
+                    <option value="">Apr</option>
+                    <option value="">May</option>
+                    <option value="">Jun</option>
+                    <option value="">Jul</option>
+                    <option value="">Aug</option>
+                    <option value="">Sep</option>
+                    <option value="">Okt</option>
+                    <option value="">Nov</option>
+                    <option value="">Dec</option>
+                </select>
+            </form>
             {% for ride in User.rideHistory %}
                 <section class="ride">
                     <h2>{{ ride.day }} {{ ride.time }}u</h2>
