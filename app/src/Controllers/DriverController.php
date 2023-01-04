@@ -7,7 +7,7 @@ use Services\DatabaseConnector;
 
 class DriverController
 {
-    protected \Doctrine\DBAL\Connection $db;
+    protected \Doctrine\DBAL\Connection $conn;
     protected \Twig\Environment $twig;
 
     public function __construct()
