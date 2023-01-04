@@ -6,7 +6,7 @@
 
 class DashboardController
 {
-    protected \Doctrine\DBAL\Connection $db;
+    protected \Doctrine\DBAL\Connection $conn;
     protected \Twig\Environment $twig;
 
     public function __construct()
@@ -83,7 +83,8 @@ class DashboardController
         ]);
     }
 
-    public function add(){
+    public function add()
+    {
         if (isset($_SESSION['user'])) {
             $loggedIn = true;
         } else {
@@ -98,22 +99,22 @@ class DashboardController
         $datetime = isset($_POST['dateTime']) ? trim($_POST['dateTime']) : '';
         $formErrors = [];
 
-        if (trim($startHouseNumber) === ''){
+        if (trim($startHouseNumber) === '') {
             $formErrors['startNumber'] = 'Voer een geldig huisnummer in';
         }
-        if (trim($startStreet) === ''){
+        if (trim($startStreet) === '') {
             $formErrors['startStreet'] = 'Voer een geldige straat in';
         }
-        if (trim($startCity) === ''){
+        if (trim($startCity) === '') {
             $formErrors['startStreet'] = 'Voer een geldige straat in';
         }
-        if (trim($endHouseNumber) === ''){
+        if (trim($endHouseNumber) === '') {
             $formErrors['endNumber'] = 'Voer een geldig huisnummer in';
         }
-        if (trim($endStreet) === ''){
+        if (trim($endStreet) === '') {
             $formErrors['endStreet'] = 'Voer een geldige straat in';
         }
-        if (trim($endCity) === ''){
+        if (trim($endCity) === '') {
             $formErrors['endStreet'] = 'Voer een geldige straat in';
         }
 
@@ -122,7 +123,7 @@ class DashboardController
         if (!checkdate($dateArr[1], $dateArr[2], $dateArr[0])) {
             $formErrors['dateTime'] = 'Voer een geldige datum in ';
         }
-        if (!trim($dateTimeArr[1]) === ''){
+        if (!trim($dateTimeArr[1]) === '') {
             $formErrors['dateTime'] = 'Voer een geldige tijd in';
         }
         /*function validateDate($date) {
@@ -136,7 +137,7 @@ class DashboardController
             return false;
         }*/
 
-        if(!$loggedIn){
+        if (!$loggedIn) {
             $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
             $lastName = isset($_POST['lastName']) ? $_POST['lastName'] : '';
             $email = isset($_POST['email']) ? $_POST['email'] : '';
@@ -163,26 +164,23 @@ class DashboardController
                 $anonUser = ['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email];
                 $_SESSION['flash']['anonUser'] = $anonUser;
                 $_SESSION['flash']['errors'] = ['anonUser' => $formErrors];
-            }*/
-            else{
+            }*/ else {
                 $stmt = $this->conn->prepare('INSERT INTO anonymous_users (email, first_name, last_name) VALUES (?, ?, ?)');
                 $result = $stmt->executeStatement([$email, $firstName, $lastName]);
                 $userId = $this->conn->fetchOne('SELECT LAST_INSERT_ID()', []);
             }
-        }
-        else{
+        } else {
             $userId = $_SESSION['user']['id'];
         }
 
         //  if no errors: insert values into database
 
-        if (!$formErrors){
+        if (!$formErrors) {
             $stmt = $this->conn->prepare('INSERT INTO trips (start_nr, start_street, start_city, stop_nr, stop_street, stop_city, start_time, costumer_id, price) VALUES (?, ?, ?, ?, ?, ?, ? ,? ?)');
             $result = $stmt->executeStatement([$startHouseNumber, $startStreet, $startCity, $endHouseNumber, $endStreet, $endCity, $datetime, $userId, 0.0]);
             header('Location : /');
             exit();
-        }
-        else{
+        } else {
             $trip = ['startNumber' => $startHouseNumber, 'startStreet' => $startStreet, 'startCity' => $startCity, 'endNumber' => $endHouseNumber, 'endStreet' => $endStreet, 'endCity' => $endCity, 'dateTime' => $datetime, 'firstName' => $firstName, 'lastName' => $lastName, 'email' => $email];
             $_SESSION['flash']['trip'] = $trip;
             $_SESSION['flash']['errors'] = ['trip' => $formErrors];
