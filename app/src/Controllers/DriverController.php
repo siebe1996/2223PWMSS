@@ -26,7 +26,7 @@ class DriverController
 
     public function show()
     {
-        $formErrors = isset($_SESSION['flash']['errors']['driver']) ? trim($_SESSION['flash']['errors']['driver']) :  '';
+        $formErrors = isset($_SESSION['flash']['errors']['driver']) ? $_SESSION['flash']['errors']['driver'] :  '';
         $numberPlate = isset($_SESSION['flash']['driver']['numberPlate']) ? trim($_SESSION['flash']['driver']['numberPlate']) : '';
         $birthDate = isset($_SESSION['flash']['driver']['birthDate']) ? trim($_SESSION['flash']['driver']['birthDate']) : '';
         $gender = isset($_SESSION['flash']['driver']['gender']) ? trim($_SESSION['flash']['driver']['gender']) : '';
@@ -65,7 +65,7 @@ class DriverController
         $genders = ['M', 'F', 'X'];
         $formErrors = [];
 
-        if (!preg_match("/^[a-zA-Z-' ]+$/", $numberPlate)) {
+        if (strlen($numberPlate) > 8) {
             $formErrors['numberPlate'] = 'Voer een geldige nummerplaat in';
         }
 
@@ -126,7 +126,8 @@ class DriverController
             $driver = ['numberPlate' => $numberPlate, 'birthDate' => $birthDate, 'gender' => $gender, 'carBrand' => $carBrand, 'carModel' => $carModel, 'carPassengers' => $carPassengers, 'btwNumber' => $btwNumber];
             $_SESSION['flash']['driver'] = $driver;
             $_SESSION['flash']['errors'] = ['driver' => $formErrors];
-            header('Location : driver/create');
+            header('location:create');
+            exit;
         }
     }
 }
