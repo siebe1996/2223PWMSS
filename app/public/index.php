@@ -41,5 +41,6 @@ $router->post('/register', 'UserController@Register');
 $router->get('/driver/create', 'DriverController@show');
 $router->post('/driver/create', 'DriverController@add');
 $router->get('/verification', 'VerificationController@show');
+$router->post('/verification', 'VerificationController@verification');
 
 $router->run();
