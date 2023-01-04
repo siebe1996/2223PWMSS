@@ -9,7 +9,7 @@ use Services\MailService;
 
 class UserController
 {
-    protected \Doctrine\DBAL\Connection $db;
+    protected \Doctrine\DBAL\Connection $conn;
     protected \Twig\Environment $twig;
 
     public function __construct()
@@ -115,7 +115,7 @@ class UserController
         $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
         $lastName = isset($_POST['lastName']) ? $_POST['lastName'] : '';
         $email = isset($_POST['email']) ? $_POST['email'] : '';
-        $password = isset($_POST['password']) ? $_POST['password'] : '';
+        //$password = isset($_POST['password']) ? $_POST['password'] : '';
         $formErrors = [];
 
         $allOk = true;
@@ -153,13 +153,8 @@ class UserController
             }
         }
 
-        if (trim($password) === '') {
-            $formErrors['password'] = 'Voer een password in';
-            $allOk = false;
-        }
-
         if (!$allOk) {
-            $register = ['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email, 'password' => $password];
+            $register = ['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email];
             $_SESSION['flash']['register'] = $register;
             $_SESSION['flash']['errors'] = ['register' => $formErrors];
             header('location:register');
@@ -174,9 +169,9 @@ class UserController
         $stmt2 = $this->conn->prepare('SELECT id FROM anonymous_users WHERE email = ?');
         $result2 = $stmt2->executeQuery([$email]);
         $userId = $result2->fetchOne();
-        $stmt3 = $this->conn->prepare('INSERT INTO users (id, password, verification_code) VALUES (?,?,?)');
-        $result3 = $stmt3->executeStatement([$userId, password_hash($password, PASSWORD_DEFAULT), $verificationCode]);
-        $user = $this->conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
+        $stmt3 = $this->conn->prepare('INSERT INTO users (id, verification_code) VALUES (?,?)');
+        $result3 = $stmt3->executeStatement([$userId, $verificationCode]);
+        //$user = $this->conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
         //$_SESSION['user'] = $user;
 
         MailService::send($this->twig, 'info@rebu.be', $email, 'Verifieer je account', 'Je verificatiecode is: ' . $verificationCode, 'email/verificatiecode.twig', [
@@ -187,7 +182,7 @@ class UserController
         ]);
         //toDo redirect to conformation page;
 
-        header('location:verification');
+        header('location:..');
         exit();
     }
 
@@ -198,5 +193,4 @@ class UserController
         header('Location: login');
         exit();
     }
-
 }
