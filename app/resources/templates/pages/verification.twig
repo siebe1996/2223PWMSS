@@ -4,12 +4,26 @@
     <h2>Verificatie</h2>
     <p>{{ errorMsg }}</p>
 
-    <form action="{{ url('') }}" method="post">
-      <label for="password">Password</label>
-      <input type="password" name="password" id="password" required {% if errors.password %}class="error"{% endif %}/>
-      {% if errors.password %}
-        <p class="errorMsg">{{ errors.password }}</p>
-      {% endif %}
-    </form>
+    {% if showPassword %}
+      <form action="{{ url('verification') }}" method="post">
+      <div class="form" id="">
+        <p>Vul je een wachtwoord in dat voldoet aan de evolgende voorwaarden:</p>
+          <ul>
+            <li>Minstens 8 karakters</li>
+            <li>Een combinae van letters en cijfers</li>
+            <li>Minimaal één hoofdleer</li>
+            <li>Minimaal één speciaal teken</li>
+          </ul>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required {% if passwordError %}class="error"{% endif %}/>
+        {% if passwordError %}
+          <p class="errorMsg">{{ passwordError }}</p>
+        {% endif %}
+        <input type="hidden" name="userId" value="{{ userId }}">
+        <input type="hidden" name="verificationCode" value="{{ verificationCode }}">
+        <button class="btn" type="submit">Verifieer</button>
+        </div>
+      </form>
+    {% endif %}
   </div>
 {% endblock %}

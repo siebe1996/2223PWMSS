@@ -182,7 +182,7 @@ class UserController
         ]);
         //toDo redirect to conformation page;
 
-        header('location:..');
+        header('location:verification');
         exit();
     }
 
