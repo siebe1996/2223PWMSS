@@ -2,7 +2,7 @@
 
 class TripController
 {
-    protected \Doctrine\DBAL\Connection $db;
+    protected \Doctrine\DBAL\Connection $conn;
     protected \Twig\Environment $twig;
 
     public function __construct()
@@ -27,7 +27,7 @@ class TripController
         }
 
         echo $this->twig->render('pages/account.twig', [
-            'loggedIn' =>true,
+            'loggedIn' => true,
             'User' => [
                 'name' => 'Lukas Downes',
                 'email' => 'lukasdownes@gmail.com',
