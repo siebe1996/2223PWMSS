@@ -3,8 +3,13 @@
   <div class="panel">
     <h2>Verificatie</h2>
     <p>{{ errorMsg }}</p>
-    <p>
-      <a href="{{ url('login') }}">Klik hier om je in te loggen</a>
-    </p>
+
+    <form action="{{ url('') }}" method="post">
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required {% if errors.password %}class="error"{% endif %}/>
+      {% if errors.password %}
+        <p class="errorMsg">{{ errors.password }}</p>
+      {% endif %}
+    </form>
   </div>
 {% endblock %}

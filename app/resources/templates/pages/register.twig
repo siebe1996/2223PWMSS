@@ -28,14 +28,6 @@
                 {% if errors.email %}
                     <p class="errorMsg">{{errors.email}}</p>
                 {% endif %}
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" required
-                        {% if errors.password %}
-                    class="error"
-                        {% endif %}>
-                {% if errors.password %}
-                    <p class="errorMsg">{{errors.password}}</p>
-                {% endif %}
                 <input type="hidden" name="moduleAction" value="register">
                 <button class="btn" type="submit">Register</button>
             </div>
