@@ -24,8 +24,8 @@ USE `rebu` ;
 DROP TABLE IF EXISTS `rebu`.`anonymous_users` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`anonymous_users` (
-                                                        `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                                                        `email` VARCHAR(255) NOT NULL,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `email` VARCHAR(255) NOT NULL,
     `first_name` VARCHAR(45) NOT NULL,
     `last_name` VARCHAR(127) NOT NULL,
     PRIMARY KEY (`id`))
@@ -42,8 +42,8 @@ CREATE UNIQUE INDEX `email_UNIQUE` ON `rebu`.`anonymous_users` (`email` ASC) VIS
 DROP TABLE IF EXISTS `rebu`.`users` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`users` (
-                                              `id` INT UNSIGNED NOT NULL,
-                                              `password` VARCHAR(255) NOT NULL,
+    `id` INT UNSIGNED NOT NULL,
+    `password` VARCHAR(255) DEFAULT NULL,
     `verified` TINYINT NOT NULL DEFAULT 0,
     `verification_code` VARCHAR(16) NOT NULL,
     PRIMARY KEY (`id`),
@@ -63,8 +63,8 @@ CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`users` (`id` ASC) VISIBLE;
 DROP TABLE IF EXISTS `rebu`.`admin_roles` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`admin_roles` (
-                                                    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                                                    `title` ENUM('admin', 'tester') NULL,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `title` ENUM('admin', 'tester') NULL,
     PRIMARY KEY (`id`))
     ENGINE = InnoDB;
 
@@ -77,9 +77,9 @@ CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`admin_roles` (`id` ASC) VISIBLE;
 DROP TABLE IF EXISTS `rebu`.`users_has_users` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`users_has_users` (
-                                                        `users_id` INT UNSIGNED NOT NULL,
-                                                        `users_id1` INT UNSIGNED NOT NULL,
-                                                        PRIMARY KEY (`users_id`, `users_id1`),
+    `users_id` INT UNSIGNED NOT NULL,
+    `users_id1` INT UNSIGNED NOT NULL,
+    PRIMARY KEY (`users_id`, `users_id1`),
     CONSTRAINT `fk_users_has_users_users`
     FOREIGN KEY (`users_id`)
     REFERENCES `rebu`.`users` (`id`)
@@ -103,9 +103,9 @@ CREATE INDEX `fk_users_has_users_users_idx` ON `rebu`.`users_has_users` (`users_
 DROP TABLE IF EXISTS `rebu`.`users_has_admin_roles` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`users_has_admin_roles` (
-                                                              `users_id` INT UNSIGNED NOT NULL,
-                                                              `roles_id` INT UNSIGNED NOT NULL,
-                                                              PRIMARY KEY (`users_id`, `roles_id`),
+    `users_id` INT UNSIGNED NOT NULL,
+    `roles_id` INT UNSIGNED NOT NULL,
+    PRIMARY KEY (`users_id`, `roles_id`),
     CONSTRAINT `fk_users_has_roles_users1`
     FOREIGN KEY (`users_id`)
     REFERENCES `rebu`.`users` (`id`)
@@ -129,8 +129,8 @@ CREATE INDEX `fk_users_has_roles_users1_idx` ON `rebu`.`users_has_admin_roles` (
 DROP TABLE IF EXISTS `rebu`.`drivers` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`drivers` (
-                                                `id` INT UNSIGNED NOT NULL,
-                                                `btw_nr` VARCHAR(10) NOT NULL,
+    `id` INT UNSIGNED NOT NULL,
+    `btw_nr` VARCHAR(10) NOT NULL,
     `number_plate` VARCHAR(7) NOT NULL,
     `birth_date` TIMESTAMP NOT NULL,
     `car_seats` INT UNSIGNED NOT NULL,
@@ -160,8 +160,8 @@ CREATE UNIQUE INDEX `nummerplaat_UNIQUE` ON `rebu`.`drivers` (`number_plate` ASC
 DROP TABLE IF EXISTS `rebu`.`trips` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`trips` (
-                                              `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-                                              `start_nr` VARCHAR(5) NOT NULL,
+    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `start_nr` VARCHAR(5) NOT NULL,
     `start_street` VARCHAR(255) NOT NULL,
     `start_city` VARCHAR(45) NOT NULL,
     `stop_nr` VARCHAR(255) NOT NULL,
@@ -199,8 +199,8 @@ CREATE INDEX `driver_idx` ON `rebu`.`trips` (`driver_id` ASC) VISIBLE;
 DROP TABLE IF EXISTS `rebu`.`reviews` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`reviews` (
-                                                `id` INT UNSIGNED NOT NULL,
-                                                `rating` DECIMAL(2,1) NOT NULL,
+    `id` INT UNSIGNED NOT NULL,
+    `rating` DECIMAL(2,1) NOT NULL,
     `review` TEXT NOT NULL,
     `trip_id` INT UNSIGNED NOT NULL,
     PRIMARY KEY (`id`),
