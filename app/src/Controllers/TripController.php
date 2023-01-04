@@ -26,9 +26,6 @@ class TripController
             exit();
         }
 
-        print_r($_SESSION);
-        print_r($_GET);
-
         $stmt = $this->conn->prepare('SELECT * FROM trips WHERE costumer_id = ?;');
         $result = $stmt->executeQuery([$_SESSION['user']['id']]);
         $trips = $result->fetchAllAssociative();
