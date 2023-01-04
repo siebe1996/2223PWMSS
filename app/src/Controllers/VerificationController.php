@@ -23,8 +23,6 @@ class VerificationController
 
     public function show()
     {
-        print_r($_SESSION);
-        print_r($_GET);
         $verificationCode = isset($_SESSION['flash']['verification']['verificationCode']) ? trim($_SESSION['flash']['verification']['verificationCode']) : (isset($_GET['verificationCode']) ? trim($_GET['verificationCode']) : '');
         $userId = isset($_SESSION['flash']['verification']['userId']) ? trim($_SESSION['flash']['verification']['userId']) : (isset($_GET['userId']) ? trim($_GET['userId']) : '');
         $passwordError = isset($_SESSION['flash']['errors']['password']) ? trim($_SESSION['flash']['errors']['password']) : '';
