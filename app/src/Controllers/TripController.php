@@ -85,10 +85,31 @@ class TripController
         $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.status = "pending"');
         $result = $stmt->executeQuery([]);
         $availableRides = $result->fetchAllAssociative();
-        var_dump($availableRides);
 
         echo $this->twig->render('pages/availableRides.twig', [
             'loggedIn' => $loggedIn,
+            /*'available' => [
+                [
+                    'day' => 'Zondag',
+                    'when' => 17,
+                    'from' => 'Anderlecht',
+                    'to' => 'Gent',
+                    'date' => '12/12/\'22',
+                    'cost' => 7.63,
+                    'fullAddressFrom' => 'Henri Vieuxtempsstraat 16, 1070 Anderlecht',
+                    'fullAddressTo' => 'Elfjulistraat 46, 9000 Gent'
+                ],
+                [
+                    'day' => 'Zondag',
+                    'time' => 10,
+                    'from' => 'Zaventem',
+                    'to' => 'Anderlecht',
+                    'date' => '12/12/\'22',
+                    'cost' => 12.9,
+                    'fullAddressFrom' => 'Brussels Airport Zaventem',
+                    'fullAddressTo' => 'Henri Vieuxtempsstraat 16, 1070 Anderlecht'
+                ]
+            ],*/
             'available' => $availableRides,
             'decided' => $acceptedRides,
         ]);
