@@ -1,6 +1,9 @@
 <?php
 require_once('../vendor/autoload.php');
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/..');
+$dotenv->load();
+
 $router = new \Bramus\Router\Router();
 //$router->setNamespace('\Controllers');
 
