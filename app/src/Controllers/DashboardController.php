@@ -106,7 +106,7 @@ class DashboardController
             $formErrors['startStreet'] = 'Voer een geldige straat in';
         }
         if (trim($startCity) === '') {
-            $formErrors['startStreet'] = 'Voer een geldige straat in';
+            $formErrors['startCity'] = 'Voer een geldige stad in';
         }
         if (trim($endHouseNumber) === '') {
             $formErrors['endNumber'] = 'Voer een geldig huisnummer in';
@@ -115,16 +115,21 @@ class DashboardController
             $formErrors['endStreet'] = 'Voer een geldige straat in';
         }
         if (trim($endCity) === '') {
-            $formErrors['endStreet'] = 'Voer een geldige straat in';
+            $formErrors['endCity'] = 'Voer een geldige stad in';
         }
 
-        $dateTimeArr = explode('T', $datetime);
-        $dateArr = explode('-', $dateTimeArr[0]);
-        if (!checkdate($dateArr[1], $dateArr[2], $dateArr[0])) {
-            $formErrors['dateTime'] = 'Voer een geldige datum in ';
+        if (trim($datetime) === ''){
+            $formErrors['dateTime'] = 'Voer een geldige tijd en datum in ';
         }
-        if (!trim($dateTimeArr[1]) === '') {
-            $formErrors['dateTime'] = 'Voer een geldige tijd in';
+        else{
+            $dateTimeArr = explode('T', $datetime);
+            $dateArr = explode('-', $dateTimeArr[0]);
+            if (!checkdate($dateArr[1], $dateArr[2], $dateArr[0])) {
+                $formErrors['dateTime'] = 'Voer een geldige datum in ';
+            }
+            if (!trim($dateTimeArr[1]) === '') {
+                $formErrors['dateTime'] = 'Voer een geldige tijd in';
+            }
         }
         /*function validateDate($date) {
             $format = 'Y-m-d H:i';
@@ -176,17 +181,16 @@ class DashboardController
         //  if no errors: insert values into database
 
         if (!$formErrors) {
-            //$datetime = str_replace('T', ' ', $datetime);
-            //var_dump($startHouseNumber.' '.$startStreet.' '.$startCity.' '.$endHouseNumber.' '.$endStreet.' '.$endCity.' '.$datetime.' '.$userId);
+            //toDo add price calculation
             $stmt = $this->conn->prepare('INSERT INTO trips (start_nr, start_street, start_city, stop_nr, stop_street, stop_city, start_time, costumer_id, price) VALUES (?, ?, ?, ?, ?, ?, ? ,?, ?)');
             $result = $stmt->executeStatement([$startHouseNumber, $startStreet, $startCity, $endHouseNumber, $endStreet, $endCity, $datetime, $userId, 0.0]);
-            header('Location : /');
+            header('Location: /');
             exit();
         } else {
             $trip = ['startNumber' => $startHouseNumber, 'startStreet' => $startStreet, 'startCity' => $startCity, 'endNumber' => $endHouseNumber, 'endStreet' => $endStreet, 'endCity' => $endCity, 'dateTime' => $datetime, 'firstName' => $firstName, 'lastName' => $lastName, 'email' => $email];
             $_SESSION['flash']['trip'] = $trip;
             $_SESSION['flash']['errors'] = ['trip' => $formErrors];
-            header('Location : /');
+            header('Location: /');
             exit();
         }
     }

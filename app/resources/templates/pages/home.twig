@@ -7,7 +7,7 @@
                 <section class="firstFormSection">
                     <h2>FROM</h2>
                     <label for="startStreet">Street:</label>
-                    <input type="text" id="startStreet" name="startStreet">
+                    <input type="text" id="startStreet" name="startStreet" value="{{ startStreet }}">
                     {% if errors.startStreet %}
                         <p class="errorMsg">{{ errors.startStreet }}</p>
                     {% endif %}
