@@ -6,3 +6,4 @@ app/storage/db.log
 app/vendor
 app/storage/cache
 app/public/js/openLayers/node_modules
+app/composer.lock
