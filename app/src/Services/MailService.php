@@ -20,7 +20,7 @@ class MailService
         $eventDispatcher = new EventDispatcher();
         $eventDispatcher->addSubscriber($messageListener);
 
-        $transport = Transport::fromDsn('smtp://' . USERNAME . ':' . PASSWORD . '@' . HOST . ':' . PORT . '?' . OPTIONS, $eventDispatcher);
+        $transport = Transport::fromDsn('smtp://' . $_ENV['EMAIL_USERNAME'] . ':' . $_ENV['EMAIL_PASSWORD'] . '@' . $_ENV['EMAIL_HOST'] . ':' . $_ENV['EMAIL_PORT'] . '?' . $_ENV['EMAIL_OPTIONS'], $eventDispatcher);
         $mailer = new Mailer($transport, null, $eventDispatcher);
 
         $email = (new TemplatedEmail())

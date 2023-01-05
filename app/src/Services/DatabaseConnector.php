@@ -4,9 +4,9 @@ namespace Services;
 
 class DatabaseConnector
 {
-    static function getConnection($DB_NAME = DB_NAME) : \Doctrine\DBAL\Connection {
+    static function getConnection(string $databaseName = '') : \Doctrine\DBAL\Connection {
         $connectionParams = [
-            'url' => 'mysql://' . DB_USER . ':' . DB_PASS . '@' . DB_HOST . '/' . $DB_NAME
+            'url' => 'mysql://' . $_ENV['DB_USER'] . ':' . $_ENV['DB_PASS'] . '@' . $_ENV['DB_HOST'] . '/' . ($databaseName?: $_ENV['DB_NAME'])
         ];
 
         try {
