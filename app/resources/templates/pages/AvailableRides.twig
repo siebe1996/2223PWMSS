@@ -7,14 +7,14 @@
                 <section class="ride available hidden accepted">
                     <div>
                         <h3>{{ ride.day }} {{ ride.time }}u</h3>
-                        <p class="trip">{{ ride.from }}->{{ ride.to }}</p>
+                        <p class="trip">{{ ride.fromCity }}->{{ ride.toCity }}</p>
                         <div class="extraInfo">
                             <div class="right">
                                 <p class="date">{{ ride.date }}</p>
                             </div>
                             <p>From:<br>{{ ride.fullAddressFrom }}</p>
                             <p>To:<br>{{ ride.fullAddressTo }}</p>
-                            <p>Fee: €{{ ride.cost }}</p>
+                            <p>Fee: €{{ ride.price }}</p>
                         </div>
                     </div>
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"
@@ -41,15 +41,15 @@
             {% for ride in available %}
                 <section class="ride available hidden">
                     <div>
-                        <h3>{{ ride.start_time }}u</h3>
-                        <p class="trip">{{ ride.from }}->{{ ride.to }}</p>
+                        <h3>{{ ride.time }}</h3>
+                        <p class="trip">{{ ride.fromCity }}->{{ ride.toCity }}</p>
                         <div class="extraInfo">
                             <div class="right">
                                 <p class="date">{{ ride.date }}</p>
                             </div>
                             <p>From:<br>{{ ride.fullAddressFrom }}</p>
                             <p>To:<br>{{ ride.fullAddressTo }}</p>
-                            <p>Fee: €{{ ride.cost }}</p>
+                            <p>Fee: €{{ ride.price }}</p>
                         </div>
                     </div>
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg"

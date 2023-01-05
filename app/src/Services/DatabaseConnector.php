@@ -13,7 +13,7 @@ class DatabaseConnector
             $connection = \Doctrine\DBAL\DriverManager::getConnection($connectionParams);
             $connection->connect();
         } catch (\Doctrine\DBAL\Exception $e) {
-            if (DEBUG){
+            if ($_ENV['DEBUG']){
                 echo($e->getMessage() . PHP_EOL);
                 exit();
             }

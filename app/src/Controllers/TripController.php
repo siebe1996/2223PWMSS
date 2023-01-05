@@ -30,7 +30,7 @@ class TripController
         $result = $stmt->executeQuery([$id]);
         $driver = $result->fetchAssociative();
         //als user geen driver is of niet bestaat redirect naar home;
-        if(!$driver){
+        if (!$driver) {
             header('location: /');
             exit();
         }
@@ -39,7 +39,7 @@ class TripController
 
         echo $this->twig->render('pages/account.twig', [
             'user' => [
-                'name' => $driver['first_name'].' '.$driver['last_name'],
+                'name' => $driver['first_name'] . ' ' . $driver['last_name'],
                 'email' => $driver['email'],
                 'gender' => $driver['gender'],
                 'car' => $driver['car_brand'],
@@ -78,14 +78,33 @@ class TripController
             $loggedIn = true;
         }
 
-        $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.driver_id = ?');
+        $stmt = $this->conn->prepare(<<<'SQL'
+            SELECT 
+                CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
+                CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
+                price,
+                start_city AS fromCity,
+                stop_city AS toCity,
+                start_time AS time
+            FROM trips as t WHERE t.driver_id = ?
+            SQL
+        );
         $result = $stmt->executeQuery([$_SESSION['user']['id']]);
         $acceptedRides = $result->fetchAllAssociative();
 
-        $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.status = "pending"');
+        $stmt = $this->conn->prepare(<<<'SQL'
+            SELECT 
+                CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
+                CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
+                price,
+                start_city AS fromCity,
+                stop_city AS toCity,
+                start_time AS time
+            FROM trips as t WHERE t.status = "pending"
+            SQL
+        );
         $result = $stmt->executeQuery([]);
         $availableRides = $result->fetchAllAssociative();
-        var_dump($availableRides);
 
         echo $this->twig->render('pages/availableRides.twig', [
             'loggedIn' => $loggedIn,
