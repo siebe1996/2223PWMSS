@@ -130,7 +130,7 @@ DROP TABLE IF EXISTS `rebu`.`drivers` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`drivers` (
     `id` INT UNSIGNED NOT NULL,
-    `btw_nr` VARCHAR(10) NOT NULL,
+    `btw_nr` VARCHAR(12) NOT NULL,
     `number_plate` VARCHAR(7) NOT NULL,
     `birth_date` TIMESTAMP NOT NULL,
     `car_seats` INT UNSIGNED NOT NULL,

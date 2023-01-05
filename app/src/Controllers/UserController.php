@@ -69,7 +69,7 @@ class UserController
                 if (password_verify($password, $user['password'])) {
                     // Store the user row in the session
                     $_SESSION['user'] = $user;
-                    header('Location: ..');
+                    header('Location: /');
                     exit();
                 } // Invalid login
                 else {

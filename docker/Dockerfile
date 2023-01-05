@@ -5,5 +5,7 @@ RUN a2enmod rewrite
 RUN apt-get update && apt-get install -y libzip-dev zip && docker-php-ext-install zip && docker-php-ext-install bcmath && docker-php-ext-install pdo_mysql
 RUN apt-get install -y locales locales-all
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN apt-get update && apt-get install -y libxml2-dev
+RUN docker-php-ext-install soap
 WORKDIR /var/www
 VOLUME /usr/local/etc/php

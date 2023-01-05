@@ -109,13 +109,13 @@ class DriverController
             $formErrors['carPassengers'] = 'Voer een geldig aantal passagiers in tussen 1 en 10';
         }
 
-        if (!\Services\VIESValidatorService::validate('BE' . $btwNumber)) {
+        if (!\Services\VIESValidatorService::validate($btwNumber)) {
             $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
         }
 
         //  if no errors: insert values into database
 
-        if (sizeof($formErrors) === 0) {
+        if (!$formErrors) {
             $stmt = $this->conn->prepare('INSERT INTO drivers (id, number_plate, birth_date, car_seats, car_model, car_brand, gender, profile_pic, btw_nr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
             $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, (int)$_SESSION['user']['id'] . '.jpg', $btwNumber]);
             header('location: /');
@@ -126,7 +126,7 @@ class DriverController
             $driver = ['numberPlate' => $numberPlate, 'birthDate' => $birthDate, 'gender' => $gender, 'carBrand' => $carBrand, 'carModel' => $carModel, 'carPassengers' => $carPassengers, 'btwNumber' => $btwNumber];
             $_SESSION['flash']['driver'] = $driver;
             $_SESSION['flash']['errors'] = ['driver' => $formErrors];
-            header('location:create');
+            header('location: create');
             exit;
         }
     }
