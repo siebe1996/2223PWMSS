@@ -30,7 +30,7 @@ class DashboardController
         } else {
             $loggedIn = false;
         }
-        $formErrors = isset($_SESSION['flash']['errors']['trip']) ? trim($_SESSION['flash']['errors']['trip']) :  '';
+        $formErrors = $_SESSION['flash']['errors']['trip'] ?? '';
         $startHouseNumber = isset($_SESSION['flash']['trip']['startNumber']) ? trim($_SESSION['flash']['trip']['startNumber']) : '';
         $startStreet = isset($_SESSION['flash']['trip']['startStreet']) ? trim($_SESSION['flash']['trip']['startStreet']) : '';
         $startCity = isset($_SESSION['flash']['trip']['startCity']) ? trim($_SESSION['flash']['trip']['startCity']) : '';
@@ -176,7 +176,9 @@ class DashboardController
         //  if no errors: insert values into database
 
         if (!$formErrors) {
-            $stmt = $this->conn->prepare('INSERT INTO trips (start_nr, start_street, start_city, stop_nr, stop_street, stop_city, start_time, costumer_id, price) VALUES (?, ?, ?, ?, ?, ?, ? ,? ?)');
+            //$datetime = str_replace('T', ' ', $datetime);
+            //var_dump($startHouseNumber.' '.$startStreet.' '.$startCity.' '.$endHouseNumber.' '.$endStreet.' '.$endCity.' '.$datetime.' '.$userId);
+            $stmt = $this->conn->prepare('INSERT INTO trips (start_nr, start_street, start_city, stop_nr, stop_street, stop_city, start_time, costumer_id, price) VALUES (?, ?, ?, ?, ?, ?, ? ,?, ?)');
             $result = $stmt->executeStatement([$startHouseNumber, $startStreet, $startCity, $endHouseNumber, $endStreet, $endCity, $datetime, $userId, 0.0]);
             header('Location : /');
             exit();
