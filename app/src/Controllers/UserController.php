@@ -193,4 +193,28 @@ class UserController
         header('Location: login');
         exit();
     }
+
+    public function showAccountInfo()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('location: /');
+            exit();
+        }
+
+        $stmt = $this->conn->prepare('SELECT * FROM trips WHERE costumer_id = ?;');
+        $result = $stmt->executeQuery([$_SESSION['user']['id']]);
+        $trips = $result->fetchAllAssociative();
+
+
+        echo $this->twig->render('pages/account.twig', [
+            'loggedIn' => true,
+            'user' => [
+                'name' => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
+                'email' => $_SESSION['user']['email'],
+                'status' => 'Rider',
+                'rideAmount' => count($trips),
+                'rideHistory' => $trips
+            ]
+        ]);
+    }
 }

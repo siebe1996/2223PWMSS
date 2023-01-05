@@ -3,9 +3,15 @@
   <div class="panel account">
     <section class="userInfo">
       <div class="text">
-        <h2>{{ User.name }}</h2>
-        <p>{{ User.email }}</p>
-        <p>{{ User.status }} • {{ User.rideAmount }} rides</p>
+        <h2>{{ user.name }}</h2>
+        <p>email : {{ user.email }}</p>
+        {% if driverInfo %}
+        <p>gender : {{ user.gender }}</p>
+        <p>car : {{ user.car }}</p>
+        <p>model : {{ user.model }}</p>
+        <p>seats : {{ user.seats }}</p>
+        {%  endif %}
+        <p>{{ user.status }} • {{ user.rideAmount }} rides</p>
       </div>
 
       <div class="profilePic">
@@ -36,12 +42,12 @@
           <option value="">Dec</option>
         </select>
       </form>
-      {% for ride in User.rideHistory %}
+      {% for ride in user.rideHistory %}
         <section class="ride">
           <h2>{{ ride.start_time|date('l') }} {{ ride.start_time|date('h\\ui') }}</h2>
           <div class="right">
             <p class="date">{{ ride.start_time|date('d/m/Y') }}</p>
-            {% if not DriverInfo %}
+            {% if not driverInfo %}
               <p class="cost">€{{ ride.price }}</p>
             {% endif %}
           </div>
