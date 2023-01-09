@@ -85,8 +85,9 @@ class TripController
                 price,
                 start_city AS fromCity,
                 stop_city AS toCity,
-                start_time AS time
-            FROM trips as t WHERE t.driver_id = ?
+                start_time AS time,
+                id
+            FROM trips as t WHERE t.driver_id = ? AND t.status = "claimed"
             SQL
         );
         $result = $stmt->executeQuery([$_SESSION['user']['id']]);
@@ -99,7 +100,8 @@ class TripController
                 price,
                 start_city AS fromCity,
                 stop_city AS toCity,
-                start_time AS time
+                start_time AS time,
+                id
             FROM trips as t WHERE t.status = "pending"
             SQL
         );

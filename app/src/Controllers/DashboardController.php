@@ -62,12 +62,39 @@ class DashboardController
         ]);
     }
 
-    public function showCancelRide()
+    public function acceptRide()
     {
-        echo $this->twig->render('pages/cancelRide.twig', [
-            'home' => true,
-            'rideAccepted' => true
-        ]);
+        //toDo check if user is driver
+        $userId = $_SESSION['user']['id'];
+        $tripId = $_POST['accept'] ?? '';
+        if (!trim($tripId) || !trim($userId)){
+            header('Location: badrequest');
+            exit();
+        }
+        else{
+            $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
+            $result = $stmt->executeStatement(['claimed', $userId, $tripId]);
+
+            header('Location: /driver/ride');
+            exit();
+        }
+    }
+    public function cancelRide()
+    {
+        //toDo check if user is driver
+        $userId = $_SESSION['user']['id'];
+        $tripId = $_POST['cancel'] ?? '';
+        if (!trim($tripId) || !trim($userId)){
+            header('Location: badrequest');
+            exit();
+        }
+        else{
+            $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
+            $result = $stmt->executeStatement(['pending', $userId, $tripId]);
+
+            header('Location: /driver/ride');
+            exit();
+        }
     }
     public function showRequestPending()
     {
