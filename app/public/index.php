@@ -50,7 +50,7 @@ $router->post('/verification', 'VerificationController@verification');
 //toDo move to driver controller or trip controller
 $router->get('/requestPending', 'DashboardController@showRequestPending'); //driver/ride
 //toDo move to driver controller or trip controller
-$router->get('/rideAccepted', 'DashboardController@showCancelRide'); //driver/ride/accept  driver/ride/cancel
+$router->get('driver/ride/accept', 'DashboardController@showCancelRide'); //driver/ride/accept  driver/ride/cancel
 //toDo move to driver controller
 $router->get('/driver/(\d+)', 'TripController@showDriverInfo');
 $router->get('/ride', 'TripController@showAvailableRides');
