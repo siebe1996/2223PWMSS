@@ -53,7 +53,7 @@
           </div>
           <p class="trip">{{ ride.start_city }}->{{ ride.stop_city }}</p>
           {% if ride.driver_id %}
-            <a class="driverPageLink" href="{{ url('driver/') }}">Visit Drivers page</a>
+            <a class="driverPageLink" href="{{ url('driver/') ~ ride.driver_id }}">Visit Drivers page</a>
           {% endif %}
         </section>
       {% endfor %}

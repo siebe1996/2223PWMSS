@@ -130,4 +130,52 @@ class DriverController
             exit;
         }
     }
+
+    public function showDriverInfo($id)
+    {
+        //        if (!isset($_SESSION['user'])) {
+        //            header('location: /');
+        //            exit();
+        //        }
+
+        $stmt = $this->conn->prepare('SELECT * FROM anonymous_users as anon JOIN drivers as d on anon.id = d.id WHERE d.id = ?');
+        $result = $stmt->executeQuery([$id]);
+        $driver = $result->fetchAssociative();
+        //als user geen driver is of niet bestaat redirect naar home;
+        if (!$driver) {
+            header('location: /');
+            exit();
+        }
+        $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.driver_id = ? AND t.status = "finished"');
+        /*$stmt = $this->conn->prepare(<<<'SQL'
+            SELECT
+                start_city AS fromCity,
+                stop_city AS toCity,
+                start_time AS date,
+                price AS cost,
+                DAYNAME(start_time) as day,
+                
+                                  
+            FROM trips as t WHERE t.driver_id = ? AND t.status = "finished"
+            SQL
+        );*/
+        $result = $stmt->executeQuery([$id]);
+        $trips = $result->fetchAllAssociative();
+
+        echo $this->twig->render('pages/account.twig', [
+            'user' => [
+                'name' => $driver['first_name'] . ' ' . $driver['last_name'],
+                'email' => $driver['email'],
+                'gender' => $driver['gender'],
+                'car' => $driver['car_brand'],
+                'model' => $driver['car_model'],
+                'seats' => $driver['car_seats'],
+                'status' => 'Driver',
+                'rideAmount' => count($trips),
+                'rideHistory' => $trips,
+            ],
+            'driverInfo' => true
+        ]);
+    }
+
 }

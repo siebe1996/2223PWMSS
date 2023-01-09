@@ -47,13 +47,10 @@ $router->post('/driver/create', 'DriverController@add');
 $router->get('/verification', 'VerificationController@show');
 $router->post('/verification', 'VerificationController@verification');
 
-//toDo move to driver controller or trip controller
-$router->get('/requestPending', 'DashboardController@showRequestPending'); //driver/ride
-//toDo move to driver controller or trip controller
-$router->post('driver/ride/accept', 'DashboardController@acceptRide'); //driver/ride/accept  driver/ride/cancel
-$router->post('driver/ride/cancel', 'DashboardController@cancelRide');
-//toDo move to driver controller
-$router->get('/driver/(\d+)', 'TripController@showDriverInfo');
+//$router->get('/requestPending', 'DashboardController@showRequestPending'); //driver/ride
+$router->post('/driver/ride/accept', 'TripController@acceptRide'); //driver/ride/accept  driver/ride/cancel
+$router->post('/driver/ride/cancelorfinish', 'TripController@cancelStartFinishRide');
+$router->get('/driver/(\d+)', 'DriverController@showDriverInfo');
 $router->get('/driver/ride', 'TripController@showAvailableRides');
 
 $router->run();

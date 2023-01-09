@@ -201,7 +201,7 @@ class UserController
             exit();
         }
 
-        $stmt = $this->conn->prepare('SELECT * FROM trips WHERE costumer_id = ?;');
+        $stmt = $this->conn->prepare('SELECT * FROM trips WHERE costumer_id = ? AND status = "finished"');
         $result = $stmt->executeQuery([$_SESSION['user']['id']]);
         $trips = $result->fetchAllAssociative();
 
