@@ -27,7 +27,7 @@ class TripController
             $loggedIn = true;
         }
 
-        $stmt = $this->conn->prepare(<<<'SQL'
+        $acceptedRides = $this->conn->fetchAllAssociative(<<<'SQL'
             SELECT 
                 CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
                 CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
@@ -38,12 +38,11 @@ class TripController
                 id,
                 status
             FROM trips as t WHERE t.driver_id = ? AND (t.status = "claimed" OR t.status = "started")
-            SQL
+            SQL,
+            [$_SESSION['user']['id']]
         );
-        $result = $stmt->executeQuery([$_SESSION['user']['id']]);
-        $acceptedRides = $result->fetchAllAssociative();
 
-        $stmt = $this->conn->prepare(<<<'SQL'
+        $availableRides = $this->conn->fetchAllAssociative(<<<'SQL'
             SELECT 
                 CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
                 CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
@@ -55,8 +54,6 @@ class TripController
             FROM trips as t WHERE t.status = "pending"
             SQL
         );
-        $result = $stmt->executeQuery([]);
-        $availableRides = $result->fetchAllAssociative();
 
         echo $this->twig->render('pages/availableRides.twig', [
             'loggedIn' => $loggedIn,

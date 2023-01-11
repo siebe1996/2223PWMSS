@@ -701,6 +701,7 @@ footer {
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
+        font-size: 1.1rem;
     }
 
     button.navbarToggle {
