@@ -78,7 +78,7 @@ class TripController
             $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
             $result = $stmt->executeStatement(['claimed', $userId, $tripId]);
 
-            header('Location: /driver/ride');
+            header('Location: /rides');
             exit();
         }
     }
@@ -107,7 +107,7 @@ class TripController
             $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
             $result = $stmt->executeStatement([$status, $userId, $tripId]);
 
-            header('Location: /driver/ride');
+            header('Location: /rides');
             exit();
         }
     }

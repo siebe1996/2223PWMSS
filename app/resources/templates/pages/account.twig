@@ -1,63 +1,124 @@
 {% extends 'partials/common.twig' %}
 {% block main %}
-  <div class="panel account">
-    <section class="userInfo">
-      <div class="text">
-        <h2>{{ user.name }}</h2>
-        <p>email : {{ user.email }}</p>
-        {% if driverInfo %}
-        <p>gender : {{ user.gender }}</p>
-        <p>car : {{ user.car }}</p>
-        <p>model : {{ user.model }}</p>
-        <p>seats : {{ user.seats }}</p>
-        {%  endif %}
-        <p>{{ user.status }} • {{ user.rideAmount }} rides</p>
-      </div>
+    <div class="panel account">
+        <div>
+            <section class="userInfo">
+                <div class="text">
+                    <h2>{{ user.name }}</h2>
+                    <p>Email : {{ user.email }}</p>
 
-      <div class="profilePic">
-        <svg width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M15.64 44.8821C23.6127 44.8821 30.0758 38.4141 30.0758 30.4353C30.0758 22.4565 23.6127 15.9884 15.64 15.9884C7.66731 15.9884 1.20416 22.4565 1.20416 30.4353C1.20416 38.4141 7.66731 44.8821 15.64 44.8821Z" fill="#2E5DA6" />
-          <path d="M16.7918 11.0122C16.3741 11.2562 15.8146 10.887 15.6807 10.4219C15.5467 9.95675 15.7028 9.46292 15.8575 9.00431C16.1171 8.23473 16.3767 7.46516 16.6364 6.69558C17.1888 5.05818 17.7751 3.36357 18.9714 2.1173C20.7772 0.236248 23.6469 -0.24228 26.2302 0.104396C29.5477 0.549598 32.821 2.34737 34.3635 5.32021C35.9061 8.29306 35.2493 12.4412 32.4621 14.296C36.4345 18.8526 37.8193 23.9308 37.6006 29.9739C37.382 36.017 30.8015 41.5787 26.5101 45.8358C25.5518 45.2545 24.6805 42.5299 25.2075 41.5401C25.7345 40.5503 24.9795 39.4036 25.6321 38.4919C26.2848 37.5802 26.8308 39.0319 26.171 38.1254C25.7546 37.5534 27.3797 36.2374 26.7608 35.895C23.7673 34.239 22.7716 30.5049 20.8915 27.6453C18.6237 24.1962 14.7424 21.8604 10.6349 21.4729C8.37228 21.2595 5.98242 21.6461 4.12782 22.9607C2.2732 24.2753 1.07253 26.6244 1.5026 28.8578C0.388793 27.726 -0.165627 26.0674 0.0434959 24.4927C0.252619 22.918 1.22069 21.4619 2.59121 20.6606C1.75787 17.9027 2.47176 14.7303 4.40598 12.5961C6.3402 10.4619 14.1864 10.8254 17.0102 11.3871L16.7918 11.0122H16.7918V11.0122Z" fill="#2F2E41" />
-          <path d="M17.2303 21.5564C20.9704 21.9604 23.6708 25.2026 25.951 28.1968C27.2653 29.9226 28.642 31.8284 28.609 33.998C28.5757 36.1915 27.1102 38.0729 26.4098 40.1517C25.2651 43.5496 26.3808 47.5923 29.1059 49.9205C26.4132 50.4318 23.5023 48.4113 23.0374 45.7082C22.4963 42.5614 24.8799 39.5243 24.5976 36.3438C24.3489 33.5418 22.1424 31.3852 20.2666 29.2902C18.3908 27.1951 16.6291 24.4149 17.492 21.7377L17.2303 21.5564H17.2303V21.5564Z" fill="#2F2E41" />
-        </svg>
-      </div>
-    </section>
-    <section class="rideHistory">
-      <form id="rideFilter" action="">
-        <select name="month" id="month">
-          {% for month in months %}
-            <option value="month">month</option>
-          {% endfor %}
-          <option value="">Jan</option>
-          <option value="">Feb</option>
-          <option value="">Mar</option>
-          <option value="">Apr</option>
-          <option value="">May</option>
-          <option value="">Jun</option>
-          <option value="">Jul</option>
-          <option value="">Aug</option>
-          <option value="">Sep</option>
-          <option value="">Okt</option>
-          <option value="">Nov</option>
-          <option value="">Dec</option>
-        </select>
-      </form>
-      {% for ride in user.rideHistory %}
-        <section class="ride">
-          <h2>{{ ride.start_time|date('l') }} {{ ride.start_time|date('h\\ui') }}</h2>
-          <div class="right">
-            <p class="date">{{ ride.start_time|date('d/m/Y') }}</p>
+                    <p>{{ user.status }} • {{ user.rideAmount }} trips</p>
+                    {% if driverInfo %}
+                        <p>Gender : <span>{{ user.gender }}</span></p>
+                        <p>Car : <span>{{ user.car }}</span></p>
+                        <p>Model : <span>{{ user.model }}</span></p>
+                        <p>Seats : <span>{{ user.seats }}</span></p>
+                    {% endif %}
+                </div>
+                <div class="profilePic">
+                    <svg width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15.64 44.8821C23.6127 44.8821 30.0758 38.4141 30.0758 30.4353C30.0758 22.4565 23.6127 15.9884 15.64 15.9884C7.66731 15.9884 1.20416 22.4565 1.20416 30.4353C1.20416 38.4141 7.66731 44.8821 15.64 44.8821Z"
+                              fill="#2E5DA6"/>
+                        <path d="M16.7918 11.0122C16.3741 11.2562 15.8146 10.887 15.6807 10.4219C15.5467 9.95675 15.7028 9.46292 15.8575 9.00431C16.1171 8.23473 16.3767 7.46516 16.6364 6.69558C17.1888 5.05818 17.7751 3.36357 18.9714 2.1173C20.7772 0.236248 23.6469 -0.24228 26.2302 0.104396C29.5477 0.549598 32.821 2.34737 34.3635 5.32021C35.9061 8.29306 35.2493 12.4412 32.4621 14.296C36.4345 18.8526 37.8193 23.9308 37.6006 29.9739C37.382 36.017 30.8015 41.5787 26.5101 45.8358C25.5518 45.2545 24.6805 42.5299 25.2075 41.5401C25.7345 40.5503 24.9795 39.4036 25.6321 38.4919C26.2848 37.5802 26.8308 39.0319 26.171 38.1254C25.7546 37.5534 27.3797 36.2374 26.7608 35.895C23.7673 34.239 22.7716 30.5049 20.8915 27.6453C18.6237 24.1962 14.7424 21.8604 10.6349 21.4729C8.37228 21.2595 5.98242 21.6461 4.12782 22.9607C2.2732 24.2753 1.07253 26.6244 1.5026 28.8578C0.388793 27.726 -0.165627 26.0674 0.0434959 24.4927C0.252619 22.918 1.22069 21.4619 2.59121 20.6606C1.75787 17.9027 2.47176 14.7303 4.40598 12.5961C6.3402 10.4619 14.1864 10.8254 17.0102 11.3871L16.7918 11.0122H16.7918V11.0122Z"
+                              fill="#2F2E41"/>
+                        <path d="M17.2303 21.5564C20.9704 21.9604 23.6708 25.2026 25.951 28.1968C27.2653 29.9226 28.642 31.8284 28.609 33.998C28.5757 36.1915 27.1102 38.0729 26.4098 40.1517C25.2651 43.5496 26.3808 47.5923 29.1059 49.9205C26.4132 50.4318 23.5023 48.4113 23.0374 45.7082C22.4963 42.5614 24.8799 39.5243 24.5976 36.3438C24.3489 33.5418 22.1424 31.3852 20.2666 29.2902C18.3908 27.1951 16.6291 24.4149 17.492 21.7377L17.2303 21.5564H17.2303V21.5564Z"
+                              fill="#2F2E41"/>
+                    </svg>
+                </div>
+            </section>
             {% if not driverInfo %}
-              <p class="cost">€{{ ride.price }}</p>
+                <section class="bookedRides">
+                    {% if user.status == 'Rider' %}
+                        <h2>Booked Trips</h2>
+                        {% if user.bookedRides %}
+                            {% for ride in user.bookedRides %}
+                                <section class="ride available hidden accepted">
+                                    <div>
+                                        <h3>{{ ride.start_time|date('l') }} {{ ride.start_time|date('h\\ui') }}</h3>
+                                        <p class="trip">{{ ride.fromCity }}->{{ ride.toCity }}</p>
+                                        <div class="extraInfo">
+                                            <div class="right">
+                                                <p class="date">{{ ride.start_time|date('d/m/Y') }}</p>
+                                            </div>
+                                            <p>From:<span>{{ ride.fullAddressFrom }}</span></p>
+                                            <p>To:<span>{{ ride.fullAddressTo }}</span></p>
+                                            <p>Fee:<span>€{{ ride.price }}</span></p>
+                                        </div>
+                                    </div>
+                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg"
+                                         class="expandToggle">
+                                        <path d="M6.25 9.375L12.5 15.625L18.75 9.375" stroke="black" stroke-width="2"
+                                              stroke-linecap="round"
+                                              stroke-linejoin="round"/>
+                                    </svg>
+                                    <form id="chooseRides" action="{{ url('rides/'~ride.id~'/cancelstartfinish') }}" method="POST"
+                                          enctype="application/x-www-form-urlencoded">
+                                        {% if ride.status != "started" %}
+                                            <button type="submit" name="cancel" value="{{ ride.id }}" class="nokButton">
+                                                <svg width="19" height="19" viewBox="0 0 15 15" fill="none"
+                                                     xmlns="http://www.w3.org/2000/svg" class="nokButton">
+                                                    <path d="M10.6977 4.30237L3.72095 11.2791" stroke="white"
+                                                          stroke-width="1"
+                                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M3.72095 4.30237L10.6977 11.2791" stroke="white"
+                                                          stroke-width="1"
+                                                          stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </button>
+                                        {% endif %}
+                                    </form>
+                                </section>
+                            {% endfor %}
+                        {% else %}
+                            <p>No rides booked yet</p>
+                        {% endif %}
+                    {% else %}
+                        <a href="{{ url('rides') }}">View Available Rides</a>
+                    {% endif %}
+                    
+                </section>
             {% endif %}
-          </div>
-          <p class="trip">{{ ride.start_city }}->{{ ride.stop_city }}</p>
-          {% if ride.driver_id %}
-            <a class="driverPageLink" href="{{ url('driver/') ~ ride.driver_id }}">Visit Drivers page</a>
-          {% endif %}
+        </div>
+        <section class="rideHistory">
+            <h2>Trip History</h2>
+            <form id="rideFilter" action="">
+                <select name="month" id="month">
+                    {% for month in months %}
+                        <option value="month">month</option>
+                    {% endfor %}
+                    <option value="">Jan</option>
+                    <option value="">Feb</option>
+                    <option value="">Mar</option>
+                    <option value="">Apr</option>
+                    <option value="">May</option>
+                    <option value="">Jun</option>
+                    <option value="">Jul</option>
+                    <option value="">Aug</option>
+                    <option value="">Sep</option>
+                    <option value="">Okt</option>
+                    <option value="">Nov</option>
+                    <option value="">Dec</option>
+                </select>
+            </form>
+            {% for ride in user.rideHistory %}
+                <section class="ride">
+                    <h2>{{ ride.start_time|date('l') }} {{ ride.start_time|date('h\\ui') }}</h2>
+                    <div class="right">
+                        <p class="date">{{ ride.start_time|date('d/m/Y') }}</p>
+                        {% if not driverInfo %}
+                            <p class="cost">€{{ ride.price }}</p>
+                        {% endif %}
+                    </div>
+                    <p class="trip">{{ ride.start_city }}->{{ ride.stop_city }}</p>
+                    {% if ride.driver_id %}
+                        <a class="driverPageLink" href="{{ url('drivers/') ~ ride.driver_id }}">Visit Drivers page</a>
+                    {% endif %}
+                </section>
+            {% endfor %}
         </section>
-      {% endfor %}
-    </section>
-    <button class="btn logout">Log Out</button>
-  </div>
+
+
+        <a class="btn logout" href="{{ url('logout') }}">Log out</a>
+    </div>
 {% endblock %}

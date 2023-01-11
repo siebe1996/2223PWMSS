@@ -67,6 +67,11 @@ class UserController
         if ($user !== false) {
             if ($user['verified']) {
                 if (password_verify($password, $user['password'])) {
+
+                    $userStatus = $this->conn
+                        ->fetchAssociative('SELECT id FROM drivers WHERE id = ?',[$user['id']]);
+                    $user['status'] = $userStatus ? 'Driver' : 'Rider';
+
                     // Store the user row in the session
                     $_SESSION['user'] = $user;
                     header('Location: /');
@@ -201,19 +206,35 @@ class UserController
             exit();
         }
 
-        $stmt = $this->conn->prepare('SELECT * FROM trips WHERE costumer_id = ? AND status = "finished"');
-        $result = $stmt->executeQuery([$_SESSION['user']['id']]);
-        $trips = $result->fetchAllAssociative();
+        $trips = $this->conn
+            ->prepare('SELECT * FROM trips WHERE costumer_id = ? AND status = "finished"')
+            ->executeQuery([$_SESSION['user']['id']])
+            ->fetchAllAssociative();
 
+        $bookedRides = $this->conn->fetchAllAssociative(<<<'SQL'
+            SELECT 
+                CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
+                CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
+                price,
+                start_city AS fromCity,
+                stop_city AS toCity,
+                start_time AS time,
+                id
+            FROM trips as t 
+            WHERE t.status = "claimed"
+            SQL,
 
+        );
         echo $this->twig->render('pages/account.twig', [
             'loggedIn' => true,
             'user' => [
                 'name' => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
                 'email' => $_SESSION['user']['email'],
+//                'status' => $_SESSION['user']['status'],
                 'status' => 'Rider',
                 'rideAmount' => count($trips),
-                'rideHistory' => $trips
+                'rideHistory' => $trips,
+                'bookedRides' => $bookedRides
             ]
         ]);
     }

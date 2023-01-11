@@ -10,10 +10,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Asap:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="{{ url('styles.css') }}" />
     <script src="{{ url('js/navbar.js') }}" defer></script>
-    {% if driverRegister or loggedIn %}
+    {% if driverRegister or (loggedIn and home) %}
       <script src="{{ url('js/dualFormSection.js') }}" defer></script>
     {% endif %}
-    {% if available %}
+    {% if (available or decided or user.bookedRides) %}
       <script src="{{ url('js/expandSection.js') }}" defer></script>
     {% endif %}
     {% if disappearingSVG %}
@@ -82,9 +82,6 @@
           {% if loggedIn %}
             <li>
               <a href="{{ url('user') }}">Account</a>
-            </li>
-            <li>
-              <a href="{{ url('logout') }}">Log out</a>
             </li>
           {% endif %}
         </ul>

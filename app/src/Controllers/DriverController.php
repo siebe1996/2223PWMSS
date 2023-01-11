@@ -109,9 +109,9 @@ class DriverController
             $formErrors['carPassengers'] = 'Voer een geldig aantal passagiers in tussen 1 en 10';
         }
 
-        if (!\Services\VIESValidatorService::validate($btwNumber)) {
-            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
-        }
+//        if (!\Services\VIESValidatorService::validate($btwNumber)) {
+//            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
+//        }
 
         //  if no errors: insert values into database
 
