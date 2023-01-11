@@ -36,7 +36,7 @@ class UserController
         echo $this->twig->render('pages/login.twig', [
             'error' => $formErrors,
             'disappearingSVG' => true,
-            'loggedIn' => false,
+            'loggedIn' => false
         ]);
     }
 
@@ -207,7 +207,7 @@ class UserController
         }
 
         $trips = $this->conn
-            ->prepare('SELECT * FROM trips WHERE costumer_id = ? AND status = "finished"')
+            ->prepare('SELECT * FROM trips WHERE costumer_id = ? AND status = "finished" ORDER BY start_time DESC')
             ->executeQuery([$_SESSION['user']['id']])
             ->fetchAllAssociative();
 
@@ -222,6 +222,8 @@ class UserController
                 id
             FROM trips as t 
             WHERE t.status = "claimed"
+            ORDER BY 
+                start_time DESC
             SQL,
 
         );

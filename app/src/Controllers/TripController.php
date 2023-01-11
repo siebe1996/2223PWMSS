@@ -62,6 +62,9 @@ class TripController
             'loggedIn' => $loggedIn,
             'available' => $availableRides,
             'decided' => $acceptedRides,
+            'user' => [
+                'status' => $_SESSION['user']['status'] ?? 'Rider'
+            ]
         ]);
     }
 

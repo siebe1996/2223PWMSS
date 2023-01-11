@@ -59,6 +59,9 @@ class DashboardController
             'email' => $email,
             'firstName' => $firstName,
             'lastName' => $lastName,
+            'user' => [
+                'status' => $_SESSION['user']['status'] ?? 'Rider'
+            ]
         ]);
     }
 
@@ -73,7 +76,10 @@ class DashboardController
     public function showAbout()
     {
         echo $this->twig->render('pages/about.twig', [
-            'loggedIn' => isset($_SESSION['user'])
+            'loggedIn' => isset($_SESSION['user']),
+            'user' => [
+                'status' => $_SESSION['user']['status'] ?? 'Rider'
+            ]
         ]);
     }
 

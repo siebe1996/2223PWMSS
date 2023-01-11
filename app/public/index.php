@@ -25,7 +25,7 @@ $router->before('GET|POST', '/register', function () {
         exit();
     }
 });
-$router->before('GET|POST', '/driver/create', function () {
+$router->before('GET|POST', '/drivers/create', function () {
     if (!isset($_SESSION['user'])) {
         header('location: ../login');
         exit();
@@ -42,8 +42,8 @@ $router->post('/login', 'UserController@login');
 $router->get('/logout', 'UserController@logout');
 $router->get('/register', 'UserController@showRegister');
 $router->post('/register', 'UserController@Register');
-$router->get('/driver/create', 'DriverController@show');
-$router->post('/driver/create', 'DriverController@add');
+$router->get('/drivers/create', 'DriverController@show');
+$router->post('/drivers/create', 'DriverController@add');
 $router->get('/verification', 'VerificationController@show');
 $router->post('/verification', 'VerificationController@verification');
 

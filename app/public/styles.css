@@ -16,6 +16,11 @@ html {
     margin: 0;
     color: #1b1b1b;
     background-color: #fafafa;
+    overflow: hidden;
+}
+
+body.overflow,
+html.overflow {
     overflow-y: auto;
 }
 
@@ -66,7 +71,7 @@ button.closeHomeOverlay {
 nav {
     display: flex;
     width: 100%;
-    top: -60vh;
+    top: -10rem;
     right: 0;
     padding-bottom: .5rem;
     position: absolute;
@@ -94,16 +99,30 @@ nav ul {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2rem;
     font-size: 1.1rem;
+    justify-content: space-around;
+    width: 100%;
 }
-
+/*TODO: choose vertical or horizontal menu*/
 nav ul li a {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
+    /*padding: 0.5rem 3rem;*/
 }
+nav ul {
+     /* flex-direction: column; */
+     /* font-size: 1.1rem; */
+     flex-direction: row;
+     font-size: 0.8rem;
+ }
+
+nav ul li a {
+    /* gap: 0.5rem; */
+    gap: 0.3rem;
+}
+
 
 .disabled-link {
     pointer-events: none;
@@ -130,24 +149,25 @@ main {
 }
 
 footer {
-    display: none;
+    display: flex;
     height: 4rem;
     background: var(--primary);
     justify-content: end;
     align-items: baseline;
     color: #fafafa;
     padding: 0.5rem 1rem;
-    position: absolute;
     right: 0;
-    bottom: -100vh;
     width: 100%;
     transition: 300ms ease-in-out;
+    position: relative;
+    bottom: -4rem;
 }
 
 .overlayOpen footer {
-    display: flex;
+    opacity: 1;
     bottom: 0;
     transition: 300ms ease-in-out;
+    position: absolute;
 }
 
 #map {
@@ -197,6 +217,7 @@ footer {
     bottom: 4rem;
     left: 50%;
     transform: translate(-50%, 0);
+    transition: all 300ms ease-in-out;
 }
 
 .newRide .btn.newRideToggle {
@@ -265,7 +286,7 @@ footer {
 
 
 .panel.bottom {
-    bottom: -75vh;
+    bottom: -80vh;
     transition: 300ms ease-in-out;
     display: flex;
     position: absolute;
@@ -354,6 +375,10 @@ footer {
     margin: 0;
 }
 
+.bottom.panel .errorMsg {
+    margin: -12px 0 4px;
+}
+
 .form span.error svg {
     color: #a62e2e;
 }
@@ -417,6 +442,7 @@ footer {
 .panel.account {
     margin-top: 0;
 }
+
 .userInfo {
     background: var(--primary);
     border-radius: 5px;
@@ -438,20 +464,23 @@ footer {
 .extraInfo {
     width: 100%;
 }
+
 .userInfo .text p,
 .extraInfo p {
     margin: 0.3rem auto;
     font-size: 0.8rem;
     position: relative;
 }
+
 .userInfo .text p {
     color: #F4F4F4;
 }
 
 .userInfo .text p:has(span),
-.extraInfo p:has(span){
+.extraInfo p:has(span) {
     border-bottom: dotted 1px CurrentColor;
 }
+
 .userInfo .text p span,
 .extraInfo p span {
     position: absolute;
@@ -468,6 +497,7 @@ footer {
     align-items: center;
     order: -1;
 }
+
 .bookedRides,
 .rideHistory {
     display: flex;
@@ -476,20 +506,23 @@ footer {
     align-items: center;
     width: 100%;
 }
+
 .rideHistory {
-    margin-bottom: 7rem;
+    margin-bottom: 3rem;
 }
+
 .chooseRides.panel {
-    margin-top: unset;
+    margin-top: 3rem;
 }
+
 .availableRides {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom: 7rem;
 }
+
 .ride {
     display: flex;
     flex-direction: column;
@@ -501,17 +534,20 @@ footer {
     padding: 1rem;
     box-shadow: 0 4px 5px #2e5da638;
 }
+
 .ride.available {
     flex-direction: row;
     align-items: center;
     padding-left: 0.5rem;
     gap: 0.5rem;
-    margin: unset;
+    margin-inline: unset;
     width: 80%;
 }
+
 .ride.available > div {
     width: 100%;
 }
+
 .ride.available.hidden div.extraInfo {
     display: none;
 }
@@ -519,6 +555,7 @@ footer {
 .ride.available.accepted {
     background: rgba(48, 166, 46, 0.39);
 }
+
 .bookedRides .ride.available.accepted {
     width: 100%;
 }
@@ -530,6 +567,7 @@ footer {
     margin-block: 0.5rem 0;
     font-size: 0.8rem;
 }
+
 .available.ride h3,
 .ride h2 {
     margin: 0;
@@ -569,9 +607,11 @@ footer {
     transform: rotate(-180deg);
     transition: 200ms ease-in-out;
 }
+
 .hidden .expandToggle {
     transform: rotate(0deg);
 }
+
 #chooseRides {
     position: absolute;
     right: 1rem;
@@ -580,14 +620,15 @@ footer {
     justify-content: unset;
     width: unset;
 }
+
 .okButton,
 .nokButton,
 .sendButton {
+    display: none;
     opacity: 0;
     border: none;
     padding: 0;
     background: transparent;
-    display: flex;
     justify-content: center;
     align-items: center;
     width: 33px;
@@ -596,11 +637,14 @@ footer {
     box-shadow: 0 4px 5px #2e5da638;
     color: #FFF;
 }
+
 .hidden .okButton,
 .hidden .nokButton,
 .hidden .sendButton {
     opacity: 1;
+    display: flex;
 }
+
 .accepted .okButton {
     display: none;
 }
@@ -608,9 +652,11 @@ footer {
 .okButton {
     background: #30A62E;
 }
+
 .nokButton {
     background: #D00D0D;
 }
+
 .sendButton {
     background: #3498db;
 }
@@ -622,8 +668,9 @@ footer {
     background: #c8191c;
     text-decoration: none;
 }
+
 .btn.cancel {
-    width: min(100%,12rem);
+    width: min(100%, 12rem);
     background: #c8191c;
 }
 
@@ -679,6 +726,9 @@ footer {
         display: none;
     }
 
+    .chooseRides.panel {
+        flex-direction: row;
+    }
 
 }
 
@@ -686,15 +736,22 @@ footer {
     h2 {
         margin-bottom: 3rem;
     }
+
     .panel.account {
         margin-top: 4rem;
         flex-direction: row;
-        align-items: start;
+        align-items: flex-start;
+        padding-inline: 10%;
     }
+
     .userInfo {
-        width: 50%;
-        margin: 2rem;
         padding: 4rem 2rem;
+        width: 100%;
+    }
+
+    .panel.account > div {
+        flex-shrink: 0;
+        width: 33%;
     }
 
     .from#register {
@@ -709,7 +766,7 @@ footer {
         transition: 300ms ease-in-out;
         bottom: 50%;
         left: 2rem;
-        width: min(30rem, 25%);
+        width: min(30rem, 30%);
         transform: translate(0, 50%);
     }
 
@@ -736,7 +793,12 @@ footer {
     .newRide .btn.formToggle {
         display: block;
     }
+
     .newRide .btn.formToggle.hidden {
         display: none;
     }
+
 }
+
+
+

@@ -54,7 +54,10 @@ class VerificationController
             'showPassword' => $showPassword,
             'passwordError' => $passwordError,
             'verificationCode' => $verificationCode,
-            'userId' => $userId
+            'userId' => $userId,
+            'user' => [
+                'status' => $_SESSION['user']['status'] ?? 'Rider'
+            ]
         ]);
     }
 

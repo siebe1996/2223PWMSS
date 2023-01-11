@@ -24,7 +24,17 @@
                     </svg>
                     <form id="chooseRides" action="{{ url('rides/'~ride.id~'/cancelstartfinish') }}" method="POST" enctype="application/x-www-form-urlencoded">
                         {% if ride.status == "started" %}
-                            <button type="submit" name="finish" value="{{ ride.id }}" class="">finish
+                            <button type="submit" name="finish" value="{{ ride.id }}" class="sendButton">
+{#                                <svg width="19" height="19" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">#}
+{#                                    <path d="M17.4116 31.1155C25.0055 31.1155 31.1616 24.9594 31.1616 17.3655C31.1616 9.77159 25.0055 3.6155 17.4116 3.6155C9.81768 3.6155 3.66159 9.77159 3.66159 17.3655C3.66159 24.9594 9.81768 31.1155 17.4116 31.1155Z" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>#}
+{#                                    <path d="M31.1616 17.3655H25.6616" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>#}
+{#                                    <path d="M9.16159 17.3655H3.66159" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>#}
+{#                                    <path d="M17.4116 9.1155V3.6155" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>#}
+{#                                    <path d="M17.4116 31.1155V25.6155" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>#}
+{#                                </svg>#}
+                                <svg width="33" height="33" viewBox="0 0 33 33" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M11 11V22V11ZM11 24.75C10.2437 24.75 9.59658 24.481 9.0585 23.9429C8.5195 23.4039 8.25 22.7563 8.25 22V11C8.25 10.2437 8.5195 9.59658 9.0585 9.0585C9.59658 8.5195 10.2437 8.25 11 8.25H22C22.7563 8.25 23.4039 8.5195 23.9429 9.0585C24.481 9.59658 24.75 10.2437 24.75 11V22C24.75 22.7563 24.481 23.4039 23.9429 23.9429C23.4039 24.481 22.7563 24.75 22 24.75H11ZM11 22H22V11H11V22Z" fill="currentColor"/>
+                                </svg>
                             </button>
                         {% else %}
                         <button type="submit" name="cancel" value="{{ ride.id }}" class="nokButton">
@@ -43,6 +53,8 @@
                     </form>
                 </section>
             {% endfor %}
+        </section>
+        <section class="availableRides">
             <h2>Available Rides</h2>
             {% for ride in available %}
                 <section class="ride available hidden">
