@@ -230,8 +230,7 @@ class UserController
             'user' => [
                 'name' => $_SESSION['user']['first_name'] . ' ' . $_SESSION['user']['last_name'],
                 'email' => $_SESSION['user']['email'],
-//                'status' => $_SESSION['user']['status'],
-                'status' => 'Rider',
+                'status' => $_SESSION['user']['status'],
                 'rideAmount' => count($trips),
                 'rideHistory' => $trips,
                 'bookedRides' => $bookedRides
