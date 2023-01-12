@@ -1,5 +1,7 @@
 <?php
 
+use Services\MailService;
+
 class TripController
 {
     protected \Doctrine\DBAL\Connection $conn;
@@ -27,7 +29,8 @@ class TripController
             $loggedIn = true;
         }
 
-        $acceptedRides = $this->conn->fetchAllAssociative(<<<'SQL'
+        $acceptedRides = $this->conn->fetchAllAssociative(
+            <<<'SQL'
             SELECT 
                 CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
                 CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
@@ -44,7 +47,8 @@ class TripController
             [$_SESSION['user']['id']]
         );
 
-        $availableRides = $this->conn->fetchAllAssociative(<<<'SQL'
+        $availableRides = $this->conn->fetchAllAssociative(
+            <<<'SQL'
             SELECT 
                 CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
                 CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
@@ -73,23 +77,36 @@ class TripController
     {
         $userId = $_SESSION['user']['id'];
         $tripId = $_POST['accept'] ?? '';
-        if (!trim($tripId) || !trim($userId)){
-            header('Location: /badrequest');
+        if (!trim($tripId) || !trim($userId)) {
+            header('location:/badrequest');
             exit();
-        }
-        else{
+        } else {
             $stmt = $this->conn->prepare('SELECT * FROM trips WHERE status = ? AND id = ?');
             $result = $stmt->executeQuery(['pending', $tripId]);
             $trip = $result->fetchAssociative();
 
-            if($trip){
+            if ($trip) {
                 $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
                 $result = $stmt->executeStatement(['claimed', $userId, $tripId]);
-                header('Location: driver/rides');
+                MailService::send(
+                    $this->twig,
+                    'info@rebu.be',
+                    $_SESSION['user']['email'],
+                    'Je rit is geacepteerd',
+                    '',
+                    'email/acceptRide',
+                    [
+                        'first_name' => $_SESSION['user']['first_name'],
+                        'last_name' => $_SESSION['user']['last_name'],
+                        'trip' => $trip
+                    ]
+                );
+
+                header('location:driver/rides');
                 exit();
             }
             //toDo error raide is claimed
-            header('Location: /rideIsClaimed');
+            header('location:/rideIsClaimed');
             exit();
         }
     }
@@ -98,22 +115,19 @@ class TripController
     {
         $userId = $_SESSION['user']['id'];
         $status = 'pending';
-        if (isset($_POST['cancel'])){
+        if (isset($_POST['cancel'])) {
             $tripId = $_POST['cancel'] ?? '';
-        }
-        elseif (isset($_POST['finish'])){
+        } elseif (isset($_POST['finish'])) {
             $tripId = $_POST['finish'] ?? '';
             $status = 'finished';
-        }
-        elseif (isset($_POST['start'])){
+        } elseif (isset($_POST['start'])) {
             $tripId = $_POST['start'] ?? '';
             $status = 'started';
         }
-        if (!trim($tripId) || !trim($userId)){
+        if (!trim($tripId) || !trim($userId)) {
             header('Location: badrequest');
             exit();
-        }
-        else{
+        } else {
             $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
             $result = $stmt->executeStatement([$status, $userId, $tripId]);
 
