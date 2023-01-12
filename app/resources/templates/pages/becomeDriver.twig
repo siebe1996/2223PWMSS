@@ -23,10 +23,6 @@
                         {% for value in genders %}
                             <option value="{{ value }}"  {% if value == gender %} selected="selected" {% endif %} >{{ value }}</option>
                         {% endfor %}
-                        <!--<option value="">...</option>
-                        <option value="M">M</option>
-                        <option value="F">F</option>
-                        <option value="X">X</option>-->
                     </select>
                     {% if errors.gender %}
                         <p class="errorMsg">{{errors.gender}}</p>
