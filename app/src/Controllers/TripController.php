@@ -90,19 +90,19 @@ class TripController
                 $result = $stmt->executeStatement(['claimed', $userId, $tripId]);
 
                 $stmt = $this->conn->prepare('SELECT * FROM anonymous_users WHERE id = ?');
-                $result = $stmt->executeQuery([$trip['driver_id']]);
-                $driver = $result->fetchAssociative();
+                $result = $stmt->executeQuery([$trip['costumer_id']]);
+                $costumer = $result->fetchAssociative();
 
                 MailService::send(
                     $this->twig,
                     'info@rebu.be',
-                    $driver['email'],
+                    $costumer['email'],
                     'Je hebt een rit geacepteerd',
                     '',
-                    'email/acceptRide',
+                    'email/acceptatieRide.twig',
                     [
-                        'first_name' => $driver['first_name'],
-                        'last_name' => $driver['last_name'],
+                        'first_name' => $costumer['first_name'],
+                        'last_name' => $costumer['last_name'],
                         'trip' => $trip,
                         'driver' => true
                     ]
@@ -113,7 +113,7 @@ class TripController
                     $_SESSION['user']['email'],
                     'Je rit is geacepteerd',
                     '',
-                    'email/acceptRide',
+                    'email/acceptatieRide.twig',
                     [
                         'first_name' => $_SESSION['user']['first_name'],
                         'last_name' => $_SESSION['user']['last_name'],
@@ -122,7 +122,7 @@ class TripController
                     ]
                 );
 
-                header('location:driver/rides');
+                header('location:/driver/rides');
                 exit();
             }
             //toDo error raide is claimed
