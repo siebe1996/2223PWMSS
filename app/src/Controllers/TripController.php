@@ -73,24 +73,37 @@ class TripController
         ]);
     }
 
-    public function confirm()
+    public function confirm($id)
     {
         $tripId = $_POST['accept'] ?? '';
+
+        if ($tripId != $id) {
+            header('location:/');
+            exit;
+        }
+
         $_SESSION['tripId'] = $tripId;
         header('Location: /driver/rides/' . urlencode($tripId) . '/confirm');
         exit();
     }
 
-    public function showConfirm()
+    public function showConfirm($id)
     {
+        if ($_SESSION['tripId'] != $id) {
+            header('location:/');
+            exit;
+        }
+
         echo $this->twig->render('pages/acceptRide.twig', [
             'rideId' => $_SESSION['tripId'],
+            'loggedIn' => true,
+            'user' => $_SESSION['user']
         ]);
     }
 
-    public function acceptRide()
+    public function acceptRide($id)
     {
-        if (isset($_POST['accept'])) {
+        if (isset($_POST['accept']) && $_POST['accept'] == $id) {
             $userId = $_SESSION['user']['id'];
             $tripId = $_SESSION['tripId'] ?? '';
             unset($_SESSION['tripId']);
@@ -154,7 +167,7 @@ class TripController
         }
     }
 
-    public function cancelStartFinishRide()
+    public function cancelStartFinishRide($id)
     {
         $userId = $_SESSION['user']['id'];
         $status = 'pending';
@@ -167,7 +180,7 @@ class TripController
             $tripId = $_POST['start'] ?? '';
             $status = 'started';
         }
-        if (!trim($tripId) || !trim($userId)) {
+        if (!trim($tripId) || !trim($userId) || $tripId != $id) {
             header('location:/badrequest');
             exit();
         } else {
@@ -179,12 +192,12 @@ class TripController
         }
     }
 
-    public function cancel()
+    public function cancel($id)
     {
         if (isset($_POST['cancel'])) {
             $tripId = $_POST['cancel'] ?? '';
         }
-        if (!trim($tripId)) {
+        if (!trim($tripId) || $tripId != $id) {
             header('location:/badrequest');
             exit();
         } else {
