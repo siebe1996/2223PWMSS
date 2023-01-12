@@ -81,7 +81,7 @@ class DriverController
         if (isset($_FILES['profilePic']) && ($_FILES['profilePic']['error'] === UPLOAD_ERR_OK)) {
 
             if ((new SplFileInfo($_FILES['profilePic']['name']))->getExtension() == 'jpg') {
-                $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], '../storage/images/' . $_SESSION['user']['id'] . '.jpg');
+                $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], './profilepic/' . $_SESSION['user']['id'] . '.jpg');
                 if (!$moved) {
                     $formErrors['profilePic'] = 'Error while saving file in the uploads folder';
                 }
@@ -120,7 +120,6 @@ class DriverController
             $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, (int)$_SESSION['user']['id'] . '.jpg', $btwNumber]);
             header('location: /');
             exit();
-
         } else {
             $driver = ['numberPlate' => $numberPlate, 'birthDate' => $birthDate, 'gender' => $gender, 'carBrand' => $carBrand, 'carModel' => $carModel, 'carPassengers' => $carPassengers, 'btwNumber' => $btwNumber];
             $_SESSION['flash']['driver'] = $driver;
@@ -189,7 +188,7 @@ class DriverController
         }
         $search = isset($_POST['month']) ? trim($_POST['month']) : '';
 
-        header('Location: /drivers/'.$id.'/month/' . urlencode($search));
+        header('Location: /drivers/' . $id . '/month/' . urlencode($search));
         exit();
     }
 
@@ -212,14 +211,13 @@ class DriverController
         $result = $stmt->executeQuery([$id]);
         $tripsCount = $result->fetchOne();
 
-        $matches =array();
-        if ($month < 13){
+        $matches = array();
+        if ($month < 13) {
             $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.driver_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
             $results = $stmt->executeQuery([$id, $month]);
             $matches = $results->fetchAllAssociative();
-        }
-        else{
-            header('location: /drivers/'.$id);
+        } else {
+            header('location: /drivers/' . $id);
             exit();
         }
 
