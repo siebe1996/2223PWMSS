@@ -81,7 +81,7 @@ class DriverController
         if (isset($_FILES['profilePic']) && ($_FILES['profilePic']['error'] === UPLOAD_ERR_OK)) {
 
             if ((new SplFileInfo($_FILES['profilePic']['name']))->getExtension() == 'jpg') {
-                $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], '../../storage/images/' . $_SESSION['user']['id'] . '.jpg');
+                $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], '../storage/images/' . $_SESSION['user']['id'] . '.jpg');
                 if (!$moved) {
                     $formErrors['profilePic'] = 'Error while saving file in the uploads folder';
                 }
@@ -109,9 +109,9 @@ class DriverController
             $formErrors['carPassengers'] = 'Voer een geldig aantal passagiers in tussen 1 en 10';
         }
 
-//        if (!\Services\VIESValidatorService::validate($btwNumber)) {
-//            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
-//        }
+        //        if (!\Services\VIESValidatorService::validate($btwNumber)) {
+        //            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
+        //        }
 
         //  if no errors: insert values into database
 
@@ -176,5 +176,4 @@ class DriverController
             'driverInfo' => true
         ]);
     }
-
 }
