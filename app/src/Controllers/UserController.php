@@ -229,10 +229,10 @@ class UserController
                 start_time AS time,
                 id
             FROM trips as t 
-            WHERE t.status = "claimed" OR t.status = "pending"
+            WHERE t.costumer_id = ? AND (t.status = "claimed" OR t.status = "pending")
             ORDER BY 
                 start_time DESC
-            SQL,
+            SQL, [$_SESSION['user']['id']]
 
         );
         echo $this->twig->render('pages/account.twig', [
@@ -306,10 +306,10 @@ class UserController
                 start_time AS time,
                 id
             FROM trips as t 
-            WHERE t.status = "claimed" OR t.status = "pending"
+            WHERE t.costumer_id = ? AND (t.status = "claimed" OR t.status = "pending")
             ORDER BY 
                 start_time DESC
-            SQL,
+            SQL, [$_SESSION['user']['id']]
 
         );
 
