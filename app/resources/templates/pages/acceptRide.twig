@@ -1,14 +1,20 @@
 {% extends "partials/common.twig" %}
 {% block main %}
     <div id="map"></div>
-    <div class="panel bottom">
-        <form action="" method="POST" enctype="application/x-www-form-urlencoded">
-            {% if rideAccepted %}
-                <h2>Ride Accepted</h2>
-                <button class="btn cancel" type="submit">Cancel Ride</button>
-            {% else %}
-                <h2>Request Pending</h2>
-            {% endif %}
+    <div class="">
+        <form action="{{ url('/driver/rides/'~rideId~'/accept') }}" method="POST" enctype="application/x-www-form-urlencoded">
+            <h2>Are you sure you want to accept?</h2>
+            <button class="" type="submit" name="accept">
+                <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.8333 4.75L7.12496 13.4583L3.16663 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+            <button class="" type="submit" name="cancel">
+                <svg width="19" height="19" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.6977 4.30237L3.72095 11.2791" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3.72095 4.30237L10.6977 11.2791" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
         </form>
         <button class="closeHomeOverlay">
             <svg width="20" height="20" viewBox="0 0 27 27" fill="none"
