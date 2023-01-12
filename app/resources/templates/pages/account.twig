@@ -52,10 +52,11 @@
                                               stroke-linecap="round"
                                               stroke-linejoin="round"/>
                                     </svg>
+                                    {% if ride.status != "started" %}
                                     <form id="chooseRides"
-                                          action="{{ url('driver/rides/'~ride.id~'/cancelstartfinish') }}" method="POST"
+                                          action="{{ url('rides/'~ride.id~'/cancel') }}" method="POST"
                                           enctype="application/x-www-form-urlencoded">
-                                        {% if ride.status != "started" %}
+
                                             <button type="submit" name="cancel" value="{{ ride.id }}" class="nokButton">
                                                 <svg width="19" height="19" viewBox="0 0 15 15" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg" class="nokButton">
@@ -67,15 +68,15 @@
                                                           stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
                                             </button>
-                                        {% endif %}
                                     </form>
+                                    {% endif %}
                                 </section>
                             {% endfor %}
                         {% else %}
                             <p>No rides booked yet</p>
                         {% endif %}
                     {% else %}
-                        <a href="{{ url('driver/rides') }}">View Available Rides</a>
+                        <a href="{{ url('/driver/rides') }}">View Available Rides</a>
                     {% endif %}
 
                 </section>

@@ -167,12 +167,20 @@ class DashboardController
             } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $formErrors['email'] = 'Voer een geldige email in';
             }
+            if (!$formErrors){
+                $stmt = $this->conn->prepare('SELECT id FROM anonymous_users WHERE email = ?');
+                $result = $stmt->executeQuery([$email]);
+                $userId = $result->fetchOne();
 
-            /*if ($formErrors) {
-                $anonUser = ['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email];
-                $_SESSION['flash']['anonUser'] = $anonUser;
-                $_SESSION['flash']['errors'] = ['anonUser' => $formErrors];
-            }*/ else {
+                if(!$userId){
+                    $stmt = $this->conn->prepare('INSERT INTO anonymous_users (email, first_name, last_name) VALUES (?, ?, ?)');
+                    $result = $stmt->executeStatement([$email, $firstName, $lastName]);
+                    $userId = $this->conn->fetchOne('SELECT LAST_INSERT_ID()', []);
+                }
+            }
+
+
+            else {
                 $stmt = $this->conn->prepare('INSERT INTO anonymous_users (email, first_name, last_name) VALUES (?, ?, ?)');
                 $result = $stmt->executeStatement([$email, $firstName, $lastName]);
                 $userId = $this->conn->fetchOne('SELECT LAST_INSERT_ID()', []);

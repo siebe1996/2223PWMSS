@@ -80,7 +80,7 @@ class DriverController
         if (isset($_FILES['profilePic']) && ($_FILES['profilePic']['error'] === UPLOAD_ERR_OK)) {
 
             if ((new SplFileInfo($_FILES['profilePic']['name']))->getExtension() == 'jpg') {
-                $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], '../storage/images/' . $_SESSION['user']['id'] . '.jpg');
+                $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], './profilepic/' . $_SESSION['user']['id'] . '.jpg');
                 if (!$moved) {
                     $formErrors['profilePic'] = 'Error while saving file in the uploads folder';
                 }
@@ -119,7 +119,6 @@ class DriverController
             $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, (int)$_SESSION['user']['id'] . '.jpg', $btwNumber]);
             header('location: /');
             exit();
-
         } else {
             $driver = ['numberPlate' => $numberPlate, 'birthDate' => $birthDate, 'gender' => $gender, 'carBrand' => $carBrand, 'carModel' => $carModel, 'carPassengers' => $carPassengers, 'btwNumber' => $btwNumber];
             $_SESSION['flash']['driver'] = $driver;
