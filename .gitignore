@@ -2,8 +2,7 @@
 .idea
 .vscode
 docker/mysql-data
-app/storage/db.log
 app/vendor
-app/storage/cache
+app/storage
 app/public/js/openLayers/node_modules
 app/.env
