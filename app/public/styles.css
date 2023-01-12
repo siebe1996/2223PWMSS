@@ -634,6 +634,7 @@ footer {
     border-radius: 5px;
     box-shadow: 0 4px 5px #2e5da638;
     color: #FFF;
+    cursor: pointer;
 }
 
 .hidden .okButton,
