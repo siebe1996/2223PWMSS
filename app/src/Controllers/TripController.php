@@ -88,6 +88,25 @@ class TripController
             if ($trip) {
                 $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
                 $result = $stmt->executeStatement(['claimed', $userId, $tripId]);
+
+                $stmt = $this->conn->prepare('SELECT * FROM anonymous_users WHERE id = ?');
+                $result = $stmt->executeQuery([$trip['driver_id']]);
+                $driver = $result->fetchAssociative();
+
+                MailService::send(
+                    $this->twig,
+                    'info@rebu.be',
+                    $driver['email'],
+                    'Je hebt een rit geacepteerd',
+                    '',
+                    'email/acceptRide',
+                    [
+                        'first_name' => $driver['first_name'],
+                        'last_name' => $$driver['last_name'],
+                        'trip' => $trip,
+                        'driver' => true
+                    ]
+                );
                 MailService::send(
                     $this->twig,
                     'info@rebu.be',
@@ -98,7 +117,8 @@ class TripController
                     [
                         'first_name' => $_SESSION['user']['first_name'],
                         'last_name' => $_SESSION['user']['last_name'],
-                        'trip' => $trip
+                        'trip' => $trip,
+                        'driver' => false
                     ]
                 );
 
