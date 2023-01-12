@@ -73,14 +73,16 @@ class TripController
         ]);
     }
 
-    public function confirm(){
+    public function confirm()
+    {
         $tripId = $_POST['accept'] ?? '';
         $_SESSION['tripId'] = $tripId;
-        header('Location: /driver/rides/'. urlencode($tripId) .'/confirm');
+        header('Location: /driver/rides/' . urlencode($tripId) . '/confirm');
         exit();
     }
 
-    public function showConfirm(){
+    public function showConfirm()
+    {
         echo $this->twig->render('pages/acceptRide.twig', [
             'rideId' => $_SESSION['tripId'],
         ]);
@@ -88,7 +90,7 @@ class TripController
 
     public function acceptRide()
     {
-        if (isset($_POST['accept'])){
+        if (isset($_POST['accept'])) {
             $userId = $_SESSION['user']['id'];
             $tripId = $_SESSION['tripId'] ?? '';
             unset($_SESSION['tripId']);
@@ -105,48 +107,47 @@ class TripController
                     $result = $stmt->executeStatement(['claimed', $userId, $tripId]);
 
                     $stmt = $this->conn->prepare('SELECT * FROM anonymous_users WHERE id = ?');
-                    $result = $stmt->executeQuery([$userId]);
-                    $driver = $result->fetchAssociative();
-                    var_dump($driver);
+                    $result = $stmt->executeQuery([$trip['costumer_id']]);
+                    $costumer = $result->fetchAssociative();
+
                     MailService::send(
                         $this->twig,
                         'info@rebu.be',
-                        $driver['email'],
-                        'Je hebt een rit geacepteerd',
+                        $costumer['email'],
+                        'Je rit is geacepteerd',
                         '',
-                        'email/acceptRide',
+                        'email/acceptatieRide.twig',
                         [
-                            'first_name' => $driver['first_name'],
-                            'last_name' => $driver['last_name'],
+                            'first_name' => $costumer['first_name'],
+                            'last_name' => $costumer['last_name'],
                             'trip' => $trip,
-                            'driver' => true
+                            'driver' => false
                         ]
                     );
                     MailService::send(
                         $this->twig,
                         'info@rebu.be',
                         $_SESSION['user']['email'],
-                        'Je rit is geacepteerd',
+                        'Je hebt een rit geacepteerd',
                         '',
-                        'email/acceptRide',
+                        'email/acceptatieRide.twig',
                         [
                             'first_name' => $_SESSION['user']['first_name'],
                             'last_name' => $_SESSION['user']['last_name'],
                             'trip' => $trip,
-                            'driver' => false
+                            'driver' => true
                         ]
                     );
 
-                    header('location:driver/rides');
+                    header('location:/driver/rides');
                     exit();
-                }else{
+                } else {
                     //toDo error raide is claimed
                     header('location:/rideIsClaimed');
                     exit();
                 }
             }
-        }
-        else{
+        } else {
             unset($_SESSION['tripId']);
             header('location:/');
             exit();
@@ -183,7 +184,7 @@ class TripController
         if (isset($_POST['cancel'])) {
             $tripId = $_POST['cancel'] ?? '';
         }
-        if (!trim($tripId)){
+        if (!trim($tripId)) {
             header('location:/badrequest');
             exit();
         } else {
