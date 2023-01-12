@@ -4,6 +4,9 @@
 //require_once ('../../config/database.php');
 //require_once ('../../src/Services/DatabaseConnector.php');
 
+use Services\LonLatService;
+use Services\ShortestPathService;
+
 class DashboardController
 {
     protected \Doctrine\DBAL\Connection $conn;
@@ -190,8 +193,20 @@ class DashboardController
 
         if (!$formErrors) {
             //toDo add price calculation
+
+            $startCoords = LonLatService::search($startStreet . ' ' . $startHouseNumber . ' ' . $startCity);
+            $endCoords = LonLatService::search($endStreet . ' ' . $endHouseNumber . ' ' . $endCity);
+
+            $route = ShortestPathService::route($startCoords, $endCoords);
+            $distance = $route['routes'][0]['distance'];
+//          price = base + dist(m)/1000*price/km
+            $price = 5 + $distance/1000*2;
+
+//            header('content-type:application/json');
+//            echo json_encode($route, true);exit();
+
             $stmt = $this->conn->prepare('INSERT INTO trips (start_nr, start_street, start_city, stop_nr, stop_street, stop_city, start_time, costumer_id, price) VALUES (?, ?, ?, ?, ?, ?, ? ,?, ?)');
-            $result = $stmt->executeStatement([$startHouseNumber, $startStreet, $startCity, $endHouseNumber, $endStreet, $endCity, $datetime, $userId, 0.0]);
+            $result = $stmt->executeStatement([$startHouseNumber, $startStreet, $startCity, $endHouseNumber, $endStreet, $endCity, $datetime, $userId, $price]);
             header('Location: /');
             exit();
         } else {

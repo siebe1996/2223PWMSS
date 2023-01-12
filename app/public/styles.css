@@ -346,6 +346,14 @@ footer {
     width: 80%;
     margin: 1rem 0;
 }
+#rideFilter label {
+    margin-bottom: 5px;
+}
+#rideFilter .btn {
+    margin-top: 5px;
+    height: 2.3rem;
+    font-size: 1.1rem;
+}
 
 #registerDriver input,
 #registerDriver select {

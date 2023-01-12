@@ -42,7 +42,7 @@ class TripController
                 status
             FROM trips as t 
             WHERE t.driver_id = ? AND (t.status = "claimed" OR t.status = "started")
-            ORDER BY t.start_time
+            ORDER BY time
             SQL,
             [$_SESSION['user']['id']]
         );
@@ -59,7 +59,7 @@ class TripController
                 id
             FROM trips as t 
             WHERE t.status = "pending"
-            ORDER BY t.start_time
+            ORDER BY time
             SQL
         );
 
