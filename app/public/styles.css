@@ -1,812 +1,806 @@
 :root {
-    /*--primary: #4248cd;*/
-    --primary: #2e5da6;
-    /*--primary: #b53c3crgba(9, 9, 121, 1) 0%;*/
-    /*--primary: linear-gradient(45deg, rgba(76, 76, 194, 0.75) 0%, rgba(9, 9, 121, 0.3) 30%), linear-gradient(315deg, rgba(76, 76, 194, 1) 0%, rgb(43, 43, 155) 30%);*/
+	/*--primary: #4248cd;*/
+	--primary: #2e5da6;
+	/*--primary: #b53c3crgba(9, 9, 121, 1) 0%;*/
+	/*--primary: linear-gradient(45deg, rgba(76, 76, 194, 0.75) 0%, rgba(9, 9, 121, 0.3) 30%), linear-gradient(315deg, rgba(76, 76, 194, 1) 0%, rgb(43, 43, 155) 30%);*/
 }
 
-*, *::after, *::before {
-    box-sizing: border-box;
-    font-family: 'Asap', 'Nunito', sans-serif;
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	font-family: "Asap", "Nunito", sans-serif;
 }
 
 body,
 html {
-    padding: 0;
-    margin: 0;
-    color: #1b1b1b;
-    background-color: #fafafa;
-    overflow: hidden;
+	padding: 0;
+	margin: 0;
+	color: #1b1b1b;
+	background-color: #fafafa;
+	overflow: hidden;
 }
 
 html.overflow:not(.overlayOpen) {
-    overflow-y: auto;
+	overflow-y: auto;
 }
 
-
 h1 {
-    margin: 0;
+	margin: 0;
 }
 
 header {
-    position: relative;
-    background: var(--primary);
-    display: flex;
-    width: 100%;
-    height: 4rem;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 4px #00000040;
-    padding-inline: 7%;
-    z-index: 1;
+	position: relative;
+	background: var(--primary);
+	display: flex;
+	width: 100%;
+	height: 4rem;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 4px 4px #00000040;
+	padding-inline: 7%;
+	z-index: 1;
 }
 
 .overlayOpen .navbarToggle,
 .closeHomeOverlay {
-    position: absolute;
-    right: 7%;
-    top: 2rem;
-    transform: translate(0, -50%);
-    cursor: pointer;
+	position: absolute;
+	right: 7%;
+	top: 2rem;
+	transform: translate(0, -50%);
+	cursor: pointer;
 }
 
 button.navbarToggle,
 button.closeHomeOverlay {
-    background: transparent;
-    color: #fafafa;
-    border: none;
-    font-size: 1.2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    height: 43px;
+	background: transparent;
+	color: #fafafa;
+	border: none;
+	font-size: 1.2rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	height: 43px;
 }
 
 button.closeHomeOverlay {
-    color: var(--primary);
+	color: var(--primary);
 }
 
 /*navigation*/
 nav {
-    display: flex;
-    width: 100%;
-    top: -15rem;
-    right: 0;
-    padding-bottom: .5rem;
-    position: absolute;
-    background: var(--primary);
-    flex-direction: column;
-    align-items: center;
-    color: #fafafa;
-    z-index: 1;
-    transition: 300ms ease-in-out;
+	display: flex;
+	width: 100%;
+	top: -15rem;
+	right: 0;
+	padding-bottom: 0.5rem;
+	position: absolute;
+	background: var(--primary);
+	flex-direction: column;
+	align-items: center;
+	color: #fafafa;
+	z-index: 1;
+	transition: 300ms ease-in-out;
 }
 
 .overlayOpen nav {
-    top: 0;
-    transition: 300ms ease-in-out;
+	top: 0;
+	transition: 300ms ease-in-out;
 }
 
 nav a {
-    color: #fafafa;
+	color: #fafafa;
 }
 
 nav ul {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 20%);
-    font-size: 0.8rem;
-    justify-content: space-around;
-    width: 100%;
+	list-style: none;
+	padding: 0;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 20%);
+	font-size: 0.8rem;
+	justify-content: space-around;
+	width: 100%;
 }
 /*TODO: choose vertical or horizontal menu*/
 nav ul li a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	text-align: center;
 }
 nav svg {
-    flex-grow: 1;
+	flex-grow: 1;
 }
 
-
 .disabled-link {
-    pointer-events: none;
+	pointer-events: none;
 }
 
 header a {
-    color: #fafafa;
+	color: #fafafa;
 }
 
 header a:not(:hover) {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 300ms ease-in-out;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 300ms ease-in-out;
 }
 
 .overlayOpen main {
-    filter: opacity(0.25);
-    transition: 300ms ease-in-out;
+	filter: opacity(0.25);
+	transition: 300ms ease-in-out;
 }
 
 footer {
-    display: flex;
-    height: 4rem;
-    background: var(--primary);
-    justify-content: end;
-    align-items: baseline;
-    color: #fafafa;
-    padding: 0.5rem 1rem;
-    right: 0;
-    width: 100%;
-    transition: opacity 300ms ease-in-out;
-    position: relative;
-    bottom: -4rem;
+	display: flex;
+	height: 4rem;
+	background: var(--primary);
+	justify-content: end;
+	align-items: baseline;
+	color: #fafafa;
+	padding: 0.5rem 1rem;
+	right: 0;
+	width: 100%;
+	transition: opacity 300ms ease-in-out;
+	position: relative;
+	bottom: -4rem;
 }
 
 .overlayOpen footer {
-    opacity: 1;
-    bottom: 0;
-    transition: opacity 300ms ease-in-out;
-    position: absolute;
+	opacity: 1;
+	bottom: 0;
+	transition: opacity 300ms ease-in-out;
+	position: absolute;
 }
 
 #map {
-    position: relative;
-    height: 100vh;
-    width: 100%;
+	position: relative;
+	height: 100vh;
+	width: 100%;
 }
 
 #map .ol-overlaycontainer-stopevent {
-    display: none;
+	display: none;
 }
 
 /*buttons*/
 .btn {
-    width: 12rem;
-    height: 3rem;
-    background: var(--primary);
-    color: #ffffff;
-    font-weight: 500;
-    font-size: 1.2rem;
-    border-radius: 5px;
-    border: none;
-    box-shadow: 0 4px 4px #1b1b1b5e;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem
+	width: 12rem;
+	height: 3rem;
+	background: var(--primary);
+	color: #ffffff;
+	font-weight: 500;
+	font-size: 1.2rem;
+	border-radius: 5px;
+	border: none;
+	box-shadow: 0 4px 4px #1b1b1b5e;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
 }
 
 .btn:not(.newRideToggle) {
-    width: 100%;
-    margin: 1rem auto 1rem;
+	width: 100%;
+	margin: 1rem auto 1rem;
 }
 
 .btn svg {
-    position: relative;
-    top: 0;
-    transform: none;
+	position: relative;
+	top: 0;
+	transform: none;
 }
 
-.btn, button:hover {
-    cursor: pointer;
+.btn,
+button:hover {
+	cursor: pointer;
 }
 
 .btn.newRideToggle {
-    position: absolute;
-    bottom: 4rem;
-    left: 50%;
-    transform: translate(-50%, 0);
-    transition: all 300ms ease-in-out;
+	position: absolute;
+	bottom: 4rem;
+	left: 50%;
+	transform: translate(-50%, 0);
+	transition: all 300ms ease-in-out;
 }
 
 .newRide .btn.newRideToggle {
-    display: none;
+	display: none;
 }
 
 /*panels*/
 .panel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 6rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+	margin-top: 6rem;
 }
 
 .firstFormSection,
 .secondFormSection,
 .thirdFormSection {
-    width: 100%;
-    transition: 200ms ease-in-out;
-    transform: scaleX(1);
+	width: 100%;
+	transition: 200ms ease-in-out;
+	transform: scaleX(1);
 }
 
 .firstFormSection.transforming,
 .secondFormSection.transforming,
 .thirdFormSection.transforming {
-    transform: scaleX(0.9);
+	transform: scaleX(0.9);
 }
 
 .firstFormSection.hidden,
 .secondFormSection.hidden,
 .thirdFormSection.hidden {
-    /*width: 0;*/
-    /*overflow: hidden;*/
-    /*height: 0;*/
-    display: none;
+	/*width: 0;*/
+	/*overflow: hidden;*/
+	/*height: 0;*/
+	display: none;
 }
 
 .btn.formToggle {
-    width: 70%;
-    transform: scaleX(1);
-    transition: 200ms ease-in-out;
+	width: 70%;
+	transform: scaleX(1);
+	transition: 200ms ease-in-out;
 }
 
 .btn.formToggle.hidden {
-    display: none;
+	display: none;
 }
 
 .btn.formToggle.transforming {
-    transform: scaleX(0.75);
-    transition: 200ms ease-in-out;
+	transform: scaleX(0.75);
+	transition: 200ms ease-in-out;
 }
 
 .btn.formToggle.back {
-    margin-top: 0;
-    background: 0;
-    color: var(--primary);
-    border: var(--primary) solid 2px;
+	margin-top: 0;
+	background: 0;
+	color: var(--primary);
+	border: var(--primary) solid 2px;
 }
 
 #registerDriver .btn {
-    margin: 2rem auto 1rem;
-    width: 100%;
+	margin: 2rem auto 1rem;
+	width: 100%;
 }
 
-
 .panel.bottom {
-    bottom: -80vh;
-    transition: 300ms ease-in-out;
-    display: flex;
-    position: absolute;
-    background: #fafafa;
-    box-shadow: 0 -4px 15px #1b1b1b5e;
-    border-radius: 10px;
-    padding: 2rem 1rem;
+	bottom: -100vh;
+	transition: 300ms ease-in-out;
+	display: flex;
+	position: absolute;
+	background: #fafafa;
+	box-shadow: 0 -4px 15px #1b1b1b5e;
+	border-radius: 10px;
+	padding: 2rem 1rem;
 }
 
 .newRide .panel.bottom {
-    transition: 300ms ease-in-out;
-    bottom: 0;
+	transition: 300ms ease-in-out;
+	bottom: 0;
 }
 
 .panel form {
-    margin-inline: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	margin-inline: auto;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .form {
-    display: flex;
-    flex-direction: column;
-    border-radius: 5px;
-    width: 70%;
+	display: flex;
+	flex-direction: column;
+	border-radius: 5px;
+	width: 70%;
 }
 
 .form label {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin: 0.5rem 2px 4px;
+	font-size: 1.2rem;
+	font-weight: 500;
+	margin: 0.5rem 2px 4px;
 }
 
 #homeForm h2 {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 #homeForm input {
-    margin: 0rem auto 1rem;
+	margin: 0rem auto 1rem;
 }
 
 #registerDriver label {
-    width: 80%;
+	width: 80%;
 }
 
 .form input,
 .form select,
 #rideFilter select {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    padding: 7px 5px;
-    border-block: none;
-    border-inline: 2px solid var(--primary);
-    box-shadow: 0 2px 4px rgba(64, 64, 64, 0.25);
-    border-radius: 5px;
-    font-family: 'Nunito', sans-serif;
-    background-color: #FFF;
-    height: 2.1rem;
-    cursor: pointer;
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	padding: 7px 5px;
+	border-block: none;
+	border-inline: 2px solid var(--primary);
+	box-shadow: 0 2px 4px rgba(64, 64, 64, 0.25);
+	border-radius: 5px;
+	font-family: "Nunito", sans-serif;
+	background-color: #fff;
+	height: 2.1rem;
+	cursor: pointer;
 }
 
 #rideFilter {
-    width: 80%;
-    margin: 1rem 0;
+	width: 80%;
+	margin: 1rem 0;
 }
 #rideFilter label {
-    margin-bottom: 5px;
+	margin-bottom: 5px;
 }
 #rideFilter .btn {
-    margin-top: 5px;
-    height: 2.3rem;
-    font-size: 1.1rem;
+	margin-top: 5px;
+	height: 2.3rem;
+	font-size: 1.1rem;
 }
 
 #registerDriver input,
 #registerDriver select {
-    margin: 0 auto 1rem;
+	margin: 0 auto 1rem;
 }
 
 .form input.error {
-    border-color: #a62e2e;
-    background: #FF000032;
-    color: #a62e2e;
-    font-weight: 600;
+	border-color: #a62e2e;
+	background: #ff000032;
+	color: #a62e2e;
+	font-weight: 600;
 }
 
 .errorMsg {
-    font-size: 12px;
-    color: red;
-    margin: 0;
+	font-size: 12px;
+	color: red;
+	margin: 0;
 }
 
 .bottom.panel .errorMsg {
-    margin: -12px 0 4px;
+	margin: -12px 0 4px;
 }
 
 .form span.error svg {
-    color: #a62e2e;
+	color: #a62e2e;
 }
 
 /*input fields*/
 .form span {
-    position: relative;
-    display: flex;
-    width: 100%;
-    margin-inline: auto;
-    align-items: center;
+	position: relative;
+	display: flex;
+	width: 100%;
+	margin-inline: auto;
+	align-items: center;
 }
 
 .form span svg {
-    position: absolute;
-    content: "";
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 1.5rem;
-    left: 0.6rem;
-    transform: translateY(-1.2rem) scale(1.2);
-    color: var(--primary);
+	position: absolute;
+	content: "";
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	top: 1.5rem;
+	left: 0.6rem;
+	transform: translateY(-1.2rem) scale(1.2);
+	color: var(--primary);
 }
 
 .form span svg.hasText {
-    display: none;
+	display: none;
 }
 
 #registerDriver span {
-    border-inline: 2px solid var(--primary);
-    box-shadow: 0 2px 4px rgba(64, 64, 64, 0.25);
-    border-radius: 5px;
-    height: 2.1rem;
-    margin: auto auto 1rem;
-    width: 100%;
-    overflow: hidden;
+	border-inline: 2px solid var(--primary);
+	box-shadow: 0 2px 4px rgba(64, 64, 64, 0.25);
+	border-radius: 5px;
+	height: 2.1rem;
+	margin: auto auto 1rem;
+	width: 100%;
+	overflow: hidden;
 }
 
 #registerDriver span::before {
-    content: "Browse";
-    display: flex;
-    position: absolute;
-    padding: 0.5rem 1rem;
-    background: var(--primary);
-    color: #FFF;
+	content: "Browse";
+	display: flex;
+	position: absolute;
+	padding: 0.5rem 1rem;
+	background: var(--primary);
+	color: #fff;
 }
 
 #registerDriver span::after {
-    content: "Choose File...";
-    width: 100%;
-    position: absolute;
-    left: 6rem;
+	content: "Choose File...";
+	width: 100%;
+	position: absolute;
+	left: 6rem;
 }
 
 #profilePic {
-    opacity: 0;
+	opacity: 0;
 }
 
 /*Account*/
 .panel.account {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .userInfo {
-    background: var(--primary);
-    border-radius: 5px;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 1rem;
-    margin: 2rem auto;
-    box-shadow: 0 4px 16px #b9b9b9;
+	background: var(--primary);
+	border-radius: 5px;
+	color: white;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 1.5rem;
+	padding: 1rem;
+	margin: 2rem auto;
+	box-shadow: 0 4px 16px #b9b9b9;
 }
 
 .userInfo .text h2 {
-    margin: 0;
+	margin: 0;
 }
 
 .extraInfo {
-    width: 100%;
+	width: 100%;
 }
 
 .userInfo .text p,
 .extraInfo p {
-    margin: 0.3rem auto;
-    font-size: 0.8rem;
-    position: relative;
+	margin: 0.3rem auto;
+	font-size: 0.8rem;
+	position: relative;
 }
 
 .userInfo .text p {
-    color: #F4F4F4;
+	color: #f4f4f4;
 }
 
 .userInfo .text p:has(span),
 .extraInfo p:has(span) {
-    border-bottom: dotted 1px CurrentColor;
+	border-bottom: dotted 1px CurrentColor;
 }
 
 .userInfo .text p span,
 .extraInfo p span {
-    position: absolute;
-    right: 0;
+	position: absolute;
+	right: 0;
 }
 
 .userInfo .profilePic {
-    border-radius: 50%;
-    background: white;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    order: -1;
+	border-radius: 50%;
+	background: white;
+	width: 60px;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	order: -1;
 }
 
 .bookedRides,
 .rideHistory {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }
 
 .rideHistory {
-    margin-bottom: 3rem;
+	margin-bottom: 3rem;
 }
 
 .chooseRides.panel {
-    margin-top: 3rem;
+	margin-top: 3rem;
 }
 
 .availableRides {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
 }
 
 .ride {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    background: #DDE9FB;
-    margin: 0.75rem -10% 0.75rem 0;
-    width: 70%;
-    border-radius: 5px;
-    padding: 1rem;
-    box-shadow: 0 4px 5px #2e5da638;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	background: #dde9fb;
+	margin: 0.75rem -10% 0.75rem 0;
+	width: 70%;
+	border-radius: 5px;
+	padding: 1rem;
+	box-shadow: 0 4px 5px #2e5da638;
 }
 
 .ride.available {
-    flex-direction: row;
-    align-items: center;
-    padding-left: 0.5rem;
-    gap: 0.5rem;
-    margin-inline: unset;
-    width: 80%;
+	flex-direction: row;
+	align-items: center;
+	padding-left: 0.5rem;
+	gap: 0.5rem;
+	margin-inline: unset;
+	width: 80%;
 }
 
 .ride.available > div {
-    width: 100%;
+	width: 100%;
 }
 
 .ride.available.hidden div.extraInfo {
-    display: none;
+	display: none;
 }
 
 .ride.available.accepted {
-    background: rgba(48, 166, 46, 0.39);
+	background: rgba(48, 166, 46, 0.39);
 }
 
 .bookedRides .ride.available.accepted {
-    width: 100%;
+	width: 100%;
 }
-
 
 .available p,
 .ride p,
 .ride a {
-    margin-block: 0.5rem 0;
-    font-size: 0.8rem;
+	margin-block: 0.5rem 0;
+	font-size: 0.8rem;
 }
 
 .available.ride h3,
 .ride h2 {
-    margin: 0;
-    font-size: 1.1rem;
+	margin: 0;
+	font-size: 1.1rem;
 }
 
 .ride .right {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    text-align: right;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	text-align: right;
 }
 
 .ride .right .date {
-    margin-top: 0.25rem;
+	margin-top: 0.25rem;
 }
 
 .ride:not(.available):before {
-    content: "•";
-    font-size: 5rem;
-    color: var(--primary);
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    left: -10%;
-    top: -20%;
-    height: 140%;
-    width: 3px;
-    background: var(--primary);
-    box-shadow: 4px 0 5px #2e5da638;
+	content: "•";
+	font-size: 5rem;
+	color: var(--primary);
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	left: -10%;
+	top: -20%;
+	height: 140%;
+	width: 3px;
+	background: var(--primary);
+	box-shadow: 4px 0 5px #2e5da638;
 }
 
 .expandToggle {
-    order: -1;
-    cursor: pointer;
-    transform: rotate(-180deg);
-    transition: 200ms ease-in-out;
+	order: -1;
+	cursor: pointer;
+	transform: rotate(-180deg);
+	transition: 200ms ease-in-out;
 }
 
 .hidden .expandToggle {
-    transform: rotate(0deg);
+	transform: rotate(0deg);
 }
 
 #chooseRides {
-    display: grid;
-    position: absolute;
-    right: 1rem;
-    gap: 5px;
-    width: unset;
+	display: grid;
+	position: absolute;
+	right: 1rem;
+	gap: 5px;
+	width: unset;
 }
 #acceptRide {
-    display: grid;
-    gap: 5px;
+	display: grid;
+	gap: 5px;
 }
 
 .okButton,
 .nokButton,
 .sendButton {
-    grid-row: 1;
-    display: none;
-    border: none;
-    padding: 0;
-    background: transparent;
-    justify-content: center;
-    align-items: center;
-    width: 33px;
-    height: 33px;
-    border-radius: 5px;
-    box-shadow: 0 4px 5px #2e5da638;
-    color: #FFF;
-    cursor: pointer;
+	grid-row: 1;
+	display: none;
+	border: none;
+	padding: 0;
+	background: transparent;
+	justify-content: center;
+	align-items: center;
+	width: 33px;
+	height: 33px;
+	border-radius: 5px;
+	box-shadow: 0 4px 5px #2e5da638;
+	color: #fff;
+	cursor: pointer;
 }
 
 .hidden .okButton,
 .hidden .nokButton,
 .hidden .sendButton {
-    display: flex;
+	display: flex;
 }
 
 .accepted .okButton {
-    display: none;
+	display: none;
 }
 
 #acceptRide .okButton,
 #acceptRide .nokButton {
-    display: flex;
+	display: flex;
 }
 
 .okButton {
-    background: #30A62E;
+	background: #30a62e;
 }
 
 .nokButton {
-    background: #D00D0D;
+	background: #d00d0d;
 }
 
 .sendButton {
-    background: #3498db;
+	background: #3498db;
 }
 
 .btn.logout {
-    width: 80%;
-    position: fixed;
-    bottom: 1.5rem;
-    background: #c8191c;
-    text-decoration: none;
+	width: 80%;
+	position: fixed;
+	bottom: 1.5rem;
+	background: #c8191c;
+	text-decoration: none;
 }
 
 .btn.cancel {
-    width: min(100%, 12rem);
-    background: #c8191c;
+	width: min(100%, 12rem);
+	background: #c8191c;
 }
 
 @media (min-width: 750px) {
-    header {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
-    }
+	header {
+		display: flex;
+		justify-content: space-between;
+		width: 100%;
+	}
 
-    nav {
-        display: unset;
-        position: unset;
-        width: 55%;
-        padding: unset;
-        background: transparent;
-    }
+	nav {
+		display: unset;
+		position: unset;
+		width: 55%;
+		padding: unset;
+		background: transparent;
+	}
 
-    nav h2 {
-        display: none;
-    }
+	nav h2 {
+		display: none;
+	}
 
-    nav svg {
-        display: none;
-    }
+	nav svg {
+		display: none;
+	}
 
-    nav ul {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        font-size: 1.1rem;
-    }
+	nav ul {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		width: 100%;
+		font-size: 1.1rem;
+	}
 
-    button.navbarToggle {
-        display: none;
-    }
+	button.navbarToggle {
+		display: none;
+	}
 
-    .form#loginForm {
-        width: min(420px, 70%);
-    }
+	.form#loginForm {
+		width: min(420px, 70%);
+	}
 
-    .btn.newRideToggle {
-        scale: 1.2;
-    }
+	.btn.newRideToggle {
+		scale: 1.2;
+	}
 
-    .panel.registerDriver .firstFormSection.hidden,
-    .panel.registerDriver .secondFormSection.hidden {
-        display: block;
-    }
+	.panel.registerDriver .firstFormSection.hidden,
+	.panel.registerDriver .secondFormSection.hidden {
+		display: block;
+	}
 
-    .newRide .firstFormSection.hidden,
-    .newRide .secondFormSection.hidden,
-    .newRide .thirdFormSection.hidden {
-        display: none;
-    }
+	.newRide .firstFormSection.hidden,
+	.newRide .secondFormSection.hidden,
+	.newRide .thirdFormSection.hidden {
+		display: none;
+	}
 
-    .chooseRides.panel {
-        flex-direction: row;
-    }
-
+	.chooseRides.panel {
+		flex-direction: row;
+	}
 }
 
 @media (min-width: 900px) {
-    h2 {
-        margin-bottom: 3rem;
-    }
+	h2 {
+		margin-bottom: 3rem;
+	}
 
-    .panel.account {
-        margin-top: 4rem;
-        flex-direction: row;
-        align-items: flex-start;
-        padding-inline: 10%;
-    }
+	.panel.account {
+		margin-top: 4rem;
+		flex-direction: row;
+		align-items: flex-start;
+		padding-inline: 10%;
+	}
 
-    .userInfo {
-        padding: 4rem 2rem;
-        width: 100%;
-    }
+	.userInfo {
+		padding: 4rem 2rem;
+		width: 100%;
+	}
 
-    .panel.account > div {
-        flex-shrink: 0;
-        width: 33%;
-    }
+	.panel.account > div {
+		flex-shrink: 0;
+		width: 33%;
+	}
 
-    .from#register {
-        width: min(700px, 70%);
-    }
+	.from#register {
+		width: min(700px, 70%);
+	}
 
-    .panel.bottom {
-        bottom: -50%;
-    }
+	.panel.bottom {
+		bottom: -100vh;
+	}
 
-    .newRide .panel.bottom {
-        transition: 300ms ease-in-out;
-        bottom: 50%;
-        left: 2rem;
-        width: min(30rem, 30%);
-        transform: translate(0, 50%);
-    }
+	.newRide .panel.bottom {
+		transition: 300ms ease-in-out;
+		bottom: 50%;
+		left: 2rem;
+		width: min(30rem, 30%);
+		transform: translate(0, 50%);
+	}
 
-    #registerDriver {
-        flex-direction: row;
-        gap: 2rem;
-    }
+	#registerDriver {
+		flex-direction: row;
+		gap: 2rem;
+	}
 
-    .panel.registerDriver .firstFormSection.hidden,
-    .panel.registerDriver .secondFormSection.hidden {
-        display: block;
-    }
+	.panel.registerDriver .firstFormSection.hidden,
+	.panel.registerDriver .secondFormSection.hidden {
+		display: block;
+	}
 
-    .newRide .firstFormSection.hidden,
-    .newRide .secondFormSection.hidden,
-    .newRide .thirdFormSection.hidden {
-        display: none;
-    }
+	.newRide .firstFormSection.hidden,
+	.newRide .secondFormSection.hidden,
+	.newRide .thirdFormSection.hidden {
+		display: none;
+	}
 
-    .btn.formToggle {
-        display: none;
-    }
+	.btn.formToggle {
+		display: none;
+	}
 
-    .newRide .btn.formToggle {
-        display: block;
-    }
+	.newRide .btn.formToggle {
+		display: block;
+	}
 
-    .newRide .btn.formToggle.hidden {
-        display: none;
-    }
-
+	.newRide .btn.formToggle.hidden {
+		display: none;
+	}
 }
-
-
-
