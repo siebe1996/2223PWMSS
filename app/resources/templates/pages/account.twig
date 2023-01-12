@@ -34,11 +34,11 @@
                             {% for ride in user.bookedRides %}
                                 <section class="ride available hidden accepted">
                                     <div>
-                                        <h3>{{ ride.start_time|date('l') }} {{ ride.start_time|date('h\\ui') }}</h3>
+                                        <h3>{{ ride.time|date('l') }} {{ ride.time|date('H\\ui') }}</h3>
                                         <p class="trip">{{ ride.fromCity }}->{{ ride.toCity }}</p>
                                         <div class="extraInfo">
                                             <div class="right">
-                                                <p class="date">{{ ride.start_time|date('d/m/Y') }}</p>
+                                                <p class="date">{{ ride.time|date('d/m/Y') }}</p>
                                             </div>
                                             <p>From:<span>{{ ride.fullAddressFrom }}</span></p>
                                             <p>To:<span>{{ ride.fullAddressTo }}</span></p>
@@ -101,9 +101,9 @@
             {% if user.rideHistory|length > 0 %}
                 {% for ride in user.rideHistory %}
                     <section class="ride">
-                        <h2>{{ ride.start_time|date('l') }} {{ ride.start_time|date('h\\ui') }}</h2>
+                        <h2>{{ ride.time|date('l') }} {{ ride.time|date('h\\ui') }}</h2>
                         <div class="right">
-                            <p class="date">{{ ride.start_time|date('d/m/Y') }}</p>
+                            <p class="date">{{ ride.time|date('d/m/Y') }}</p>
                             {% if not driverInfo %}
                                 <p class="cost">€{{ ride.price }}</p>
                             {% endif %}
