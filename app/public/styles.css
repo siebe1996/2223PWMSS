@@ -19,10 +19,10 @@ html {
     overflow: hidden;
 }
 
-body.overflow,
-html.overflow {
+html.overflow:not(.overlayOpen) {
     overflow-y: auto;
 }
+
 
 h1 {
     margin: 0;
@@ -95,8 +95,8 @@ nav a {
 nav ul {
     list-style: none;
     padding: 0;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     align-items: center;
     font-size: 0.8rem;
     justify-content: space-around;
@@ -108,6 +108,7 @@ nav ul li a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
 }
 nav svg {
     flex-grow: 1;
@@ -697,6 +698,7 @@ footer {
     }
 
     nav ul {
+        display: flex;
         flex-direction: row;
         justify-content: space-between;
         width: 100%;
