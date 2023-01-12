@@ -58,42 +58,42 @@ class UserController
 
         if (!$allOk) {
             $_SESSION['flash']['errors'] = ['login' => $formErrors];
-            header('Location: login');
+            header('location:login');
             exit();
         }
+
         $user = $this->conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
 
-
-        if ($user !== false) {
+        if (!empty($user)) {
             if ($user['verified']) {
                 if (password_verify($password, $user['password'])) {
 
                     $userStatus = $this->conn
-                        ->fetchAssociative('SELECT id FROM drivers WHERE id = ?',[$user['id']]);
+                        ->fetchAssociative('SELECT id FROM drivers WHERE id = ?', [$user['id']]);
                     $user['status'] = $userStatus ? 'Driver' : 'Rider';
 
                     // Store the user row in the session
                     $_SESSION['user'] = $user;
-                    header('Location: /');
+                    header('location:/');
                     exit();
                 } // Invalid login
                 else {
                     $formErrors = 'Please enter valid credentials';
                     $_SESSION['flash']['errors'] = ['login' => $formErrors];
-                    header('Location: login');
+                    header('location:login');
                     exit();
                 }
             } else {
                 $formErrors = 'Please validate user';
                 $_SESSION['flash']['errors'] = ['login' => $formErrors];
-                header('Location: login');
+                header('location:login');
                 exit();
             }
         } // username & password are not valid
         else {
             $formErrors = 'Please enter valid credentials';
             $_SESSION['flash']['errors'] = ['login' => $formErrors];
-            header('Location : login');
+            header('location:login');
             exit();
         }
     }
@@ -211,7 +211,8 @@ class UserController
             ->executeQuery([$_SESSION['user']['id']])
             ->fetchAllAssociative();
 
-        $bookedRides = $this->conn->fetchAllAssociative(<<<'SQL'
+        $bookedRides = $this->conn->fetchAllAssociative(
+            <<<'SQL'
             SELECT 
                 CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
                 CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
