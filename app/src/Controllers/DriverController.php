@@ -189,7 +189,7 @@ class DriverController
         }
         $search = isset($_POST['month']) ? trim($_POST['month']) : '';
 
-        header('location:drivers/' . $id . '/month/' . urlencode($search));
+        header('location:/drivers/' . $id . '/month/' . urlencode($search));
         exit();
     }
 

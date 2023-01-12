@@ -19,10 +19,10 @@ html {
     overflow: hidden;
 }
 
-body.overflow,
-html.overflow {
+html.overflow:not(.overlayOpen) {
     overflow-y: auto;
 }
+
 
 h1 {
     margin: 0;
@@ -95,9 +95,8 @@ nav a {
 nav ul {
     list-style: none;
     padding: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 20%);
     font-size: 0.8rem;
     justify-content: space-around;
     width: 100%;
@@ -108,6 +107,7 @@ nav ul li a {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    text-align: center;
 }
 nav svg {
     flex-grow: 1;
@@ -148,7 +148,7 @@ footer {
     padding: 0.5rem 1rem;
     right: 0;
     width: 100%;
-    transition: 300ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
     position: relative;
     bottom: -4rem;
 }
@@ -156,7 +156,7 @@ footer {
 .overlayOpen footer {
     opacity: 1;
     bottom: 0;
-    transition: 300ms ease-in-out;
+    transition: opacity 300ms ease-in-out;
     position: absolute;
 }
 
@@ -611,19 +611,22 @@ footer {
 }
 
 #chooseRides {
+    display: grid;
     position: absolute;
     right: 1rem;
     gap: 5px;
-    flex-direction: row;
-    justify-content: unset;
     width: unset;
+}
+#acceptRide {
+    display: grid;
+    gap: 5px;
 }
 
 .okButton,
 .nokButton,
 .sendButton {
+    grid-row: 1;
     display: none;
-    opacity: 0;
     border: none;
     padding: 0;
     background: transparent;
@@ -640,12 +643,16 @@ footer {
 .hidden .okButton,
 .hidden .nokButton,
 .hidden .sendButton {
-    opacity: 1;
     display: flex;
 }
 
 .accepted .okButton {
     display: none;
+}
+
+#acceptRide .okButton,
+#acceptRide .nokButton {
+    display: flex;
 }
 
 .okButton {
@@ -697,6 +704,7 @@ footer {
     }
 
     nav ul {
+        display: flex;
         flex-direction: row;
         justify-content: space-between;
         width: 100%;

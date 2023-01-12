@@ -85,6 +85,8 @@ class TripController
     {
         echo $this->twig->render('pages/acceptRide.twig', [
             'rideId' => $_SESSION['tripId'],
+            'loggedIn' => true,
+            'user' => $_SESSION['user']
         ]);
     }
 
