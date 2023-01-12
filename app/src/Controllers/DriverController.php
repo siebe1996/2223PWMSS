@@ -1,6 +1,5 @@
 <?php
 //namespace Controllers;
-use Services\DatabaseConnector;
 //require_once ('../../vendor/autoload.php');
 //require_once ('../../config/database.php');
 //require_once ('../../src/Services/DatabaseConnector.php');
@@ -26,7 +25,7 @@ class DriverController
 
     public function show()
     {
-        $formErrors = isset($_SESSION['flash']['errors']['driver']) ? $_SESSION['flash']['errors']['driver'] :  '';
+        $formErrors = isset($_SESSION['flash']['errors']['driver']) ? $_SESSION['flash']['errors']['driver'] : '';
         $numberPlate = isset($_SESSION['flash']['driver']['numberPlate']) ? trim($_SESSION['flash']['driver']['numberPlate']) : '';
         $birthDate = isset($_SESSION['flash']['driver']['birthDate']) ? trim($_SESSION['flash']['driver']['birthDate']) : '';
         $gender = isset($_SESSION['flash']['driver']['gender']) ? trim($_SESSION['flash']['driver']['gender']) : '';
@@ -69,7 +68,7 @@ class DriverController
             $formErrors['numberPlate'] = 'Voer een geldige nummerplaat in';
         }
 
-        $birthDate_arr  = explode('-', $birthDate);
+        $birthDate_arr = explode('-', $birthDate);
         if (!checkdate($birthDate_arr[1], $birthDate_arr[2], $birthDate_arr[0])) {
             $formErrors['birthDate'] = 'Voer een geldige geboorte datum in ' . $birthDate_arr[1];
         }
@@ -132,13 +131,13 @@ class DriverController
 
     public function showDriverInfo($id)
     {
-        //        if (!isset($_SESSION['user'])) {
-        //            header('location: /');
-        //            exit();
-        //        }
+        $loggedIn = false;
+        if (isset($_SESSION['user'])) {
+            $loggedIn = true;
+        }
         $months = [1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr', 5 => 'May', 6 => 'Jun', 7 => 'Jul', 8 => 'Aug', 9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'];
 
-        $stmt = $this->conn->prepare('SELECT * FROM anonymous_users as anon JOIN drivers as d on anon.id = d.id WHERE d.id = ?');
+        $stmt = $this->conn->prepare('SELECT * FROM anonymous_users as anon INNER JOIN drivers as d on anon.id = d.id WHERE d.id = ?');
         $result = $stmt->executeQuery([$id]);
         $driver = $result->fetchAssociative();
         //als user geen driver is of niet bestaat redirect naar home;
@@ -175,9 +174,11 @@ class DriverController
                 'rideHistory' => $trips,
                 'id' => $id,
             ],
+            'userStatus'=>$_SESSION['user']['status'],
             'driverInfo' => true,
             'months' => $months,
             'month' => -1,
+            'loggedIn' => $loggedIn
         ]);
     }
 
@@ -189,12 +190,16 @@ class DriverController
         }
         $search = isset($_POST['month']) ? trim($_POST['month']) : '';
 
-        header('Location: /drivers/'.$id.'/month/' . urlencode($search));
+        header('Location: /drivers/' . $id . '/month/' . urlencode($search));
         exit();
     }
 
     public function showSearchResults($id, $month)
     {
+        $loggedIn = false;
+        if (isset($_SESSION['user'])) {
+            $loggedIn = true;
+        }
         $id = urldecode($id);
         $month = urldecode($month);
 
@@ -212,14 +217,13 @@ class DriverController
         $result = $stmt->executeQuery([$id]);
         $tripsCount = $result->fetchOne();
 
-        $matches =array();
-        if ($month < 13){
+        $matches = array();
+        if ($month < 13) {
             $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.driver_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
             $results = $stmt->executeQuery([$id, $month]);
             $matches = $results->fetchAllAssociative();
-        }
-        else{
-            header('location: /drivers/'.$id);
+        } else {
+            header('location: /drivers/' . $id);
             exit();
         }
 
@@ -239,6 +243,7 @@ class DriverController
             'driverInfo' => true,
             'months' => $months,
             'month' => $month,
+            'loggedIn' => $loggedIn
         ]);
     }
 }

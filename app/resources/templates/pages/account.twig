@@ -52,7 +52,8 @@
                                               stroke-linecap="round"
                                               stroke-linejoin="round"/>
                                     </svg>
-                                    <form id="chooseRides" action="{{ url('rides/'~ride.id~'/cancelstartfinish') }}" method="POST"
+                                    <form id="chooseRides"
+                                          action="{{ url('driver/rides/'~ride.id~'/cancelstartfinish') }}" method="POST"
                                           enctype="application/x-www-form-urlencoded">
                                         {% if ride.status != "started" %}
                                             <button type="submit" name="cancel" value="{{ ride.id }}" class="nokButton">
@@ -74,9 +75,9 @@
                             <p>No rides booked yet</p>
                         {% endif %}
                     {% else %}
-                        <a href="{{ url('rides') }}">View Available Rides</a>
+                        <a href="{{ url('driver/rides') }}">View Available Rides</a>
                     {% endif %}
-                    
+
                 </section>
             {% endif %}
         </div>
@@ -85,33 +86,34 @@
             <form id="rideFilter" action="{{ url('/drivers/'~user.id~'/search') }}" method="POST">
                 <label for="month">Select month:</label>
                 <select name="month" id="month">
-                    {% if months|length < 0 %}
-                        <option value="14">something went wrong</option>
+                    {% if months %}
+                        <option value="13" {% if month < 0 %} selected="selected" {% endif %}>...</option>
+                        {% for key, value in months %}
+                            <option value="{{ key }}" {% if key == month %} selected="selected" {% endif %} >{{ value }}</option>
+                        {% endfor %}
                     {% else %}
-                    <option value="13" {% if month < 0 %} selected="selected" {% endif %}>...</option>
-                    {% for key, value in months %}
-                        <option value="{{ key }}"  {% if key == month %} selected="selected" {% endif %} >{{ value }}</option>
-                    {% endfor %}
+                        <option value="14">something went wrong</option>
                     {% endif %}
                 </select>
-                <button class="" type="submit">Search</button>
+                <button class="btn" type="submit">Search</button>
             </form>
             {% if user.rideHistory|length > 0 %}
-            {% for ride in user.rideHistory %}
-                <section class="ride">
-                    <h2>{{ ride.start_time|date('l') }} {{ ride.start_time|date('h\\ui') }}</h2>
-                    <div class="right">
-                        <p class="date">{{ ride.start_time|date('d/m/Y') }}</p>
-                        {% if not driverInfo %}
-                            <p class="cost">€{{ ride.price }}</p>
+                {% for ride in user.rideHistory %}
+                    <section class="ride">
+                        <h2>{{ ride.start_time|date('l') }} {{ ride.start_time|date('h\\ui') }}</h2>
+                        <div class="right">
+                            <p class="date">{{ ride.start_time|date('d/m/Y') }}</p>
+                            {% if not driverInfo %}
+                                <p class="cost">€{{ ride.price }}</p>
+                            {% endif %}
+                        </div>
+                        <p class="trip">{{ ride.start_city }}->{{ ride.stop_city }}</p>
+                        {% if ride.driver_id %}
+                            <a class="driverPageLink" href="{{ url('drivers/') ~ ride.driver_id }}">Visit Drivers
+                                page</a>
                         {% endif %}
-                    </div>
-                    <p class="trip">{{ ride.start_city }}->{{ ride.stop_city }}</p>
-                    {% if ride.driver_id %}
-                        <a class="driverPageLink" href="{{ url('drivers/') ~ ride.driver_id }}">Visit Drivers page</a>
-                    {% endif %}
-                </section>
-            {% endfor %}
+                    </section>
+                {% endfor %}
             {% else %}
                 <section class="ride">
                     <h2>no rides founds</h2>

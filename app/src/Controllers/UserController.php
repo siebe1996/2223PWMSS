@@ -205,6 +205,12 @@ class UserController
             header('location: /');
             exit();
         }
+        if ($_SESSION['user']['status'] == 'Driver') {
+            header('location:/drivers/' . $_SESSION['user']['id']);
+        }
+
+        $months = [1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr', 5 => 'May', 6 => 'Jun', 7 => 'Jul', 8 => 'Aug', 9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'];
+
 
         $trips = $this->conn
             ->prepare('SELECT * FROM trips WHERE costumer_id = ? AND status = "finished" ORDER BY start_time DESC')
@@ -236,7 +242,8 @@ class UserController
                 'rideAmount' => count($trips),
                 'rideHistory' => $trips,
                 'bookedRides' => $bookedRides
-            ]
+            ],
+            'months'=> $months
         ]);
     }
 }

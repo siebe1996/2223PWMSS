@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "db89be57b5317eecf29ab709093ff7df",
+    "content-hash": "c850e649d008d4443438537e0172317f",
     "packages": [
         {
             "name": "bramus/router",
@@ -1524,6 +1524,61 @@
                 "source": "https://github.com/ralouphie/getallheaders/tree/develop"
             },
             "time": "2019-03-08T08:55:37+00:00"
+        },
+        {
+            "name": "riverside/php-osrm",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/riverside/php-osrm.git",
+                "reference": "c6f3bc95f510eabd3a040e3802342ee705b511fc"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/riverside/php-osrm/zipball/c6f3bc95f510eabd3a040e3802342ee705b511fc",
+                "reference": "c6f3bc95f510eabd3a040e3802342ee705b511fc",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-json": "*",
+                "php": ">=7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "OSRM\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dimitar Ivanov",
+                    "email": "info@zinoui.com",
+                    "homepage": "https://zinoui.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP client for Project-OSRM.",
+            "homepage": "https://github.com/riverside/php-osrm",
+            "keywords": [
+                "OpenStreetMap",
+                "distance",
+                "osm",
+                "osrm",
+                "php"
+            ],
+            "support": {
+                "issues": "https://github.com/riverside/php-osrm/issues",
+                "source": "https://github.com/riverside/php-osrm/tree/v1.0.0"
+            },
+            "time": "2020-01-09T21:27:48+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
