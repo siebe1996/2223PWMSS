@@ -42,7 +42,7 @@ class TripController
                 status
             FROM trips as t 
             WHERE t.driver_id = ? AND (t.status = "claimed" OR t.status = "started")
-            ORDER BY t.time
+            ORDER BY t.start_time
             SQL,
             [$_SESSION['user']['id']]
         );
@@ -59,7 +59,7 @@ class TripController
                 id
             FROM trips as t 
             WHERE t.status = "pending"
-            ORDER BY t.time
+            ORDER BY t.start_time
             SQL
         );
 
@@ -158,14 +158,13 @@ class TripController
 
     public function cancel()
     {
-        if (isset($_POST['cancel'])){
+        if (isset($_POST['cancel'])) {
             $tripId = $_POST['cancel'] ?? '';
         }
-        if (!trim($tripId)){
+        if (!trim($tripId)) {
             header('Location: badrequest');
             exit();
-        }
-        else{
+        } else {
             $stmt = $this->conn->prepare('UPDATE trips SET status =  "cancelled" WHERE id = ?');
             $result = $stmt->executeStatement([$tripId]);
 
