@@ -180,14 +180,13 @@ class TripController
 
     public function cancel()
     {
-        if (isset($_POST['cancel'])){
+        if (isset($_POST['cancel'])) {
             $tripId = $_POST['cancel'] ?? '';
         }
         if (!trim($tripId)){
             header('location:/badrequest');
             exit();
-        }
-        else{
+        } else {
             $stmt = $this->conn->prepare('UPDATE trips SET status =  "cancelled" WHERE id = ?');
             $result = $stmt->executeStatement([$tripId]);
 
