@@ -102,7 +102,7 @@ class TripController
                     'email/acceptRide',
                     [
                         'first_name' => $driver['first_name'],
-                        'last_name' => $$driver['last_name'],
+                        'last_name' => $driver['last_name'],
                         'trip' => $trip,
                         'driver' => true
                     ]
@@ -151,7 +151,7 @@ class TripController
             $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
             $result = $stmt->executeStatement([$status, $userId, $tripId]);
 
-            header('Location: driver/rides');
+            header('Location: /driver/rides');
             exit();
         }
     }
