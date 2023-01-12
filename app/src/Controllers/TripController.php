@@ -85,10 +85,10 @@ class TripController
             if($trip){
                 $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
                 $result = $stmt->executeStatement(['claimed', $userId, $tripId]);
-                header('Location: /rides');
+                header('Location: driver/rides');
                 exit();
             }
-
+            //toDo error raide is claimed
             header('Location: /rideIsClaimed');
             exit();
         }
@@ -117,7 +117,25 @@ class TripController
             $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
             $result = $stmt->executeStatement([$status, $userId, $tripId]);
 
-            header('Location: /rides');
+            header('Location: driver/rides');
+            exit();
+        }
+    }
+
+    public function cancel()
+    {
+        if (isset($_POST['cancel'])){
+            $tripId = $_POST['cancel'] ?? '';
+        }
+        if (!trim($tripId)){
+            header('Location: badrequest');
+            exit();
+        }
+        else{
+            $stmt = $this->conn->prepare('UPDATE trips SET status =  "cancelled" WHERE id = ?');
+            $result = $stmt->executeStatement([$tripId]);
+
+            header('Location: /users');
             exit();
         }
     }

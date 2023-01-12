@@ -59,7 +59,7 @@
 
         <ul>
             <li>
-                <a href="{{ url('') }}" aria-label="Home" title="Home">
+                <a href="{{ url('/') }}" aria-label="Home" title="Home">
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M3.08191 9.31964L12.0819 2.31964L21.0819 9.31964V20.3196C21.0819 20.8501 20.8712 21.3588 20.4961 21.7339C20.121 22.1089 19.6123 22.3196 19.0819 22.3196H5.08191C4.55148 22.3196 4.04277 22.1089 3.6677 21.7339C3.29262 21.3588 3.08191 20.8501 3.08191 20.3196V9.31964Z"
                               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -121,7 +121,7 @@
             </li>
             {% if loggedIn %}
                 <li>
-                    <a href="{{ url('user') }}" aria-label="Account" title="Account">
+                    <a href="{{ url('users') }}" aria-label="Account" title="Account">
                         <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M20.0819 21.3196V19.3196C20.0819 18.2588 19.6605 17.2414 18.9103 16.4912C18.1602 15.7411 17.1428 15.3196 16.0819 15.3196H8.08191C7.02104 15.3196 6.00363 15.7411 5.25348 16.4912C4.50334 17.2414 4.08191 18.2588 4.08191 19.3196V21.3196"
                                   stroke="currentColor" stroke-width="2" stroke-linecap="round"

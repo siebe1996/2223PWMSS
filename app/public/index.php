@@ -61,6 +61,7 @@ $router->post('/verification', 'VerificationController@verification');
 //$router->get('/requestPending', 'DashboardController@showRequestPending'); //driver/ride
 $router->post('/driver/rides/(\d+)/accept', 'TripController@acceptRide'); //driver/ride/accept  driver/ride/cancel
 $router->post('/driver/rides/(\d+)/cancelstartfinish', 'TripController@cancelStartFinishRide');
+$router->post('/rides/(\d+)/cancel', 'TripController@cancel');
 $router->get('/drivers/(\d+)', 'DriverController@showDriverInfo');
 $router->get('/drivers/(\d+)/month/(\d+)', 'DriverController@showSearchResults');
 $router->post('/drivers/(\d+)/search', 'DriverController@search');

@@ -222,7 +222,7 @@ class UserController
                 start_time AS time,
                 id
             FROM trips as t 
-            WHERE t.status = "claimed"
+            WHERE t.status = "claimed" OR t.status = "pending"
             ORDER BY 
                 start_time DESC
             SQL,
