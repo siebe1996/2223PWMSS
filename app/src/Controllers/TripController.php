@@ -155,7 +155,7 @@ class TripController
                     header('location:/driver/rides');
                     exit();
                 } else {
-                    //toDo error raide is claimed
+                    //toDo error ride is claimed
                     header('location:/rideIsClaimed');
                     exit();
                 }
