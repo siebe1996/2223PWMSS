@@ -100,6 +100,7 @@ class DashboardController
         $endStreet = isset($_POST['endStreet']) ? trim($_POST['endStreet']) : '';
         $endCity = isset($_POST['endCity']) ? trim($_POST['endCity']) : '';
         $datetime = isset($_POST['dateTime']) ? trim($_POST['dateTime']) : '';
+        $price = 0;
         $formErrors = [];
 
         if (trim($startHouseNumber) === '') {
@@ -134,6 +135,26 @@ class DashboardController
                 $formErrors['dateTime'] = 'Voer een geldige tijd in';
             }
         }
+
+        //toDo add price calculation
+
+        $startCoords = LonLatService::search($startStreet . ' ' . $startHouseNumber . ' ' . $startCity);
+        $endCoords = LonLatService::search($endStreet . ' ' . $endHouseNumber . ' ' . $endCity);
+
+        $route = ShortestPathService::route($startCoords, $endCoords);
+        $distance = $route['routes'][0]['distance'];
+
+        if ($distance > 100000) {
+            $formErrors['startStreet'] = 'Trip is longer than 100km';
+        }
+        else {
+//          price = base + dist(m)/1000*price/km
+            $price = 5 + $distance/1000*2;
+//          header('content-type:application/json');
+//          echo json_encode($route, true);exit();
+        }
+
+
         /*function validateDate($date) {
             $format = 'Y-m-d H:i';
             $dateTime = DateTime::createFromFormat($format, $date);
@@ -192,18 +213,6 @@ class DashboardController
         //  if no errors: insert values into database
 
         if (!$formErrors) {
-            //toDo add price calculation
-
-            $startCoords = LonLatService::search($startStreet . ' ' . $startHouseNumber . ' ' . $startCity);
-            $endCoords = LonLatService::search($endStreet . ' ' . $endHouseNumber . ' ' . $endCity);
-
-            $route = ShortestPathService::route($startCoords, $endCoords);
-            $distance = $route['routes'][0]['distance'];
-//          price = base + dist(m)/1000*price/km
-            $price = 5 + $distance/1000*2;
-
-//            header('content-type:application/json');
-//            echo json_encode($route, true);exit();
 
             $stmt = $this->conn->prepare('INSERT INTO trips (start_nr, start_street, start_city, stop_nr, stop_street, stop_city, start_time, costumer_id, price) VALUES (?, ?, ?, ?, ?, ?, ? ,?, ?)');
             $result = $stmt->executeStatement([$startHouseNumber, $startStreet, $startCity, $endHouseNumber, $endStreet, $endCity, $datetime, $userId, $price]);
