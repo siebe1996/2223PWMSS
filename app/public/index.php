@@ -59,7 +59,9 @@ $router->get('/verification', 'VerificationController@show');
 $router->post('/verification', 'VerificationController@verification');
 
 //$router->get('/requestPending', 'DashboardController@showRequestPending'); //driver/ride
-$router->post('/driver/rides/(\d+)/accept', 'TripController@acceptRide'); //driver/ride/accept  driver/ride/cancel
+$router->post('/driver/rides/(\d+)/accept', 'TripController@acceptRide');
+$router->get('/driver/rides/(\d+)/confirm', 'TripController@showConfirm');
+$router->post('/driver/rides/(\d+)/confirm', 'TripController@confirm');
 $router->post('/driver/rides/(\d+)/cancelstartfinish', 'TripController@cancelStartFinishRide');
 $router->post('/rides/(\d+)/cancel', 'TripController@cancel');
 $router->get('/drivers/(\d+)', 'DriverController@showDriverInfo');
