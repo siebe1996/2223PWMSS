@@ -205,6 +205,7 @@ class UserController
             header('location: /');
             exit();
         }
+        $userId = $_SESSION['user']['id'];
         if ($_SESSION['user']['status'] == 'Driver') {
             header('location:/drivers/' . $_SESSION['user']['id']);
         }
@@ -242,9 +243,90 @@ class UserController
                 'status' => $_SESSION['user']['status'],
                 'rideAmount' => count($trips),
                 'rideHistory' => $trips,
-                'bookedRides' => $bookedRides
+                'bookedRides' => $bookedRides,
+                'id' => $userId,
             ],
             'months'=> $months
+        ]);
+    }
+
+    public function search()
+    {
+        if (!isset($_SESSION['user'])) {
+            header('location: ../login');
+            exit();
+        }
+        $search = isset($_POST['month']) ? trim($_POST['month']) : '';
+
+        header('location:/users/month/' . urlencode($search));
+        exit();
+    }
+
+    public function showSearchResults($month)
+    {
+        $loggedIn = false;
+        if (isset($_SESSION['user'])) {
+            $loggedIn = true;
+        }
+        $id = $_SESSION['user']['id'];
+        $month = urldecode($month);
+
+        $months = [1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr', 5 => 'May', 6 => 'Jun', 7 => 'Jul', 8 => 'Aug', 9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'];
+
+        $stmt = $this->conn->prepare('SELECT * FROM anonymous_users as anon WHERE anon.id = ?');
+        $result = $stmt->executeQuery([$id]);
+        $costumer = $result->fetchAssociative();
+        if (!$costumer) {
+            header('location:/');
+            exit();
+        }
+
+        $stmt = $this->conn->prepare('SELECT COUNT(*) FROM trips as t WHERE t.costumer_id = ? AND t.status = "finished"');
+        $result = $stmt->executeQuery([$id]);
+        $tripsCount = $result->fetchOne();
+
+        $matches = array();
+        if ($month < 13) {
+            $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.costumer_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
+            $results = $stmt->executeQuery([$id, $month]);
+            $matches = $results->fetchAllAssociative();
+        } else {
+            header('location:/users');
+            exit();
+        }
+
+        $bookedRides = $this->conn->fetchAllAssociative(
+            <<<'SQL'
+            SELECT 
+                CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
+                CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
+                price,
+                start_city AS fromCity,
+                stop_city AS toCity,
+                start_time AS time,
+                id
+            FROM trips as t 
+            WHERE t.status = "claimed" OR t.status = "pending"
+            ORDER BY 
+                start_time DESC
+            SQL,
+
+        );
+
+        echo $this->twig->render('pages/account.twig', [
+            'user' => [
+                'name' => $costumer['first_name'] . ' ' . $costumer['last_name'],
+                'email' => $costumer['email'],
+                'status' => 'Rider',
+                'rideAmount' => $tripsCount,
+                'rideHistory' => $matches,
+                'bookedRides' => $bookedRides,
+                'id' => $id,
+            ],
+            'driverInfo' => true,
+            'months' => $months,
+            'month' => $month,
+            'loggedIn' => $loggedIn
         ]);
     }
 }

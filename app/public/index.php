@@ -48,6 +48,8 @@ $router->post('/', 'DashboardController@add');
 //$router->post('/', 'TripController@add');
 $router->get('/about', 'DashboardController@showAbout');
 $router->get('/users', 'UserController@showAccountInfo');
+$router->get('/users/month/(\d+)', 'UserController@showSearchResults');
+$router->post('/users/search', 'UserController@search');
 $router->get('/login', 'UserController@showLogin');
 $router->post('/login', 'UserController@login');
 $router->get('/logout', 'UserController@logout');

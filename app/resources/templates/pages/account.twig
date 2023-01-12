@@ -84,7 +84,12 @@
         </div>
         <section class="rideHistory">
             <h2>Trip History</h2>
-            <form id="rideFilter" action="{{ url('/drivers/'~user.id~'/search') }}" method="POST">
+            <form id="rideFilter" {% if user.status == 'Driver' %}
+                  action="{{ url('/drivers/'~user.id~'/search') }}"
+                  {% else %}
+                  action="{{ url('/users/search') }}"
+                  {% endif %}
+                  method="POST">
                 <label for="month">Select month:</label>
                 <select name="month" id="month">
                     {% if months %}
