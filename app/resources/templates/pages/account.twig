@@ -82,25 +82,21 @@
         </div>
         <section class="rideHistory">
             <h2>Trip History</h2>
-            <form id="rideFilter" action="">
+            <form id="rideFilter" action="{{ url('/drivers/'~user.id~'/search') }}" method="POST">
+                <label for="month">Select month:</label>
                 <select name="month" id="month">
-                    {% for month in months %}
-                        <option value="month">month</option>
+                    {% if months|length < 0 %}
+                        <option value="14">something went wrong</option>
+                    {% else %}
+                    <option value="13" {% if month < 0 %} selected="selected" {% endif %}>...</option>
+                    {% for key, value in months %}
+                        <option value="{{ key }}"  {% if key == month %} selected="selected" {% endif %} >{{ value }}</option>
                     {% endfor %}
-                    <option value="">Jan</option>
-                    <option value="">Feb</option>
-                    <option value="">Mar</option>
-                    <option value="">Apr</option>
-                    <option value="">May</option>
-                    <option value="">Jun</option>
-                    <option value="">Jul</option>
-                    <option value="">Aug</option>
-                    <option value="">Sep</option>
-                    <option value="">Okt</option>
-                    <option value="">Nov</option>
-                    <option value="">Dec</option>
+                    {% endif %}
                 </select>
+                <button class="" type="submit">Search</button>
             </form>
+            {% if user.rideHistory|length > 0 %}
             {% for ride in user.rideHistory %}
                 <section class="ride">
                     <h2>{{ ride.start_time|date('l') }} {{ ride.start_time|date('h\\ui') }}</h2>
@@ -116,6 +112,11 @@
                     {% endif %}
                 </section>
             {% endfor %}
+            {% else %}
+                <section class="ride">
+                    <h2>no rides founds</h2>
+                </section>
+            {% endif %}
         </section>
 
 

@@ -81,7 +81,7 @@ class DriverController
         if (isset($_FILES['profilePic']) && ($_FILES['profilePic']['error'] === UPLOAD_ERR_OK)) {
 
             if ((new SplFileInfo($_FILES['profilePic']['name']))->getExtension() == 'jpg') {
-                $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], '../../storage/images/' . $_SESSION['user']['id'] . '.jpg');
+                $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], '../storage/images/' . $_SESSION['user']['id'] . '.jpg');
                 if (!$moved) {
                     $formErrors['profilePic'] = 'Error while saving file in the uploads folder';
                 }
@@ -109,9 +109,9 @@ class DriverController
             $formErrors['carPassengers'] = 'Voer een geldig aantal passagiers in tussen 1 en 10';
         }
 
-//        if (!\Services\VIESValidatorService::validate($btwNumber)) {
-//            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
-//        }
+        //        if (!\Services\VIESValidatorService::validate($btwNumber)) {
+        //            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
+        //        }
 
         //  if no errors: insert values into database
 
@@ -121,7 +121,6 @@ class DriverController
             header('location: /');
             exit();
 
-            //toDo als je bestuurder bent kun je nie opnieuw inschrijven
         } else {
             $driver = ['numberPlate' => $numberPlate, 'birthDate' => $birthDate, 'gender' => $gender, 'carBrand' => $carBrand, 'carModel' => $carModel, 'carPassengers' => $carPassengers, 'btwNumber' => $btwNumber];
             $_SESSION['flash']['driver'] = $driver;
@@ -137,6 +136,7 @@ class DriverController
         //            header('location: /');
         //            exit();
         //        }
+        $months = [1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr', 5 => 'May', 6 => 'Jun', 7 => 'Jul', 8 => 'Aug', 9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'];
 
         $stmt = $this->conn->prepare('SELECT * FROM anonymous_users as anon JOIN drivers as d on anon.id = d.id WHERE d.id = ?');
         $result = $stmt->executeQuery([$id]);
@@ -173,9 +173,72 @@ class DriverController
                 'status' => 'Driver',
                 'rideAmount' => count($trips),
                 'rideHistory' => $trips,
+                'id' => $id,
             ],
-            'driverInfo' => true
+            'driverInfo' => true,
+            'months' => $months,
+            'month' => -1,
         ]);
     }
 
+    public function search($id)
+    {
+        if (!isset($_SESSION['user'])) {
+            header('location: ../login');
+            exit();
+        }
+        $search = isset($_POST['month']) ? trim($_POST['month']) : '';
+
+        header('Location: /drivers/'.$id.'/month/' . urlencode($search));
+        exit();
+    }
+
+    public function showSearchResults($id, $month)
+    {
+        $id = urldecode($id);
+        $month = urldecode($month);
+
+        $months = [1 => 'Jan', 2 => 'Feb', 3 => 'Mar', 4 => 'Apr', 5 => 'May', 6 => 'Jun', 7 => 'Jul', 8 => 'Aug', 9 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'];
+
+        $stmt = $this->conn->prepare('SELECT * FROM anonymous_users as anon JOIN drivers as d on anon.id = d.id WHERE d.id = ?');
+        $result = $stmt->executeQuery([$id]);
+        $driver = $result->fetchAssociative();
+        if (!$driver) {
+            header('location: /');
+            exit();
+        }
+
+        $stmt = $this->conn->prepare('SELECT COUNT(*) FROM trips as t WHERE t.driver_id = ? AND t.status = "finished"');
+        $result = $stmt->executeQuery([$id]);
+        $tripsCount = $result->fetchOne();
+
+        $matches =array();
+        if ($month < 13){
+            $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.driver_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
+            $results = $stmt->executeQuery([$id, $month]);
+            $matches = $results->fetchAllAssociative();
+        }
+        else{
+            header('location: /drivers/'.$id);
+            exit();
+        }
+
+        echo $this->twig->render('pages/account.twig', [
+            'user' => [
+                'name' => $driver['first_name'] . ' ' . $driver['last_name'],
+                'email' => $driver['email'],
+                'gender' => $driver['gender'],
+                'car' => $driver['car_brand'],
+                'model' => $driver['car_model'],
+                'seats' => $driver['car_seats'],
+                'status' => 'Driver',
+                'rideAmount' => $tripsCount,
+                'rideHistory' => $matches,
+                'id' => $id,
+            ],
+            'driverInfo' => true,
+            'months' => $months,
+            'month' => $month,
+        ]);
+    }
 }

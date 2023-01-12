@@ -37,7 +37,9 @@ class TripController
                 start_time AS time,
                 id,
                 status
-            FROM trips as t WHERE t.driver_id = ? AND (t.status = "claimed" OR t.status = "started")
+            FROM trips as t 
+            WHERE t.driver_id = ? AND (t.status = "claimed" OR t.status = "started")
+            ORDER BY t.time
             SQL,
             [$_SESSION['user']['id']]
         );
@@ -51,7 +53,9 @@ class TripController
                 stop_city AS toCity,
                 start_time AS time,
                 id
-            FROM trips as t WHERE t.status = "pending"
+            FROM trips as t 
+            WHERE t.status = "pending"
+            ORDER BY t.time
             SQL
         );
 
@@ -67,25 +71,31 @@ class TripController
 
     public function acceptRide()
     {
-        //toDo check if user is driver
         $userId = $_SESSION['user']['id'];
         $tripId = $_POST['accept'] ?? '';
         if (!trim($tripId) || !trim($userId)){
-            header('Location: badrequest');
+            header('Location: /badrequest');
             exit();
         }
         else{
-            $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
-            $result = $stmt->executeStatement(['claimed', $userId, $tripId]);
+            $stmt = $this->conn->prepare('SELECT * FROM trips WHERE status = ? AND id = ?');
+            $result = $stmt->executeQuery(['pending', $tripId]);
+            $trip = $result->fetchAssociative();
 
-            header('Location: /rides');
+            if($trip){
+                $stmt = $this->conn->prepare('UPDATE trips SET status = ?, driver_id = ? WHERE id = ?');
+                $result = $stmt->executeStatement(['claimed', $userId, $tripId]);
+                header('Location: /rides');
+                exit();
+            }
+
+            header('Location: /rideIsClaimed');
             exit();
         }
     }
 
     public function cancelStartFinishRide()
     {
-        //toDo check if user is driver
         $userId = $_SESSION['user']['id'];
         $status = 'pending';
         if (isset($_POST['cancel'])){

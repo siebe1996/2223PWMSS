@@ -30,13 +30,24 @@ $router->before('GET|POST', '/drivers/create', function () {
         header('location: ../login');
         exit();
     }
+    if ($_SESSION['user']['status'] !== 'Rider') {
+        header('location: /');
+        exit();
+    }
+});
+
+$router->before('GET|POST', '/driver/.*', function () {
+    if ($_SESSION['user']['status'] !== 'Driver') {
+        header('location: /');
+        exit();
+    }
 });
 
 $router->get('/', 'DashboardController@show');
 $router->post('/', 'DashboardController@add');
 //$router->post('/', 'TripController@add');
 $router->get('/about', 'DashboardController@showAbout');
-$router->get('/user', 'UserController@showAccountInfo');
+$router->get('/users', 'UserController@showAccountInfo');
 $router->get('/login', 'UserController@showLogin');
 $router->post('/login', 'UserController@login');
 $router->get('/logout', 'UserController@logout');
@@ -48,9 +59,11 @@ $router->get('/verification', 'VerificationController@show');
 $router->post('/verification', 'VerificationController@verification');
 
 //$router->get('/requestPending', 'DashboardController@showRequestPending'); //driver/ride
-$router->post('/rides/(\d+)/accept', 'TripController@acceptRide'); //driver/ride/accept  driver/ride/cancel
-$router->post('/rides/(\d+)/cancelstartfinish', 'TripController@cancelStartFinishRide');
+$router->post('/driver/rides/(\d+)/accept', 'TripController@acceptRide'); //driver/ride/accept  driver/ride/cancel
+$router->post('/driver/rides/(\d+)/cancelstartfinish', 'TripController@cancelStartFinishRide');
 $router->get('/drivers/(\d+)', 'DriverController@showDriverInfo');
-$router->get('/rides', 'TripController@showAvailableRides');
+$router->get('/drivers/(\d+)/month/(\d+)', 'DriverController@showSearchResults');
+$router->post('/drivers/(\d+)/search', 'DriverController@search');
+$router->get('/driver/rides', 'TripController@showAvailableRides');
 
 $router->run();

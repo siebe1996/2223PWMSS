@@ -30,8 +30,7 @@ class VerificationController
 
         unset($_SESSION['flash']['errors']);
 
-        $showPassword = isset($errorMsg) && $errorMsg == '';
-
+        $showPassword = false;
 
         if ($verificationCode !== '' && $userId !== '') {
             $stmt = $this->conn->prepare('SELECT verification_code,verified FROM users WHERE id = ?');
@@ -67,9 +66,6 @@ class VerificationController
         $userId = isset($_POST['userId']) ? trim($_POST['userId']) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
 
-        $_SESSION['flash']['verification']['verificationCode'] = $verificationCode;
-        $_SESSION['flash']['verification']['userId'] = $userId;
-
         if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$^+=!*()@%&]).{8,16}$/', $password)) {
             $_SESSION['flash']['errors']['password'] = 'Je wachtwoord voldoet niet aan alle voorwaarden';
             header('location:verification');
@@ -77,6 +73,9 @@ class VerificationController
         }
 
         if ($verificationCode !== '' && $userId !== '') {
+            $_SESSION['flash']['verification']['verificationCode'] = $verificationCode;
+            $_SESSION['flash']['verification']['userId'] = $userId;
+
             $stmt = $this->conn->prepare('SELECT verification_code,verified FROM users WHERE id = ?');
             $result = $stmt->executeQuery([$userId]);
             $user = $result->fetchAssociative();
@@ -91,8 +90,7 @@ class VerificationController
                 exit;
             } elseif ($user['verification_code'] == $verificationCode) {
                 $stmt = $this->conn->prepare('UPDATE users SET password=?,verified=1 WHERE id = ?;');
-                $result = $stmt->executeQuery([password_hash($password, PASSWORD_ARGON2ID), $userId]);
-                $user = $result->fetchAssociative();
+                $result = $stmt->executeStatement([password_hash($password, PASSWORD_ARGON2ID), $userId]);
                 header('location:login');
                 exit;
             }
