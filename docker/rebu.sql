@@ -24,11 +24,11 @@ USE `rebu` ;
 DROP TABLE IF EXISTS `rebu`.`anonymous_users` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`anonymous_users` (
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `email` VARCHAR(255) NOT NULL,
-    `first_name` VARCHAR(45) NOT NULL,
-    `last_name` VARCHAR(127) NOT NULL,
-    PRIMARY KEY (`id`))
+                                                        `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                                                        `email` VARCHAR(255) NOT NULL,
+                                                        `first_name` VARCHAR(45) NOT NULL,
+                                                        `last_name` VARCHAR(127) NOT NULL,
+                                                        PRIMARY KEY (`id`))
     ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`anonymous_users` (`id` ASC) VISIBLE;
@@ -42,85 +42,19 @@ CREATE UNIQUE INDEX `email_UNIQUE` ON `rebu`.`anonymous_users` (`email` ASC) VIS
 DROP TABLE IF EXISTS `rebu`.`users` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`users` (
-    `id` INT UNSIGNED NOT NULL,
-    `password` VARCHAR(255) DEFAULT NULL,
-    `verified` TINYINT NOT NULL DEFAULT 0,
-    `verification_code` VARCHAR(16) NOT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT `userid`
-    FOREIGN KEY (`id`)
-    REFERENCES `rebu`.`anonymous_users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+                                              `id` INT UNSIGNED NOT NULL,
+                                              `password` VARCHAR(255) DEFAULT NULL,
+                                              `verified` TINYINT NOT NULL DEFAULT 0,
+                                              `verification_code` VARCHAR(16) NOT NULL,
+                                              PRIMARY KEY (`id`),
+                                              CONSTRAINT `userid`
+                                                  FOREIGN KEY (`id`)
+                                                      REFERENCES `rebu`.`anonymous_users` (`id`)
+                                                      ON DELETE NO ACTION
+                                                      ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`users` (`id` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `rebu`.`admin_roles`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `rebu`.`admin_roles` ;
-
-CREATE TABLE IF NOT EXISTS `rebu`.`admin_roles` (
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `title` ENUM('admin', 'tester') NULL,
-    PRIMARY KEY (`id`))
-    ENGINE = InnoDB;
-
-CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`admin_roles` (`id` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `rebu`.`users_has_users`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `rebu`.`users_has_users` ;
-
-CREATE TABLE IF NOT EXISTS `rebu`.`users_has_users` (
-    `users_id` INT UNSIGNED NOT NULL,
-    `users_id1` INT UNSIGNED NOT NULL,
-    PRIMARY KEY (`users_id`, `users_id1`),
-    CONSTRAINT `fk_users_has_users_users`
-    FOREIGN KEY (`users_id`)
-    REFERENCES `rebu`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    CONSTRAINT `fk_users_has_users_users1`
-    FOREIGN KEY (`users_id1`)
-    REFERENCES `rebu`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
-
-CREATE INDEX `fk_users_has_users_users1_idx` ON `rebu`.`users_has_users` (`users_id1` ASC) VISIBLE;
-
-CREATE INDEX `fk_users_has_users_users_idx` ON `rebu`.`users_has_users` (`users_id` ASC) VISIBLE;
-
-
--- -----------------------------------------------------
--- Table `rebu`.`users_has_admin_roles`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `rebu`.`users_has_admin_roles` ;
-
-CREATE TABLE IF NOT EXISTS `rebu`.`users_has_admin_roles` (
-    `users_id` INT UNSIGNED NOT NULL,
-    `roles_id` INT UNSIGNED NOT NULL,
-    PRIMARY KEY (`users_id`, `roles_id`),
-    CONSTRAINT `fk_users_has_roles_users1`
-    FOREIGN KEY (`users_id`)
-    REFERENCES `rebu`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    CONSTRAINT `fk_users_has_roles_roles1`
-    FOREIGN KEY (`roles_id`)
-    REFERENCES `rebu`.`admin_roles` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-    ENGINE = InnoDB;
-
-CREATE INDEX `fk_users_has_roles_roles1_idx` ON `rebu`.`users_has_admin_roles` (`roles_id` ASC) VISIBLE;
-
-CREATE INDEX `fk_users_has_roles_users1_idx` ON `rebu`.`users_has_admin_roles` (`users_id` ASC) VISIBLE;
 
 
 -- -----------------------------------------------------
@@ -129,22 +63,22 @@ CREATE INDEX `fk_users_has_roles_users1_idx` ON `rebu`.`users_has_admin_roles` (
 DROP TABLE IF EXISTS `rebu`.`drivers` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`drivers` (
-    `id` INT UNSIGNED NOT NULL,
-    `btw_nr` VARCHAR(12) NOT NULL,
-    `number_plate` VARCHAR(7) NOT NULL,
-    `birth_date` TIMESTAMP NOT NULL,
-    `car_seats` INT UNSIGNED NOT NULL,
-    `car_model` VARCHAR(45) NOT NULL,
-    `car_brand` VARCHAR(45) NOT NULL,
-    `actief` TINYINT NOT NULL DEFAULT 0,
-    `gender` ENUM('M', 'F', 'X') NOT NULL,
-    `profile_pic` VARCHAR(45) NOT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT `driver`
-    FOREIGN KEY (`id`)
-    REFERENCES `rebu`.`users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+                                                `id` INT UNSIGNED NOT NULL,
+                                                `btw_nr` VARCHAR(12) NOT NULL,
+                                                `number_plate` VARCHAR(7) NOT NULL,
+                                                `birth_date` TIMESTAMP NOT NULL,
+                                                `car_seats` INT UNSIGNED NOT NULL,
+                                                `car_model` VARCHAR(45) NOT NULL,
+                                                `car_brand` VARCHAR(45) NOT NULL,
+                                                `actief` TINYINT NOT NULL DEFAULT 0,
+                                                `gender` ENUM('M', 'F', 'X') NOT NULL,
+                                                `profile_pic` VARCHAR(45) NOT NULL,
+                                                PRIMARY KEY (`id`),
+                                                CONSTRAINT `driver`
+                                                    FOREIGN KEY (`id`)
+                                                        REFERENCES `rebu`.`users` (`id`)
+                                                        ON DELETE NO ACTION
+                                                        ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `idd_UNIQUE` ON `rebu`.`drivers` (`id` ASC) VISIBLE;
@@ -160,30 +94,30 @@ CREATE UNIQUE INDEX `nummerplaat_UNIQUE` ON `rebu`.`drivers` (`number_plate` ASC
 DROP TABLE IF EXISTS `rebu`.`trips` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`trips` (
-    `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `start_nr` VARCHAR(5) NOT NULL,
-    `start_street` VARCHAR(255) NOT NULL,
-    `start_city` VARCHAR(45) NOT NULL,
-    `stop_nr` VARCHAR(255) NOT NULL,
-    `stop_street` VARCHAR(45) NOT NULL,
-    `stop_city` VARCHAR(45) NOT NULL,
-    `start_time` DATETIME NOT NULL,
-    `stop_time` DATETIME DEFAULT NULL,
-    `costumer_id` INT UNSIGNED NOT NULL,
-    `driver_id` INT UNSIGNED DEFAULT NULL,
-    `price` DECIMAL(5,2) UNSIGNED NOT NULL,
-    `status` ENUM('pending', 'claimed', 'cancelled', 'started', 'finished') NOT NULL DEFAULT 'pending',
-    PRIMARY KEY (`id`),
-    CONSTRAINT `costumer`
-    FOREIGN KEY (`costumer_id`)
-    REFERENCES `rebu`.`anonymous_users` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-    CONSTRAINT `driverreview`
-    FOREIGN KEY (`driver_id`)
-    REFERENCES `rebu`.`drivers` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+                                              `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+                                              `start_nr` VARCHAR(5) NOT NULL,
+                                              `start_street` VARCHAR(255) NOT NULL,
+                                              `start_city` VARCHAR(45) NOT NULL,
+                                              `stop_nr` VARCHAR(255) NOT NULL,
+                                              `stop_street` VARCHAR(45) NOT NULL,
+                                              `stop_city` VARCHAR(45) NOT NULL,
+                                              `start_time` DATETIME NOT NULL,
+                                              `stop_time` DATETIME DEFAULT NULL,
+                                              `costumer_id` INT UNSIGNED NOT NULL,
+                                              `driver_id` INT UNSIGNED DEFAULT NULL,
+                                              `price` DECIMAL(5,2) UNSIGNED NOT NULL,
+                                              `status` ENUM('pending', 'claimed', 'cancelled', 'started', 'finished') NOT NULL DEFAULT 'pending',
+                                              PRIMARY KEY (`id`),
+                                              CONSTRAINT `costumer`
+                                                  FOREIGN KEY (`costumer_id`)
+                                                      REFERENCES `rebu`.`anonymous_users` (`id`)
+                                                      ON DELETE NO ACTION
+                                                      ON UPDATE NO ACTION,
+                                              CONSTRAINT `driverreview`
+                                                  FOREIGN KEY (`driver_id`)
+                                                      REFERENCES `rebu`.`drivers` (`id`)
+                                                      ON DELETE NO ACTION
+                                                      ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `idt_UNIQUE` ON `rebu`.`trips` (`id` ASC) VISIBLE;
@@ -199,16 +133,16 @@ CREATE INDEX `driver_idx` ON `rebu`.`trips` (`driver_id` ASC) VISIBLE;
 DROP TABLE IF EXISTS `rebu`.`reviews` ;
 
 CREATE TABLE IF NOT EXISTS `rebu`.`reviews` (
-    `id` INT UNSIGNED NOT NULL,
-    `rating` DECIMAL(2,1) NOT NULL,
-    `review` TEXT NOT NULL,
-    `trip_id` INT UNSIGNED NOT NULL,
-    PRIMARY KEY (`id`),
-    CONSTRAINT `trip`
-    FOREIGN KEY (`trip_id`)
-    REFERENCES `rebu`.`trips` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+                                                `id` INT UNSIGNED NOT NULL,
+                                                `rating` DECIMAL(2,1) NOT NULL,
+                                                `review` TEXT NOT NULL,
+                                                `trip_id` INT UNSIGNED NOT NULL,
+                                                PRIMARY KEY (`id`),
+                                                CONSTRAINT `trip`
+                                                    FOREIGN KEY (`trip_id`)
+                                                        REFERENCES `rebu`.`trips` (`id`)
+                                                        ON DELETE NO ACTION
+                                                        ON UPDATE NO ACTION)
     ENGINE = InnoDB;
 
 CREATE UNIQUE INDEX `id_UNIQUE` ON `rebu`.`reviews` (`id` ASC) VISIBLE;
@@ -221,3 +155,49 @@ CREATE INDEX `trip_idx` ON `rebu`.`reviews` (`trip_id` ASC) VISIBLE;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+--
+-- Dumping data for table `anonymous_users`
+--
+
+INSERT INTO `anonymous_users` (`id`, `email`, `first_name`, `last_name`) VALUES
+                                                                             (1, 'lukasdownes@gmail.com', 'l', 'd'),
+                                                                             (5, 'lukas.downes@student.odisee.be', 'lukas', 'downes');
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `password`, `verified`, `verification_code`) VALUES
+                                                                            (1, '$argon2id$v=19$m=65536,t=4,p=1$clZkcFVacFVBRnZqb0pRbA$/3QBfdkYwdlTJfzP5nlW15bcc3SpWBQLEG9bx+/MPbQ', 1, 'MIZWPJTDVFBORYKG'),
+                                                                            (5, '$argon2id$v=19$m=65536,t=4,p=1$bDJPRC52MDJRN3lQbUZkSg$XYNUDZylw2QeXZ08h8BJZIEPo2BPwcWzjUQsuSp64n0', 1, 'EZQBCHGVFJWTYRLN');
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `drivers`
+--
+
+INSERT INTO `drivers` (`id`, `btw_nr`, `number_plate`, `birth_date`, `car_seats`, `car_model`, `car_brand`, `actief`, `gender`, `profile_pic`) VALUES
+    (1, 'BE13548547', '1dle884', '1996-03-13 00:00:00', 3, 'm', 'bm', 0, 'F', '1.jpg');
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `trips`
+--
+
+INSERT INTO `trips` (`id`, `start_nr`, `start_street`, `start_city`, `stop_nr`, `stop_street`, `stop_city`, `start_time`, `stop_time`, `costumer_id`, `driver_id`, `price`, `status`) VALUES
+                                                                                                                                                                                          (1, '46', 'elfjulistraat', '9000 Gent', '46', 'henri vieuxtempsstraat', '1070 Anderlecht', '2023-02-14 14:52:00', NULL, 1, 1, '0.00', 'finished'),
+                                                                                                                                                                                          (2, '452', 'regrqe', 'qgfeZFzf', '46', 'sqfq', 'sqfde', '2023-01-12 16:05:00', NULL, 1, 1, '0.00', 'finished'),
+                                                                                                                                                                                          (3, '46', 'dfEF', 'qsdf', '66', 'sqf', 'qdsfsqdfq', '2023-01-12 15:41:00', NULL, 1, 1, '0.00', 'finished'),
+                                                                                                                                                                                          (4, '16', 'henri vieuxtempsstraat', '1070 Anderlecht', '46', 'elfjulistraat', '9000 Gent', '2023-01-11 20:50:00', NULL, 1, 1, '0.00', 'finished'),
+                                                                                                                                                                                          (5, '16', 'henri vieuxtempsstraat', 'Anderlecht', '46', 'elfjulistraat', 'Gent', '2024-02-12 21:00:00', NULL, 1, 1, '0.00', 'finished'),
+                                                                                                                                                                                          (6, '46', 'henri vieuxtempsstraat', 'Gent', '46', 'elfjulistraat', 'Anderlecht', '2024-03-12 00:04:00', NULL, 1, 1, '0.00', 'cancelled'),
+                                                                                                                                                                                          (7, '452', 'elfjulistraat', 'gent', '61', 'henri vieuxtempsstraat', 'downes', '2024-02-10 00:05:00', NULL, 1, 1, '0.00', 'finished'),
+                                                                                                                                                                                          (8, '16', 'lukas', 'gent', '16', 'Downes', 'Gent', '2024-02-12 00:17:00', NULL, 5, 1, '0.00', 'finished'),
+                                                                                                                                                                                          (9, '123', 'Azerty', 'Qwerty', '123', 'Qwerty', 'Azerty', '2027-03-12 00:18:00', NULL, 5, 1, '0.00', 'cancelled'),
+                                                                                                                                                                                          (10, '16', 'henri vieuxtempsstraat', 'Anderlecht', '46', 'elfjulistraat', 'Gent', '2024-02-13 17:05:00', NULL, 5, 1, '109.52', 'finished'),
+                                                                                                                                                                                          (11, '116', 'Meir', 'Antwerpen', '46', 'elfjulistraat', 'Gent', '2024-02-13 19:25:00', NULL, 5, 1, '237.35', 'finished'),
+                                                                                                                                                                                          (12, '16', 'henri vieuxtempsstraat', 'Anderlecht', '46', 'elfjulistraat', 'Gent', '2024-02-13 20:15:00', NULL, 5, 1, '0.00', 'finished'),
+                                                                                                                                                                                          (13, '33', 'Nieuwstraat', 'Brussel', '16', 'henri vieuxtempsstraat', 'Anderlecht', '2024-02-13 20:19:00', NULL, 5, NULL, '20.29', 'pending');
+-- --------------------------------------------------------
