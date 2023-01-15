@@ -5,7 +5,6 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/..');
 $dotenv->load();
 
 $router = new \Bramus\Router\Router();
-//$router->setNamespace('\Controllers');
 
 $router = new \Bramus\Router\Router();
 

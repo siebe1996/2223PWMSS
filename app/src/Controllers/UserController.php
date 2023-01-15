@@ -172,7 +172,6 @@ class UserController
             'last_name' => $lastName,
             'userId' => $userId
         ]);
-        //toDo redirect to conformation page;
 
         header('location:/verification');
         exit();
