@@ -25,7 +25,7 @@ class DriverController
 
     public function show()
     {
-        $formErrors = isset($_SESSION['flash']['errors']['driver']) ? $_SESSION['flash']['errors']['driver'] : '';
+        $formErrors = $_SESSION['flash']['errors']['driver'] ?? '';
         $numberPlate = isset($_SESSION['flash']['driver']['numberPlate']) ? trim($_SESSION['flash']['driver']['numberPlate']) : '';
         $birthDate = isset($_SESSION['flash']['driver']['birthDate']) ? trim($_SESSION['flash']['driver']['birthDate']) : '';
         $gender = isset($_SESSION['flash']['driver']['gender']) ? trim($_SESSION['flash']['driver']['gender']) : '';
@@ -108,11 +108,9 @@ class DriverController
             $formErrors['carPassengers'] = 'Voer een geldig aantal passagiers in tussen 1 en 10';
         }
 
-        //        if (!\Services\VIESValidatorService::validate($btwNumber)) {
-        //            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
-        //        }
-
-        //  if no errors: insert values into database
+        if (!\Services\VIESValidatorService::validate($btwNumber)) {
+            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
+        }
 
         if (!$formErrors) {
             $stmt = $this->conn->prepare('INSERT INTO drivers (id, number_plate, birth_date, car_seats, car_model, car_brand, gender, profile_pic, btw_nr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
@@ -123,7 +121,7 @@ class DriverController
             $driver = ['numberPlate' => $numberPlate, 'birthDate' => $birthDate, 'gender' => $gender, 'carBrand' => $carBrand, 'carModel' => $carModel, 'carPassengers' => $carPassengers, 'btwNumber' => $btwNumber];
             $_SESSION['flash']['driver'] = $driver;
             $_SESSION['flash']['errors'] = ['driver' => $formErrors];
-            header('location: create');
+            header('location: /create');
             exit;
         }
     }
@@ -145,18 +143,6 @@ class DriverController
             exit();
         }
         $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.driver_id = ? AND t.status = "finished"');
-        /*$stmt = $this->conn->prepare(<<<'SQL'
-            SELECT
-                start_city AS fromCity,
-                stop_city AS toCity,
-                start_time AS date,
-                price AS cost,
-                DAYNAME(start_time) as day,
-                
-                                  
-            FROM trips as t WHERE t.driver_id = ? AND t.status = "finished"
-            SQL
-        );*/
         $result = $stmt->executeQuery([$id]);
         $trips = $result->fetchAllAssociative();
 
