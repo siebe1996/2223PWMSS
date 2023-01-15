@@ -171,6 +171,7 @@ class TripController
         $status = 'pending';
         if (isset($_POST['cancel'])) {
             $tripId = $_POST['cancel'] ?? '';
+            $userId = 'NULL';
         } elseif (isset($_POST['finish'])) {
             $tripId = $_POST['finish'] ?? '';
             $status = 'finished';
