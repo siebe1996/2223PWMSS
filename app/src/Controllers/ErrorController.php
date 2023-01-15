@@ -21,8 +21,15 @@ class ErrorController
 
     public function notFound(){
         header('HTTP/1.1 404 Not Found');
-        echo $this->twig->render('pages/404.twig', [
+        http_response_code(404);
+        echo $this->twig->render('errors/404.twig', [
         ]);
     }
 
+    public function badRequest(){
+        header('HTTP/1.1 400 Not Found');
+        http_response_code(400);
+        echo $this->twig->render('errors/400.twig', [
+        ]);
+    }
 }

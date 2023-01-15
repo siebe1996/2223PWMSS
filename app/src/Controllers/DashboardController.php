@@ -141,13 +141,18 @@ class DashboardController
 
         $route = ShortestPathService::route($startCoords, $endCoords);
         $distance = $route['routes'][0]['distance'];
-
-        if ($distance > 100000) {
-            $formErrors['startStreet'] = 'Trip is longer than 100km';
+        if ($startCoords && $endCoords) {
+            if ($distance > 100000) {
+                $formErrors['startStreet'] = 'Trip is longer than 100km';
+            }
+            else {
+                $price = 5 + $distance/1000*2;
+            }
         }
         else {
-            $price = 5 + $distance/1000*2;
+            $startCoords ? $formErrors['endStreet'] = 'Ongledig eindadres' : $formErrors['startStreet'] = 'Ongeldig beginadres';
         }
+
 
         if (!$loggedIn) {
             $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
