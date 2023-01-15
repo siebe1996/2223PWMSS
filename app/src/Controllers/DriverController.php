@@ -4,6 +4,8 @@
 //require_once ('../../config/database.php');
 //require_once ('../../src/Services/DatabaseConnector.php');
 
+use Services\VIESValidatorService;
+
 class DriverController
 {
     protected \Doctrine\DBAL\Connection $conn;
@@ -108,9 +110,9 @@ class DriverController
             $formErrors['carPassengers'] = 'Voer een geldig aantal passagiers in tussen 1 en 10';
         }
 
-        //        if (!\Services\VIESValidatorService::validate($btwNumber)) {
-        //            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
-        //        }
+        if (!VIESValidatorService::validate($btwNumber)) {
+            $formErrors['btwNumber'] = 'Voer een geldig btw nummer in';
+        }
 
         //  if no errors: insert values into database
 
@@ -173,7 +175,7 @@ class DriverController
                 'rideHistory' => $trips,
                 'id' => $id,
             ],
-            'userStatus'=>$_SESSION['user']['status'],
+            'userStatus' => $_SESSION['user']['status'],
             'driverInfo' => true,
             'months' => $months,
             'month' => -1,
