@@ -39,7 +39,6 @@ class DriverController
         unset($_SESSION['flash']);
 
         echo $this->twig->render('pages/becomeDriver.twig', [
-            'pathToRoot' => '../',
             'driverRegister' => true,
             'loggedIn' => true,
             'errors' => $formErrors,

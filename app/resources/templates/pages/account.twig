@@ -6,7 +6,6 @@
                 <div class="text">
                     <h2>{{ user.name }}</h2>
                     <p>Email : {{ user.email }}</p>
-
                     <p>{{ user.status }} • {{ user.rideAmount }} trips</p>
                     {% if driverInfo %}
                         <p>Gender : <span>{{ user.gender }}</span></p>
@@ -16,6 +15,9 @@
                     {% endif %}
                 </div>
                 <div class="profilePic">
+                    {% if  %}
+                        
+                    {% endif %}
                     <svg width="38" height="50" viewBox="0 0 38 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15.64 44.8821C23.6127 44.8821 30.0758 38.4141 30.0758 30.4353C30.0758 22.4565 23.6127 15.9884 15.64 15.9884C7.66731 15.9884 1.20416 22.4565 1.20416 30.4353C1.20416 38.4141 7.66731 44.8821 15.64 44.8821Z"
                               fill="#2E5DA6"/>
@@ -87,7 +89,7 @@
             <form id="rideFilter" {% if user.status == 'Driver' %}
                   action="{{ url('/drivers/'~user.id~'/search') }}"
                   {% else %}
-                  action="{{ url('/users/search') }}"
+                  action="{{ url('/account/search') }}"
                   {% endif %}
                   method="POST">
                 <label for="month">Select month:</label>

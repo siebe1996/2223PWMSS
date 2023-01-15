@@ -252,7 +252,7 @@ class UserController
         }
         $search = isset($_POST['month']) ? trim($_POST['month']) : '';
 
-        header('location:/users/months/' . urlencode($search));
+        header('location:/account/months/' . urlencode($search));
         exit();
     }
 
@@ -291,7 +291,7 @@ class UserController
             $results = $stmt->executeQuery([$id, $month]);
             $matches = $results->fetchAllAssociative();
         } else {
-            header('location:/users');
+            header('location:/account');
             exit();
         }
 
