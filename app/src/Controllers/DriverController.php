@@ -125,6 +125,7 @@ class DriverController
             $_SESSION['flash']['errors'] = ['driver' => $formErrors];
             header('location: /create');
             exit;
+
         }
     }
 
