@@ -48,7 +48,7 @@ $router->post('/', 'DashboardController@add');
 //$router->post('/', 'TripController@add');
 $router->get('/about', 'DashboardController@showAbout');
 $router->get('/users', 'UserController@showAccountInfo');
-$router->get('/users/month/(\d+)', 'UserController@showSearchResults');
+$router->get('/users/months/(\d+)', 'UserController@showSearchResults');
 $router->post('/users/search', 'UserController@search');
 $router->get('/login', 'UserController@showLogin');
 $router->post('/login', 'UserController@login');
@@ -67,7 +67,7 @@ $router->post('/driver/rides/(\d+)/confirm', 'TripController@confirm');
 $router->post('/driver/rides/(\d+)/cancelstartfinish', 'TripController@cancelStartFinishRide');
 $router->post('/rides/(\d+)/cancel', 'TripController@cancel');
 $router->get('/drivers/(\d+)', 'DriverController@showDriverInfo');
-$router->get('/drivers/(\d+)/month/(\d+)', 'DriverController@showSearchResults');
+$router->get('/drivers/(\d+)/months/(\d+)', 'DriverController@showSearchResults');
 $router->post('/drivers/(\d+)/search', 'DriverController@search');
 $router->get('/driver/rides', 'TripController@showAvailableRides');
 

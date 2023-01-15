@@ -245,7 +245,7 @@ class UserController
         }
         $search = isset($_POST['month']) ? trim($_POST['month']) : '';
 
-        header('location:/users/month/' . urlencode($search));
+        header('location:/users/months/' . urlencode($search));
         exit();
     }
 
