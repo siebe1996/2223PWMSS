@@ -29,7 +29,7 @@ class UserController
     public function showLogin()
     {
         $formErrors = isset($_SESSION['flash']['errors']['login']) ? trim($_SESSION['flash']['errors']['login']) : '';
-        $email = isset($_SESSION['flash']['login']['email']) ? trim($_SESSION['flash']['login']['email']) :  '';
+        $email = isset($_SESSION['flash']['login']['email']) ? trim($_SESSION['flash']['login']['email']) : '';
         unset($_SESSION['flash']);
 
         echo $this->twig->render('pages/login.twig', [
@@ -60,7 +60,14 @@ class UserController
             exit();
         }
 
-        $user = $this->conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
+        $user = $this->conn->fetchAssociative('SELECT 
+        anon.id, 
+        anon.email, 
+        anon.first_name, 
+        anon.last_name, 
+        u.password, 
+        u.verified 
+        FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/', [$email]);
 
         if (!empty($user)) {
             if ($user['verified']) {
@@ -207,7 +214,8 @@ class UserController
                 start_city AS fromCity,
                 stop_city AS toCity,
                 start_time AS time,
-                id FROM trips WHERE costumer_id = ? AND status = "finished" ORDER BY start_time DESC')
+                id 
+                FROM trips WHERE costumer_id = ? AND status = "finished" ORDER BY start_time DESC')
             ->executeQuery([$_SESSION['user']['id']])
             ->fetchAllAssociative();
 
@@ -239,7 +247,7 @@ class UserController
                 'bookedRides' => $bookedRides,
                 'id' => $userId,
             ],
-            'months'=> $months
+            'months' => $months
         ]);
     }
 
@@ -286,7 +294,8 @@ class UserController
                 start_city AS fromCity,
                 stop_city AS toCity,
                 start_time AS time,
-                id FROM trips as t WHERE t.costumer_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
+                id 
+                FROM trips as t WHERE t.costumer_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
             $results = $stmt->executeQuery([$id, $month]);
             $matches = $results->fetchAllAssociative();
         } else {

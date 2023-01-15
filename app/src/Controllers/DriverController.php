@@ -146,13 +146,15 @@ class DriverController
             header('location: /');
             exit();
         }
-        $stmt = $this->conn->prepare('SELECT CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
+        $stmt = $this->conn->prepare('SELECT 
+                CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
                 CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
                 price,
                 start_city AS fromCity,
                 stop_city AS toCity,
                 start_time AS time,
-                id FROM trips as t WHERE t.driver_id = ? AND t.status = "finished"');
+                id 
+                FROM trips as t WHERE t.driver_id = ? AND t.status = "finished"');
         $result = $stmt->executeQuery([$id]);
         $trips = $result->fetchAllAssociative();
 
@@ -214,13 +216,15 @@ class DriverController
 
         $matches = array();
         if ($month < 13) {
-            $stmt = $this->conn->prepare('SELECT CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
+            $stmt = $this->conn->prepare('SELECT 
+                CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
                 CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
                 price,
                 start_city AS fromCity,
                 stop_city AS toCity,
                 start_time AS time,
-                id FROM trips as t WHERE t.driver_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
+                id 
+                FROM trips as t WHERE t.driver_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
             $results = $stmt->executeQuery([$id, $month]);
             $matches = $results->fetchAllAssociative();
         } else {
