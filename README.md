@@ -54,9 +54,9 @@ GET     /
 POST    /
 
 GET     /about
-GET     /account
-GET     /account/months/(\d+)
-POST    /account/search
+GET     /me
+GET     /me/months/(\d+)
+POST    /me/search
 
 GET     /login
 POST    /login

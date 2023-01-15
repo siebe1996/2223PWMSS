@@ -494,6 +494,12 @@ button:hover {
 	justify-content: center;
 	align-items: center;
 	order: -1;
+	overflow: hidden;
+}
+.userInfo .profilePic img {
+	width: 100%;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
 }
 
 .bookedRides,

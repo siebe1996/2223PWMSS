@@ -207,6 +207,7 @@ class UserController
                 start_city AS fromCity,
                 stop_city AS toCity,
                 start_time AS time,
+                driver_id,
                 id FROM trips WHERE costumer_id = ? AND status = "finished" ORDER BY start_time DESC')
             ->executeQuery([$_SESSION['user']['id']])
             ->fetchAllAssociative();
@@ -251,7 +252,7 @@ class UserController
         }
         $search = isset($_POST['month']) ? trim($_POST['month']) : '';
 
-        header('location:/account/months/' . urlencode($search));
+        header('location:/me/months/' . urlencode($search));
         exit();
     }
 
@@ -290,7 +291,7 @@ class UserController
             $results = $stmt->executeQuery([$id, $month]);
             $matches = $results->fetchAllAssociative();
         } else {
-            header('location:/account');
+            header('location:/me');
             exit();
         }
 
