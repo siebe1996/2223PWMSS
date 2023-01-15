@@ -181,6 +181,7 @@ class TripController
             $status = 'started';
         }
         if (!trim($tripId) || !trim($userId) || $tripId != $id) {
+            //toDo something
             header('location:/badrequest');
             exit();
         } else {
@@ -198,6 +199,7 @@ class TripController
             $tripId = $_POST['cancel'] ?? '';
         }
         if (!trim($tripId) || $tripId != $id) {
+            //toDo something
             header('location:/badrequest');
             exit();
         } else {

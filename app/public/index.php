@@ -54,7 +54,7 @@ $router->get('/login', 'UserController@showLogin');
 $router->post('/login', 'UserController@login');
 $router->get('/logout', 'UserController@logout');
 $router->get('/register', 'UserController@showRegister');
-$router->post('/register', 'UserController@Register');
+$router->post('/register', 'UserController@register');
 $router->get('/drivers/create', 'DriverController@show');
 $router->post('/drivers/create', 'DriverController@add');
 $router->get('/verification', 'VerificationController@show');

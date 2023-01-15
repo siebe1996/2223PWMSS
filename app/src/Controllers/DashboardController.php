@@ -136,8 +136,6 @@ class DashboardController
             }
         }
 
-        //toDo add price calculation
-
         $startCoords = LonLatService::search($startStreet . ' ' . $startHouseNumber . ' ' . $startCity);
         $endCoords = LonLatService::search($endStreet . ' ' . $endHouseNumber . ' ' . $endCity);
 
@@ -148,23 +146,8 @@ class DashboardController
             $formErrors['startStreet'] = 'Trip is longer than 100km';
         }
         else {
-//          price = base + dist(m)/1000*price/km
             $price = 5 + $distance/1000*2;
-//          header('content-type:application/json');
-//          echo json_encode($route, true);exit();
         }
-
-
-        /*function validateDate($date) {
-            $format = 'Y-m-d H:i';
-            $dateTime = DateTime::createFromFormat($format, $date);
-
-            if ($dateTime instanceof DateTime && $dateTime->format('Y-m-d H:i') == $date) {
-                return $dateTime->getTimestamp();
-            }
-
-            return false;
-        }*/
 
         if (!$loggedIn) {
             $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
@@ -216,13 +199,13 @@ class DashboardController
 
             $stmt = $this->conn->prepare('INSERT INTO trips (start_nr, start_street, start_city, stop_nr, stop_street, stop_city, start_time, costumer_id, price) VALUES (?, ?, ?, ?, ?, ?, ? ,?, ?)');
             $result = $stmt->executeStatement([$startHouseNumber, $startStreet, $startCity, $endHouseNumber, $endStreet, $endCity, $datetime, $userId, $price]);
-            header('Location: /');
+            header('location:/');
             exit();
         } else {
             $trip = ['startNumber' => $startHouseNumber, 'startStreet' => $startStreet, 'startCity' => $startCity, 'endNumber' => $endHouseNumber, 'endStreet' => $endStreet, 'endCity' => $endCity, 'dateTime' => $datetime, 'firstName' => $firstName, 'lastName' => $lastName, 'email' => $email];
             $_SESSION['flash']['trip'] = $trip;
             $_SESSION['flash']['errors'] = ['trip' => $formErrors];
-            header('Location: /');
+            header('location:/');
             exit();
         }
     }

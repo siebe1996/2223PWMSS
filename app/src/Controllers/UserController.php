@@ -29,14 +29,14 @@ class UserController
     public function showLogin()
     {
         $formErrors = isset($_SESSION['flash']['errors']['login']) ? trim($_SESSION['flash']['errors']['login']) : '';
-        //$email = isset($_SESSION['flash']['login']['email']) ? trim($_SESSION['flash']['login']['email']) :  '';
-        //$password = isset($_SESSION['flash']['login']['password']) ? trim($_SESSION['flash']['login']['password']) :  '';
+        $email = isset($_SESSION['flash']['login']['email']) ? trim($_SESSION['flash']['login']['email']) :  '';
         unset($_SESSION['flash']);
 
         echo $this->twig->render('pages/login.twig', [
             'error' => $formErrors,
             'disappearingSVG' => true,
-            'loggedIn' => false
+            'loggedIn' => false,
+            'email' => $email
         ]);
     }
 
@@ -44,21 +44,19 @@ class UserController
     {
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
         $password = isset($_POST['password']) ? trim($_POST['password']) : '';
-
-        $allOk = true;
+        $formErrors = '';
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $formErrors = 'Please enter valid credentials';
-            $allOk = false;
         }
         if ($password === '') {
             $formErrors = 'Please enter valid credentials';
-            $allOk = false;
         }
 
-        if (!$allOk) {
+        if ($formErrors) {
+            $_SESSION['flash']['login']['email'] = $email;
             $_SESSION['flash']['errors'] = ['login' => $formErrors];
-            header('location:login');
+            header('location:/login');
             exit();
         }
 
@@ -79,21 +77,24 @@ class UserController
                 } // Invalid login
                 else {
                     $formErrors = 'Please enter valid credentials';
+                    $_SESSION['flash']['login']['email'] = $email;
                     $_SESSION['flash']['errors'] = ['login' => $formErrors];
-                    header('location:login');
+                    header('location:/login');
                     exit();
                 }
             } else {
                 $formErrors = 'Please validate user';
+                $_SESSION['flash']['login']['email'] = $email;
                 $_SESSION['flash']['errors'] = ['login' => $formErrors];
-                header('location:login');
+                header('location:/login');
                 exit();
             }
         } // username & password are not valid
         else {
             $formErrors = 'Please enter valid credentials';
+            $_SESSION['flash']['login']['email'] = $email;
             $_SESSION['flash']['errors'] = ['login' => $formErrors];
-            header('location:login');
+            header('location:/login');
             exit();
         }
     }
@@ -103,8 +104,7 @@ class UserController
         $firstName = isset($_SESSION['flash']['register']['firstName']) ? trim($_SESSION['flash']['register']['firstName']) : '';
         $lastName = isset($_SESSION['flash']['register']['lastName']) ? trim($_SESSION['flash']['register']['lastName']) : '';
         $email = isset($_SESSION['flash']['register']['email']) ? trim($_SESSION['flash']['register']['email']) : '';
-        //$password = isset($_SESSION['flash']['register']['password']) ? trim($_SESSION['flash']['register']['password']) : '';
-        $formErrors = isset($_SESSION['flash']['errors']['register']) ? $_SESSION['flash']['errors']['register'] : '';
+        $formErrors = $_SESSION['flash']['errors']['register'] ?? '';
         unset($_SESSION['flash']);
         echo $this->twig->render('pages/register.twig', [
             'firstName' => $firstName,
@@ -115,38 +115,29 @@ class UserController
         ]);
     }
 
-    public function Register()
+    public function register()
     {
-        $firstName = isset($_POST['firstName']) ? $_POST['firstName'] : '';
-        $lastName = isset($_POST['lastName']) ? $_POST['lastName'] : '';
-        $email = isset($_POST['email']) ? $_POST['email'] : '';
-        //$password = isset($_POST['password']) ? $_POST['password'] : '';
-        $formErrors = [];
-
-        $allOk = true;
+        $firstName = $_POST['firstName'] ?? '';
+        $lastName = $_POST['lastName'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $formErrors = [];;
 
         if (trim($firstName) === '') {
             $formErrors['firstName'] = 'Voer een voornaam in';
-            $allOk = false;
         } else if (!preg_match("/^[a-zA-Z-' ]+$/", $firstName)) {
             $formErrors['firstName'] = 'Voer een geldige voornaam in';
-            $allOk = false;
         }
 
         if (trim($lastName) === '') {
             $formErrors['lastName'] = 'Voer een achternaam in';
-            $allOk = false;
         } else if (!preg_match("/^[a-zA-Z-' ]+$/", $lastName)) {
             $formErrors['lastName'] = 'Voer een geldige achternaam in';
-            $allOk = false;
         }
 
         if (trim($email) === '') {
             $formErrors['email'] = 'Voer een email in';
-            $allOk = false;
         } else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             $formErrors['email'] = 'Voer een geldige email in';
-            $allOk = false;
         } else {
             $stmt = $this->conn->prepare('SELECT * FROM anonymous_users WHERE email = ?');
             $result = $stmt->executeQuery([$email]);
@@ -154,11 +145,10 @@ class UserController
 
             if (!empty($anonymous_user)) {
                 $formErrors['email'] = 'Er bestaat al een gebruiker met dit e-mailadres';
-                $allOk = false;
             }
         }
 
-        if (!$allOk) {
+        if ($formErrors) {
             $register = ['firstName' => $firstName, 'lastName' => $lastName, 'email' => $email];
             $_SESSION['flash']['register'] = $register;
             $_SESSION['flash']['errors'] = ['register' => $formErrors];
@@ -166,7 +156,6 @@ class UserController
             exit;
         }
 
-        // @toDO check errors connection
         $verificationCode = substr(str_shuffle(implode(range('A', 'Z'))), 0, 16);
 
         $stmt = $this->conn->prepare('INSERT INTO anonymous_users (email, first_name, last_name) VALUES (?, ?, ?)');
@@ -176,8 +165,6 @@ class UserController
         $userId = $result2->fetchOne();
         $stmt3 = $this->conn->prepare('INSERT INTO users (id, verification_code) VALUES (?,?)');
         $result3 = $stmt3->executeStatement([$userId, $verificationCode]);
-        //$user = $this->conn->fetchAssociative('SELECT anon.id, anon.email, anon.first_name, anon.last_name, u.password, u.verified FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/*JOIN users AS u ON anonymous_users.id = users.id*/', [$email]);
-        //$_SESSION['user'] = $user;
 
         MailService::send($this->twig, 'info@rebu.be', $email, 'Verifieer je account', 'Je verificatiecode is: ' . $verificationCode, 'email/verificatiecode.twig', [
             'verificationCode' => $verificationCode,
@@ -187,7 +174,7 @@ class UserController
         ]);
         //toDo redirect to conformation page;
 
-        header('location:verification');
+        header('location:/verification');
         exit();
     }
 
@@ -195,14 +182,14 @@ class UserController
     {
         session_destroy();
 
-        header('Location: login');
+        header('Location:/login');
         exit();
     }
 
     public function showAccountInfo()
     {
         if (!isset($_SESSION['user'])) {
-            header('location: /');
+            header('location:/');
             exit();
         }
         $userId = $_SESSION['user']['id'];
@@ -253,7 +240,7 @@ class UserController
     public function search()
     {
         if (!isset($_SESSION['user'])) {
-            header('location: ../login');
+            header('location:/login');
             exit();
         }
         $search = isset($_POST['month']) ? trim($_POST['month']) : '';
@@ -323,10 +310,10 @@ class UserController
                 'bookedRides' => $bookedRides,
                 'id' => $id,
             ],
-            'driverInfo' => true,
             'months' => $months,
             'month' => $month,
             'loggedIn' => $loggedIn
         ]);
     }
+
 }
