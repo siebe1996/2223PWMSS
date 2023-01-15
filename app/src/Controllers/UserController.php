@@ -201,7 +201,13 @@ class UserController
 
 
         $trips = $this->conn
-            ->prepare('SELECT * FROM trips WHERE costumer_id = ? AND status = "finished" ORDER BY start_time DESC')
+            ->prepare('SELECT CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
+                CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
+                price,
+                start_city AS fromCity,
+                stop_city AS toCity,
+                start_time AS time,
+                id FROM trips WHERE costumer_id = ? AND status = "finished" ORDER BY start_time DESC')
             ->executeQuery([$_SESSION['user']['id']])
             ->fetchAllAssociative();
 
@@ -274,7 +280,13 @@ class UserController
 
         $matches = array();
         if ($month < 13) {
-            $stmt = $this->conn->prepare('SELECT * FROM trips as t WHERE t.costumer_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
+            $stmt = $this->conn->prepare('SELECT CONCAT(start_nr, " ", start_street, ", ", start_city) AS fullAddressFrom,
+                CONCAT(stop_nr, " ", stop_street, ", ", stop_city) AS fullAddressTo,
+                price,
+                start_city AS fromCity,
+                stop_city AS toCity,
+                start_time AS time,
+                id FROM trips as t WHERE t.costumer_id = ? AND t.status = "finished" AND MONTH(t.start_time) = ?');
             $results = $stmt->executeQuery([$id, $month]);
             $matches = $results->fetchAllAssociative();
         } else {
@@ -299,7 +311,6 @@ class UserController
             SQL, [$_SESSION['user']['id']]
 
         );
-
         echo $this->twig->render('pages/account.twig', [
             'user' => [
                 'name' => $costumer['first_name'] . ' ' . $costumer['last_name'],
