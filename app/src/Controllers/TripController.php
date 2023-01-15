@@ -203,7 +203,7 @@ class TripController
             $stmt = $this->conn->prepare('UPDATE trips SET status =  "cancelled" WHERE id = ?');
             $result = $stmt->executeStatement([$tripId]);
 
-            header('location:/users');
+            header('location:/account');
             exit();
         }
     }

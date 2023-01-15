@@ -50,23 +50,38 @@ npm install
 ## URL Paths
 
 ```
-GET	/
+GET     /
+POST    /
 
-GET	/login
-POST	/login
+GET     /about
+GET     /account
+GET     /account/months/(\d+)
+POST    /account/search
 
-GET	/register
-POST	/register
+GET     /login
+POST    /login
+GET     /logout
+GET     /register
+POST    /register
+GET     /verification
+POST    /verification
 
-GET	/tirps
-GET	/trips/{{ID}}
-POST	/trips/new
+POST 	/rides/(\d+)/cancel
+POST    /diver/rides/(\d+)/accept
+GET     /driver/rides/(\d+)confirm
+POST 	/driver/rides/(\d+)/accept
+GET 	/driver/rides/(\d+)/confirm
+POST 	/driver/rides/(\d+)/confirm
+POST 	/driver/rides/(\d+)/cancelstartfinish
 
-GET	/users
+GET 	/driver/rides
+GET     /drivers/create
+POST    /drivers/create
+GET 	/drivers/(\d+)
+POST 	/drivers/(\d+)/search
+GET 	/drivers/(\d+)/months/(\d+)
 
-GET	/reviews
-GET	/reviews/{{ID}}
-POST	/reviews/new
+GET 	 /badrequest
 ```
 
 ---
