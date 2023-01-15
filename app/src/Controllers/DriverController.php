@@ -79,8 +79,9 @@ class DriverController
             $formErrors['gender'] = 'Voer een geldige gender in';
         }
 
+        $picId = 'NULL';
         if (isset($_FILES['profilePic']) && ($_FILES['profilePic']['error'] === UPLOAD_ERR_OK)) {
-
+            $picId = (int)$_SESSION['user']['id'] . 'jpg';
             if ((new SplFileInfo($_FILES['profilePic']['name']))->getExtension() == 'jpg') {
                 $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], './profilepic/' . $_SESSION['user']['id'] . '.jpg');
                 if (!$moved) {
@@ -116,7 +117,7 @@ class DriverController
 
         if (!$formErrors) {
             $stmt = $this->conn->prepare('INSERT INTO drivers (id, number_plate, birth_date, car_seats, car_model, car_brand, gender, profile_pic, btw_nr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-            $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, (int)$_SESSION['user']['id'] . '.jpg', $btwNumber]);
+            $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, $picId , $btwNumber]);
             header('location: /');
             exit();
         } else {
