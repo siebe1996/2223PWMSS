@@ -108,7 +108,6 @@ class TripController
             $tripId = $_SESSION['tripId'] ?? '';
             unset($_SESSION['tripId']);
             if (!trim($tripId) || !trim($userId)) {
-                //toDo denk hierover na
                 header('location:/badrequest');
                 exit();
             } else {
@@ -155,8 +154,7 @@ class TripController
                     header('location:/driver/rides');
                     exit();
                 } else {
-                    //toDo error ride is claimed
-                    header('location:/rideIsClaimed');
+                    header('location:/badrequest');
                     exit();
                 }
             }
@@ -181,7 +179,6 @@ class TripController
             $status = 'started';
         }
         if (!trim($tripId) || !trim($userId) || $tripId != $id) {
-            //toDo something
             header('location:/badrequest');
             exit();
         } else {
@@ -199,7 +196,6 @@ class TripController
             $tripId = $_POST['cancel'] ?? '';
         }
         if (!trim($tripId) || $tripId != $id) {
-            //toDo something
             header('location:/badrequest');
             exit();
         } else {

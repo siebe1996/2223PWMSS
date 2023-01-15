@@ -71,7 +71,7 @@ $router->get('/drivers/(\d+)/month/(\d+)', 'DriverController@showSearchResults')
 $router->post('/drivers/(\d+)/search', 'DriverController@search');
 $router->get('/driver/rides', 'TripController@showAvailableRides');
 
-$router->get('/400', 'ErrorController@badRequest');
+$router->get('/badrequest', 'ErrorController@badRequest');
 $router->set404('ErrorController@notFound');
 
 $router->run();
