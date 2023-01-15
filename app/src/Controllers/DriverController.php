@@ -4,6 +4,8 @@
 //require_once ('../../config/database.php');
 //require_once ('../../src/Services/DatabaseConnector.php');
 
+use Services\VIESValidatorService;
+
 class DriverController
 {
     protected \Doctrine\DBAL\Connection $conn;
@@ -159,7 +161,7 @@ class DriverController
                 'rideHistory' => $trips,
                 'id' => $id,
             ],
-            'userStatus'=>$_SESSION['user']['status'],
+            'userStatus' => $_SESSION['user']['status'],
             'driverInfo' => true,
             'months' => $months,
             'month' => -1,
