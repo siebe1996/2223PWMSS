@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: mysqldb
--- Generation Time: Jan 15, 2023 at 11:08 AM
+-- Generation Time: Jan 15, 2023 at 11:20 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.0.19
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `rebu`
 --
+CREATE DATABASE IF NOT EXISTS `rebu` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `rebu`;
 
 -- --------------------------------------------------------
 
