@@ -103,7 +103,7 @@ class TripController
 
     public function acceptRide($id)
     {
-        if (isset($_POST['accept']) && $_POST['accept'] == $id) {
+        if (isset($_POST['accept']) && $_SESSION['tripId'] == $id) {
             $userId = $_SESSION['user']['id'];
             $tripId = $_SESSION['tripId'] ?? '';
             unset($_SESSION['tripId']);
@@ -160,7 +160,7 @@ class TripController
             }
         } else {
             unset($_SESSION['tripId']);
-            header('location:/');
+            header('location:/driver/rides');
             exit();
         }
     }
