@@ -67,7 +67,7 @@ class UserController
         anon.last_name, 
         u.password, 
         u.verified 
-        FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id/', [$email]);
+        FROM anonymous_users AS anon, users AS u WHERE email = ? AND anon.id = u.id', [$email]);
 
         if (!empty($user)) {
             if ($user['verified']) {
