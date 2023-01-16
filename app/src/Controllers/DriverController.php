@@ -165,6 +165,7 @@ class DriverController
                 'car' => $driver['car_brand'],
                 'model' => $driver['car_model'],
                 'seats' => $driver['car_seats'],
+                'profile_pic' => $driver['profile_pic'],
                 'status' => 'Driver',
                 'rideAmount' => count($trips),
                 'rideHistory' => $trips,
