@@ -214,7 +214,7 @@ class UserController
                 start_city AS fromCity,
                 stop_city AS toCity,
                 start_time AS time,
-                dirver_id,
+                driver_id,
                 id 
                 FROM trips WHERE costumer_id = ? AND status = "finished" ORDER BY start_time DESC')
             ->executeQuery([$_SESSION['user']['id']])
@@ -234,7 +234,8 @@ class UserController
             WHERE t.costumer_id = ? AND (t.status = "claimed" OR t.status = "pending")
             ORDER BY 
                 start_time DESC
-            SQL, [$_SESSION['user']['id']]
+            SQL,
+            [$_SESSION['user']['id']]
 
         );
         echo $this->twig->render('pages/account.twig', [
@@ -318,7 +319,8 @@ class UserController
             WHERE t.costumer_id = ? AND (t.status = "claimed" OR t.status = "pending")
             ORDER BY 
                 start_time DESC
-            SQL, [$_SESSION['user']['id']]
+            SQL,
+            [$_SESSION['user']['id']]
 
         );
         echo $this->twig->render('pages/account.twig', [
@@ -336,5 +338,4 @@ class UserController
             'loggedIn' => $loggedIn
         ]);
     }
-
 }
