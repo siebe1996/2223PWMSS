@@ -81,7 +81,7 @@ class DriverController
         $picId = 'NULL';
         if (isset($_FILES['profilePic']) && ($_FILES['profilePic']['error'] === UPLOAD_ERR_OK)) {
             $picId = (int)$_SESSION['user']['id'] . 'jpg';
-            if ((new SplFileInfo($_FILES['profilePic']['name']))->getExtension() == 'jpg') {
+            if ((new SplFileInfo($_FILES['profilePic']['name']))->getExtension() == '.jpg') {
                 $moved = @move_uploaded_file($_FILES['profilePic']['tmp_name'], './profilepic/' . $_SESSION['user']['id'] . '.jpg');
                 if (!$moved) {
                     $formErrors['profilePic'] = 'Error while saving file in the uploads folder';
