@@ -63,7 +63,7 @@ class TripController
             SQL
         );
 
-        echo $this->twig->render('pages/availableRides.twig', [
+        echo $this->twig->render('pages/AvailableRides.twig', [
             'loggedIn' => $loggedIn,
             'available' => $availableRides,
             'decided' => $acceptedRides,

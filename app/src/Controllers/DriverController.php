@@ -116,7 +116,8 @@ class DriverController
 
         if (!$formErrors) {
             $stmt = $this->conn->prepare('INSERT INTO drivers (id, number_plate, birth_date, car_seats, car_model, car_brand, gender, profile_pic, btw_nr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)');
-            $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, $picId , $btwNumber]);
+            $result = $stmt->executeStatement([(int)$_SESSION['user']['id'], $numberPlate, $birthDate, $carPassengers, $carModel, $carBrand, $gender, $picId, $btwNumber]);
+            $_SESSION['user']['status'] = 'Driver';
             header('location: /');
             exit();
         } else {
@@ -125,7 +126,6 @@ class DriverController
             $_SESSION['flash']['errors'] = ['driver' => $formErrors];
             header('location: /create');
             exit;
-
         }
     }
 
