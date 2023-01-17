@@ -109,7 +109,7 @@
             {% if user.rideHistory|length > 0 %}
                 {% for ride in user.rideHistory %}
                     <section class="ride">
-                        <h2>{{ ride.time|date('l') }} {{ ride.time|date('h\\ui') }}</h2>
+                        <h2>{{ ride.time|date('l') }} {{ ride.time|date('H\\ui') }}</h2>
                         <div class="right">
                             <p class="date">{{ ride.time|date('d/m/Y') }}</p>
                             {% if not driverInfo %}
